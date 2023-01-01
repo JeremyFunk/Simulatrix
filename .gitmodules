@@ -1,0 +1,9 @@
+[submodule "Simulatrix/vendor/spdlog"]
+	path = Simulatrix/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "Simulatrix/vendor/GLFW"]
+	path = Simulatrix/vendor/GLFW
+	url = https://github.com/TheCherno/glfw
+[submodule "Simulatrix/vendor/imgui"]
+	path = Simulatrix/vendor/imgui
+	url = https://github.com/TheCherno/imgui
