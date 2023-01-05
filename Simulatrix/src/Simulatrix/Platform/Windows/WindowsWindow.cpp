@@ -1,10 +1,10 @@
 #include "simixpch.h"
 #include "WindowsWindow.h"
-#include "Simulatrix/Debug/Log.h"
-#include "Simulatrix/Events/ApplicationEvent.h"
-#include "Simulatrix/Events/MouseEvent.h"
-#include "Simulatrix/Events/KeyEvent.h"
-#include "Simulatrix/Platform/OpenGL/OpenGLContext.h"
+#include <Simulatrix/Debug/Log.h>
+#include <Simulatrix/Events/ApplicationEvent.h>
+#include <Simulatrix/Events/MouseEvent.h>
+#include <Simulatrix/Events/KeyEvent.h>
+#include <Simulatrix/Platform/OpenGL/OpenGLContext.h>
 namespace Simulatrix {
     static bool s_GLFWInitialized = false;
 

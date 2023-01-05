@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <glm/glm.hpp>
+#include <string>
 
 #ifdef SIMIX_PLATFORM_WINDOWS
     #include <Windows.h>

@@ -143,17 +143,16 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Simulatrix\Core\OrthographicCamera.h" />
-    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Simulatrix.h" />
     <ClInclude Include="src\Simulatrix\Core\Application.h" />
+    <ClInclude Include="src\Simulatrix\Core\Camera.h" />
     <ClInclude Include="src\Simulatrix\Core\Core.h" />
     <ClInclude Include="src\Simulatrix\Core\Entrypoint.h" />
     <ClInclude Include="src\Simulatrix\Core\KeyCode.h" />
     <ClInclude Include="src\Simulatrix\Core\Layer.h" />
     <ClInclude Include="src\Simulatrix\Core\LayerStack.h" />
     <ClInclude Include="src\Simulatrix\Core\MouseCodes.h" />
+    <ClInclude Include="src\Simulatrix\Core\OrthographicCamera.h" />
     <ClInclude Include="src\Simulatrix\Core\Timestep.h" />
     <ClInclude Include="src\Simulatrix\Core\Window.h" />
     <ClInclude Include="src\Simulatrix\Debug\Log.h" />
@@ -162,43 +161,46 @@
     <ClInclude Include="src\Simulatrix\Events\KeyEvent.h" />
     <ClInclude Include="src\Simulatrix\Events\MouseEvent.h" />
     <ClInclude Include="src\Simulatrix\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsWindow.h" />
-    <ClInclude Include="src\simixpch.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Buffer.h" />
-    <ClInclude Include="src\Simulatrix\Core\Camera.h" />
     <ClInclude Include="src\Simulatrix\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Simulatrix\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Renderer.h" />
     <ClInclude Include="src\Simulatrix\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Shader.h" />
     <ClInclude Include="src\Simulatrix\Renderer\VertexArray.h" />
+    <ClInclude Include="src\simixpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Simulatrix\Core\OrthographicCamera.cpp" />
-    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Simulatrix\Core\Application.cpp" />
     <ClCompile Include="src\Simulatrix\Core\Layer.cpp" />
     <ClCompile Include="src\Simulatrix\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Simulatrix\Core\OrthographicCamera.cpp" />
     <ClCompile Include="src\Simulatrix\Core\Window.cpp" />
     <ClCompile Include="src\Simulatrix\Debug\Log.cpp" />
     <ClCompile Include="src\Simulatrix\Events\Event.cpp" />
     <ClCompile Include="src\Simulatrix\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Simulatrix\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\simixpch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Shader.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\simixpch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

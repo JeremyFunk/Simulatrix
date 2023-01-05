@@ -26,7 +26,8 @@ namespace Simulatrix {
             0.5, -0.5, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
             0.0, 0.5, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
         };
-        auto vertexBuffer = std::make_shared<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
+        std::shared_ptr<VertexBuffer> vertexBuffer;
+        vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
         BufferLayout layout{
             { ShaderDataType::Vec3, "a_Position" },
             { ShaderDataType::Vec4, "a_Color" },
@@ -36,7 +37,9 @@ namespace Simulatrix {
 
 
         unsigned int indices[3] = { 0, 1, 2 };
-        m_VertexArray->SetIndexBuffer(std::make_shared<IndexBuffer>(IndexBuffer::Create(indices, 3)));
+        std::shared_ptr<IndexBuffer> indexBuffer;
+        indexBuffer.reset(IndexBuffer::Create(indices, 3));
+        m_VertexArray->SetIndexBuffer(indexBuffer);
 
         std::string vertexSrc = R"(
             #version 330 core
@@ -54,13 +57,17 @@ namespace Simulatrix {
             #version 330 core
             out vec4 color;
             in vec4 p_Color;
+            uniform float color_add;
             void main(){
-                color = p_Color;
+                color = p_Color + vec4(color_add * 0.1);
             }
         )";
+        m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
+        ShaderUniforms uniforms = {
+            { ShaderDataType::Float, "color_add" }
+        };
 
-        m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
-
+        m_Shader->AddUniforms(uniforms);
 
         m_Camera.reset(new OrthographicCamera());
     }
@@ -88,10 +95,10 @@ namespace Simulatrix {
             m_LastFrameTime = time;
 
             m_Camera->Update(timestep);
-
             RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.f });
             RenderCommand::Clear();
             m_Shader->Bind();
+            m_Shader->SetUniform("color_add", time);
             Renderer::BeginScene();
             Renderer::Submit(m_VertexArray);
             Renderer::EndScene();
