@@ -6,12 +6,12 @@ namespace Simulatrix {
         std::string Title;
         unsigned int Width, Height;
 
-        WindowProps(const std::string& title = "Simulatrix", unsigned int width = 1280, unsigned int height = 720)
+        WindowProps(const std::string& title = "Simulatrix", unsigned int width = 1920, unsigned int height = 1080)
             : Width(width), Height(height), Title(title)
         {}
     };
 
-    class SIMIX_API Window {
+    class Window {
     public:
         using EventCallbackFn = std::function<void(Event&)>;
 
@@ -24,7 +24,7 @@ namespace Simulatrix {
         virtual void SetVSync(bool enabled) = 0;
         virtual bool IsVSync() const = 0;
         virtual void* GetNativeWindow() const = 0;
-
+        
         static Scope<Window> Create(const WindowProps& props = WindowProps());
     };
 }

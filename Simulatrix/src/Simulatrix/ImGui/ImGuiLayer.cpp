@@ -64,7 +64,6 @@ namespace Simulatrix {
 	void ImGuiLayer::OnUpdate(Timestep ts) {
 		Begin();
 		ImGui::Begin("AHA");
-
 		ImGui::Text("LOLO");
 
 		ImGui::End();

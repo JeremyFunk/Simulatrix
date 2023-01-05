@@ -3,7 +3,7 @@
 #include "Simulatrix/Core/Layer.h"
 namespace Simulatrix {
 
-    class SIMIX_API LayerStack
+    class LayerStack
     {
     public:
         LayerStack();

@@ -1,6 +1,8 @@
 #pragma once
 #include "Simulatrix/Core/Window.h"
 #include <GLFW/glfw3.h>
+#include <Simulatrix/Renderer/GraphicsContext.h>
+
 namespace Simulatrix {
     class WindowsWindow : public Window
     {
@@ -22,6 +24,7 @@ namespace Simulatrix {
         virtual void Shutdown();
     private:
         GLFWwindow* m_Window;
+        GraphicsContext* m_Context;
         struct WindowData {
             std::string Title;
             unsigned int Width, Height;

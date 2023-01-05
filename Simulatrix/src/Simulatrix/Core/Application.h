@@ -6,11 +6,14 @@
 #include <Simulatrix/Core/LayerStack.h>
 #include <Simulatrix/Events/ApplicationEvent.h>
 #include <Simulatrix/ImGui/ImGuiLayer.h>
-
+#include <Simulatrix/Renderer/Shader.h>
+#include <Simulatrix/Renderer/Buffer.h>
+#include <Simulatrix/Renderer/VertexArray.h>
+#include <Simulatrix/Core/Camera.h>
 int main(int argc, char** argv);
 
 namespace Simulatrix {
-    class SIMIX_API Application
+    class Application
     {
     public:
         Application();
@@ -34,6 +37,10 @@ namespace Simulatrix {
         float m_LastFrameTime = 0.0f;
         ImGuiLayer* m_ImGuiLayer;
         friend int ::main(int argc, char** argv);
+
+        std::shared_ptr<VertexArray> m_VertexArray;
+        std::shared_ptr<Shader> m_Shader;
+        std::shared_ptr<Camera> m_Camera;
     };
     // To be defined in client.
     Application* CreateApplication();

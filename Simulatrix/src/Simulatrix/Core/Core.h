@@ -1,11 +1,7 @@
 #pragma once
 
 #ifdef SIMIX_PLATFORM_WINDOWS
-    #ifdef SIMIX_BUILD_DLL
-        #define SIMIX_API __declspec(dllexport)
-    #else
-        #define SIMIX_API __declspec(dllimport)
-    #endif
+
 #else
 #error Only Windows supported!
 #endif

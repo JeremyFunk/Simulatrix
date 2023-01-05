@@ -4,7 +4,7 @@
 #include "Simulatrix/Events/Event.h"
 #include <Simulatrix/Core/Timestep.h>
 namespace Simulatrix {
-    class SIMIX_API Layer
+    class Layer
     {
     public:
         Layer(const std::string& name = "Layer");

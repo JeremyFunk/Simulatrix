@@ -12,6 +12,7 @@ workspace "Simulatrix"
     IncludeDir["GLFW"] = "Simulatrix/vendor/GLFW/include"
     IncludeDir["Glad"] = "Simulatrix/vendor/Glad/include"
     IncludeDir["ImGui"] = "Simulatrix/vendor/imgui"
+    IncludeDir["GLM"] = "Simulatrix/vendor/glm"
 
     include "Simulatrix/vendor/GLFW"
     include "Simulatrix/vendor/Glad"
@@ -19,8 +20,10 @@ workspace "Simulatrix"
 
 project "Simulatrix"
     location "Simulatrix"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
+    cppdialect "C++17"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -38,9 +41,16 @@ project "Simulatrix"
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}"
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.GLM}"
     }
 
+    defines 
+    {
+        _CRT_SECURE_NO_WARNINGS
+    }
+
+    
     links{
         "GLFW",
         "Glad",
@@ -49,9 +59,7 @@ project "Simulatrix"
     }
     
     filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
-        systemversion "10.0.19041.0"
+        systemversion "latest"
 
         defines{
             "SIMIX_PLATFORM_WINDOWS",
@@ -59,29 +67,27 @@ project "Simulatrix"
             "GLFW_INCLUDE_NONE"
         }
 
-        postbuildcommands{
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-        }
-
     filter "configurations:Debug"
         defines "SIMIX_DEBUG"
         buildoptions "/MDd"
-        symbols "On"
+        symbols "on"
 
     filter "configurations:Release"
         defines "SIMIX_RELEASE"
         buildoptions "/MD"
-        optimize "On"
+        optimize "on"
 
     filter "configurations:Dist"
         defines "SIMIX_DIST"
         buildoptions "/MD"
-        optimize "On"
+        optimize "on"
 
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
+    staticruntime "on"
+    cppdialect "C++17"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -93,7 +99,8 @@ project "Sandbox"
 
     includedirs{
         "Simulatrix/vendor/spdlog/include",
-        "Simulatrix/src"
+        "Simulatrix/src",
+        "%{IncludeDir.GLM}"
     }
 
     links {
@@ -101,9 +108,7 @@ project "Sandbox"
     }
     
     filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
-        systemversion "10.0.19041.0"
+        systemversion "latest"
 
         defines{
             "SIMIX_PLATFORM_WINDOWS"
@@ -112,14 +117,14 @@ project "Sandbox"
     filter "configurations:Debug"
         defines "SIMIX_DEBUG"
         buildoptions "/MDd"
-        symbols "On"
+        symbols "on"
 
     filter "configurations:Release"
         defines "SIMIX_RELEASE"
         buildoptions "/MD"
-        optimize "On"
+        optimize "on"
 
     filter "configurations:Dist"
         defines "SIMIX_DIST"
         buildoptions "/MD"
-        optimize "On"
+        optimize "on"

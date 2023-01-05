@@ -19,9 +19,6 @@
     <Filter Include="Simulatrix\Platform">
       <UniqueIdentifier>{4B301599-B791-F2A6-40FF-3859AC5F2966}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Platform\OpenGL">
-      <UniqueIdentifier>{1F370561-0B47-B131-7400-1650602FA0CA}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Simulatrix\Platform\Windows">
       <UniqueIdentifier>{85F5C7D9-F102-F6BF-7AE9-F1AAE6F5C176}</UniqueIdentifier>
     </Filter>
@@ -49,6 +46,9 @@
     <ClInclude Include="src\Simulatrix\Core\MouseCodes.h">
       <Filter>Simulatrix\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Core\Timestep.h">
+      <Filter>Simulatrix\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Window.h">
       <Filter>Simulatrix\Core</Filter>
     </ClInclude>
@@ -74,7 +74,19 @@
       <Filter>Simulatrix\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\simixpch.h" />
-    <ClInclude Include="src\Simulatrix\Core\Timestep.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\Shader.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\Buffer.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\Renderer.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Simulatrix\Core\Camera.h" />
+    <ClInclude Include="src\Simulatrix\Core\OrthographicCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
@@ -86,11 +98,17 @@
     <ClCompile Include="src\Simulatrix\Core\LayerStack.cpp">
       <Filter>Simulatrix\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Core\Window.cpp">
+      <Filter>Simulatrix\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\Simulatrix\Debug\Log.cpp">
       <Filter>Simulatrix\Debug</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Events\Event.cpp">
       <Filter>Simulatrix\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\ImGui\ImGuiBuild.cpp">
+      <Filter>Simulatrix\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\ImGui\ImGuiLayer.cpp">
       <Filter>Simulatrix\ImGui</Filter>
@@ -99,7 +117,16 @@
       <Filter>Simulatrix\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\simixpch.cpp" />
-    <ClCompile Include="src\Simulatrix\ImGui\ImGuiBuild.cpp" />
-    <ClCompile Include="src\Simulatrix\Core\Window.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Simulatrix\Core\OrthographicCamera.cpp" />
   </ItemGroup>
 </Project>
