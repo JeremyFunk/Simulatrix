@@ -9,7 +9,7 @@ namespace Simulatrix {
     static bool s_GLFWInitialized = false;
 
     static void GLFWErrorCallback(int error, const char* description) {
-        SIMIX_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
+        //SIMIX_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
     }
 
     WindowsWindow::WindowsWindow(const WindowProps& props) {

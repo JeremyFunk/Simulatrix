@@ -10,3 +10,6 @@
 [submodule "Simulatrix/vendor/glm"]
 	path = Simulatrix/vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "Simulatrix/vendor/assimp"]
+	path = Simulatrix/vendor/assimp
+	url = https://github.com/assimp/assimp

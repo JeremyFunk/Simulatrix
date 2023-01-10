@@ -13,6 +13,7 @@ workspace "Simulatrix"
     IncludeDir["Glad"] = "Simulatrix/vendor/Glad/include"
     IncludeDir["ImGui"] = "Simulatrix/vendor/imgui"
     IncludeDir["GLM"] = "Simulatrix/vendor/glm"
+    IncludeDir["entt"] = "Simulatrix/vendor/entt/include"
 
     include "Simulatrix/vendor/GLFW"
     include "Simulatrix/vendor/Glad"
@@ -42,7 +43,8 @@ project "Simulatrix"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.GLM}"
+        "%{IncludeDir.GLM}",
+        "%{IncludeDir.entt}"
     }
 
     defines 
@@ -100,7 +102,8 @@ project "Sandbox"
     includedirs{
         "Simulatrix/vendor/spdlog/include",
         "Simulatrix/src",
-        "%{IncludeDir.GLM}"
+        "%{IncludeDir.GLM}",
+        "%{IncludeDir.entt}"
     }
 
     links {

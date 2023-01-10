@@ -62,6 +62,8 @@ namespace Simulatrix {
 		ImGui::DestroyContext();
 	}
 	void ImGuiLayer::OnUpdate(Timestep ts) {
+	}
+	void ImGuiLayer::OnRenderOverlay() {
 		Begin();
 		ImGui::Begin("AHA");
 		ImGui::Text("LOLO");

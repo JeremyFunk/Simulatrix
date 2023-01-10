@@ -28,6 +28,9 @@
     <Filter Include="Simulatrix\Renderer">
       <UniqueIdentifier>{9D37F273-0999-CF81-9206-1634FE660641}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Simulatrix\Scene">
+      <UniqueIdentifier>{740C207F-6005-3FD1-8937-2456758F1EDD}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Simulatrix.h" />
@@ -43,6 +46,15 @@
     <ClInclude Include="src\Simulatrix\Core\Entrypoint.h">
       <Filter>Simulatrix\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Core\FileWatcher.h">
+      <Filter>Simulatrix\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Core\IOWrapper.h">
+      <Filter>Simulatrix\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Core\Input.h">
+      <Filter>Simulatrix\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\KeyCode.h">
       <Filter>Simulatrix\Core</Filter>
     </ClInclude>
@@ -56,6 +68,12 @@
       <Filter>Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\OrthographicCamera.h">
+      <Filter>Simulatrix\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Core\ProjectionCamera.h">
+      <Filter>Simulatrix\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Core\ResourceManager.h">
       <Filter>Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Timestep.h">
@@ -97,6 +115,12 @@
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsIOWrapper.h">
+      <Filter>Simulatrix\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsInput.h">
+      <Filter>Simulatrix\Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsWindow.h">
       <Filter>Simulatrix\Platform\Windows</Filter>
     </ClInclude>
@@ -121,10 +145,29 @@
     <ClInclude Include="src\Simulatrix\Renderer\VertexArray.h">
       <Filter>Simulatrix\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Scene\Entity.h">
+      <Filter>Simulatrix\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Scene\Mesh.h">
+      <Filter>Simulatrix\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Scene\OBJParser.h">
+      <Filter>Simulatrix\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Scene\Scene.h">
+      <Filter>Simulatrix\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\simixpch.h" />
+    <ClInclude Include="src\Simulatrix\Scene\ModelParser.h">
+      <Filter>Simulatrix\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Scene\SceneData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
+      <Filter>Simulatrix\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Core\FileWatcher.cpp">
       <Filter>Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\Layer.cpp">
@@ -134,6 +177,12 @@
       <Filter>Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\OrthographicCamera.cpp">
+      <Filter>Simulatrix\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Core\ProjectionCamera.cpp">
+      <Filter>Simulatrix\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Core\ResourceManager.cpp">
       <Filter>Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\Window.cpp">
@@ -166,6 +215,12 @@
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsIOWrapper.cpp">
+      <Filter>Simulatrix\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsInput.cpp">
+      <Filter>Simulatrix\Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsWindow.cpp">
       <Filter>Simulatrix\Platform\Windows</Filter>
     </ClCompile>
@@ -186,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\VertexArray.cpp">
       <Filter>Simulatrix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Scene\OBJParser.cpp">
+      <Filter>Simulatrix\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Scene\Scene.cpp">
+      <Filter>Simulatrix\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\simixpch.cpp" />
   </ItemGroup>

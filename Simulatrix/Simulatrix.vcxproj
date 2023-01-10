@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>simixpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SIMIX_PLATFORM_WINDOWS;SIMIX_BUILD_DLL;GLFW_INCLUDE_NONE;SIMIX_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -98,7 +98,7 @@
       <PrecompiledHeaderFile>simixpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SIMIX_PLATFORM_WINDOWS;SIMIX_BUILD_DLL;GLFW_INCLUDE_NONE;SIMIX_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -123,7 +123,7 @@
       <PrecompiledHeaderFile>simixpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SIMIX_PLATFORM_WINDOWS;SIMIX_BUILD_DLL;GLFW_INCLUDE_NONE;SIMIX_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -148,11 +148,16 @@
     <ClInclude Include="src\Simulatrix\Core\Camera.h" />
     <ClInclude Include="src\Simulatrix\Core\Core.h" />
     <ClInclude Include="src\Simulatrix\Core\Entrypoint.h" />
+    <ClInclude Include="src\Simulatrix\Core\FileWatcher.h" />
+    <ClInclude Include="src\Simulatrix\Core\IOWrapper.h" />
+    <ClInclude Include="src\Simulatrix\Core\Input.h" />
     <ClInclude Include="src\Simulatrix\Core\KeyCode.h" />
     <ClInclude Include="src\Simulatrix\Core\Layer.h" />
     <ClInclude Include="src\Simulatrix\Core\LayerStack.h" />
     <ClInclude Include="src\Simulatrix\Core\MouseCodes.h" />
     <ClInclude Include="src\Simulatrix\Core\OrthographicCamera.h" />
+    <ClInclude Include="src\Simulatrix\Core\ProjectionCamera.h" />
+    <ClInclude Include="src\Simulatrix\Core\ResourceManager.h" />
     <ClInclude Include="src\Simulatrix\Core\Timestep.h" />
     <ClInclude Include="src\Simulatrix\Core\Window.h" />
     <ClInclude Include="src\Simulatrix\Debug\Log.h" />
@@ -166,6 +171,8 @@
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsIOWrapper.h" />
+    <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Buffer.h" />
     <ClInclude Include="src\Simulatrix\Renderer\GraphicsContext.h" />
@@ -174,13 +181,22 @@
     <ClInclude Include="src\Simulatrix\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Shader.h" />
     <ClInclude Include="src\Simulatrix\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Simulatrix\Scene\Entity.h" />
+    <ClInclude Include="src\Simulatrix\Scene\ModelParser.h" />
+    <ClInclude Include="src\Simulatrix\Scene\Mesh.h" />
+    <ClInclude Include="src\Simulatrix\Scene\OBJParser.h" />
+    <ClInclude Include="src\Simulatrix\Scene\Scene.h" />
     <ClInclude Include="src\simixpch.h" />
+    <ClInclude Include="src\Simulatrix\Scene\SceneData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp" />
+    <ClCompile Include="src\Simulatrix\Core\FileWatcher.cpp" />
     <ClCompile Include="src\Simulatrix\Core\Layer.cpp" />
     <ClCompile Include="src\Simulatrix\Core\LayerStack.cpp" />
     <ClCompile Include="src\Simulatrix\Core\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Simulatrix\Core\ProjectionCamera.cpp" />
+    <ClCompile Include="src\Simulatrix\Core\ResourceManager.cpp" />
     <ClCompile Include="src\Simulatrix\Core\Window.cpp" />
     <ClCompile Include="src\Simulatrix\Debug\Log.cpp" />
     <ClCompile Include="src\Simulatrix\Events\Event.cpp" />
@@ -191,6 +207,8 @@
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsIOWrapper.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\RenderCommand.cpp" />
@@ -198,6 +216,8 @@
     <ClCompile Include="src\Simulatrix\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Shader.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Simulatrix\Scene\OBJParser.cpp" />
+    <ClCompile Include="src\Simulatrix\Scene\Scene.cpp" />
     <ClCompile Include="src\simixpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

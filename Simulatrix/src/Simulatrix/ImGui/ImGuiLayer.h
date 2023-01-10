@@ -12,6 +12,7 @@ namespace Simulatrix {
         void OnAttach();
         void OnDetach();
         void OnUpdate(Timestep ts);
+        void OnRenderOverlay();
 
         void Begin();
         void End();

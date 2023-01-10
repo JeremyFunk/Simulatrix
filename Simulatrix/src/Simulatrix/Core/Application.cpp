@@ -4,72 +4,26 @@
 #include "Simulatrix/Renderer/Renderer.h"
 #include <GLFW/glfw3.h>
 #include "Simulatrix/Core/OrthographicCamera.h"
+#include "IOWrapper.h"
+#include "Simulatrix/Core/Input.h"
 namespace Simulatrix {
 
     Application* Application::s_Instance = nullptr;
-#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
-
 
     Application::Application() {
+        m_ResourceManager.reset(new ResourceManager());
+        auto temp = m_ResourceManager->GetIO()->GetCurrentDir();
+        SIMIX_CORE_INFO("Starting in directory {0}", m_ResourceManager->GetIO()->GetCurrentDir().PathString);
+
         m_Window = std::unique_ptr<Window>(Window::Create());
-        m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+        m_Window->SetEventCallback(SIMIX_BIND_EVENT_FN(Application::OnEvent));
         SIMIX_CORE_ASSERT(!s_Instance, "Application already exists!");
         s_Instance = this;
 
         m_ImGuiLayer = new ImGuiLayer();
         PushOverlay(m_ImGuiLayer);
 
-        m_VertexArray.reset(VertexArray::Create());
-
-        float vertices[3 * 3 + 3 * 4] = {
-            -0.5, -0.5, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-            0.5, -0.5, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-            0.0, 0.5, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-        };
-        std::shared_ptr<VertexBuffer> vertexBuffer;
-        vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-        BufferLayout layout{
-            { ShaderDataType::Vec3, "a_Position" },
-            { ShaderDataType::Vec4, "a_Color" },
-        };
-        vertexBuffer->SetLayout(layout);
-        m_VertexArray->AddVertexBuffer(vertexBuffer);
-
-
-        unsigned int indices[3] = { 0, 1, 2 };
-        std::shared_ptr<IndexBuffer> indexBuffer;
-        indexBuffer.reset(IndexBuffer::Create(indices, 3));
-        m_VertexArray->SetIndexBuffer(indexBuffer);
-
-        std::string vertexSrc = R"(
-            #version 330 core
-            
-            layout(location = 0) in vec3 a_Position;
-            layout(location = 1) in vec4 a_Color;
-            out vec4 p_Color;
-
-            void main(){
-                gl_Position = vec4(a_Position, 1.0);
-                p_Color = a_Color;
-            }
-        )";
-        std::string fragmentSrc = R"(
-            #version 330 core
-            out vec4 color;
-            in vec4 p_Color;
-            uniform float color_add;
-            void main(){
-                color = p_Color + vec4(color_add * 0.1);
-            }
-        )";
-        m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
-        ShaderUniforms uniforms = {
-            { ShaderDataType::Float, "color_add" }
-        };
-
-        m_Shader->AddUniforms(uniforms);
-
-        m_Camera.reset(new OrthographicCamera());
+        m_ActiveScene.reset(new Scene());
     }
     Application::~Application() {
 
@@ -77,7 +31,7 @@ namespace Simulatrix {
 
     void Application::OnEvent(Event& e) {
         EventDispatcher dispatcher(e);
-        dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClosed));
+        dispatcher.Dispatch<WindowCloseEvent>(SIMIX_BIND_EVENT_FN(Application::OnWindowClosed));
 
         //SIMIX_CORE_TRACE("{0}", e.ToString());
 
@@ -90,23 +44,26 @@ namespace Simulatrix {
 
     void Application::Run() {
         while (m_Running) {
+            Input::PollInputs();
+            m_ResourceManager->Update();
+            Renderer::BeginScene(m_ActiveScene);
+
             float time = (float)glfwGetTime();
             Timestep timestep = time - m_LastFrameTime;
             m_LastFrameTime = time;
-
-            m_Camera->Update(timestep);
-            RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.f });
-            RenderCommand::Clear();
-            m_Shader->Bind();
-            m_Shader->SetUniform("color_add", time);
-            Renderer::BeginScene();
-            Renderer::Submit(m_VertexArray);
-            Renderer::EndScene();
-
-
+            
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate(timestep);
 
+            for (Layer* layer : m_LayerStack)
+                layer->OnRender();
+
+            Renderer::Render(m_ActiveScene);
+
+            for (Layer* layer : m_LayerStack)
+                layer->OnRenderOverlay();
+
+            Renderer::EndScene(m_ActiveScene);
             m_Window->OnUpdate();
         }
     }

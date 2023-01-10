@@ -43,6 +43,8 @@ namespace Simulatrix {
         virtual void AddUniforms(ShaderUniforms uniforms) = 0;
         virtual void SetUniform(uint32_t rendererID, float value) = 0;
         virtual void SetUniform(const char* name, float value) = 0;
+        virtual void SetUniform(uint32_t rendererID, const glm::mat4& value) = 0;
+        virtual void SetUniform(const char* name, const glm::mat4& value) = 0;
         virtual const ShaderUniforms& GetUniforms() const = 0;
         static Shader* Create(std::string& vertexSrc, std::string& fragmentSrc);
     };

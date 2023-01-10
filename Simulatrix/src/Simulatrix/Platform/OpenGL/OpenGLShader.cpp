@@ -106,6 +106,19 @@ namespace Simulatrix {
             }
         }
     }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::mat4& value)
+    {
+        glUniformMatrix4fv(rendererID, 1, GL_FALSE, &value[0][0]);
+    }
+    void OpenGLShader::SetUniform(const char* name, const glm::mat4& value)
+    {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniformMatrix4fv(uniform.RendererID, 1, GL_FALSE, &value[0][0]);
+                break;
+            }
+        }
+    }
     const ShaderUniforms& OpenGLShader::GetUniforms() const
     {
         return m_Uniforms;

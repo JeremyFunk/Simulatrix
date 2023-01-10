@@ -4,18 +4,21 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Simulatrix {
-    const glm::vec3& OrthographicCamera::GetPosition() const
+    glm::vec3 OrthographicCamera::GetPosition() const
     {
         return m_Position;
     }
-    const glm::mat4x4& OrthographicCamera::GetViewMatrix() const
+    glm::mat4x4 OrthographicCamera::GetViewMatrix() const
     {
-        auto m = glm::mat4x4();
+        glm::mat4 m = glm::mat4(1.0);
         m = glm::translate(m, m_Position);
         return m;
     }
+
+    void OrthographicCamera::SetPosition(glm::vec3 position) {
+        m_Position = position;
+    }
     void OrthographicCamera::Update(Timestep delta)
     {
-        m_Position.x += delta * .1f;
     }
 }

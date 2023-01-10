@@ -10,7 +10,8 @@
 #include <Simulatrix/Renderer/Buffer.h>
 #include <Simulatrix/Renderer/VertexArray.h>
 #include <Simulatrix/Core/Camera.h>
-int main(int argc, char** argv);
+#include <Simulatrix/Core/ResourceManager.h>
+#include <Simulatrix/Scene/Scene.h>
 
 namespace Simulatrix {
     class Application
@@ -26,6 +27,9 @@ namespace Simulatrix {
 
         void PushLayer(Layer* layer);
         void PushOverlay(Layer* overlay);
+        std::shared_ptr<Scene>& GetActiveScene() {
+            return m_ActiveScene;
+        }
     private:
         bool OnWindowClosed(WindowCloseEvent& e);
 
@@ -36,11 +40,8 @@ namespace Simulatrix {
         static Application* s_Instance;
         float m_LastFrameTime = 0.0f;
         ImGuiLayer* m_ImGuiLayer;
-        friend int ::main(int argc, char** argv);
-
-        std::shared_ptr<VertexArray> m_VertexArray;
-        std::shared_ptr<Shader> m_Shader;
-        std::shared_ptr<Camera> m_Camera;
+        std::shared_ptr<ResourceManager> m_ResourceManager;
+        std::shared_ptr<Scene> m_ActiveScene;
     };
     // To be defined in client.
     Application* CreateApplication();
