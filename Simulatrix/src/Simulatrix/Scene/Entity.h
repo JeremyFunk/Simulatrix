@@ -1,6 +1,8 @@
 #pragma once
 #include "entt.hpp"
 #include "Simulatrix/Scene/Scene.h"
+#include "Simulatrix/Core/UUID.h"
+#include "Simulatrix/Scene/Components.h"
 namespace Simulatrix {
     class Scene;
     class Entity {
@@ -11,20 +13,22 @@ namespace Simulatrix {
 
         }
 
+        UUID GetUUID() { return GetComponent<IDComponent>().ID; }
+
         template<typename T>
         bool HasComponent() {
-            return m_Scene->m_Registry.any_of<T>(m_Entity);
+            return HasComponents<T>();
         }
 
         template<typename... Components>
         bool HasComponents() {
-            return m_Scene->m_Registry.all_of<Components>(m_Entity);
+            return m_Scene->m_Registry.any_of<Components...>(m_Entity);
         }
 
         template<typename T, typename... Args>
         T& AddComponent(Args&&... args) {
             SIMIX_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
-
+            
             return m_Scene->m_Registry.emplace<T>(m_Entity, std::forward<Args>(args)...);
         }
 
@@ -37,9 +41,9 @@ namespace Simulatrix {
 
         template<typename... Components>
         auto GetComponents() {
-            SIMIX_CORE_ASSERT(HasComponents<Components>(), "Entity does not have components!");
+            SIMIX_CORE_ASSERT(HasComponents<Components...>(), "Entity does not have components!");
 
-            return m_Scene->m_Registry.get<Components>(m_Entity);
+            return m_Scene->m_Registry.get<Components...>(m_Entity);
         }
 
         template<typename T>

@@ -69,16 +69,54 @@ public:
             { ShaderDataType::Mat4, "u_projectionMatrix" },
             { ShaderDataType::Mat4, "u_modelMatrix" }
         };
-
         m_Shader->AddUniforms(uniforms);
+        std::string vertexSrc2 = R"(
+            #version 330 core
+            
+            layout(location = 0) in vec3 a_Position;
+            layout(location = 1) in vec3 a_Normal;
+            layout(location = 2) in vec2 a_TexCoords;
+            out vec2 p_TextureCoords;
+            uniform mat4 u_projectionMatrix;
+            uniform mat4 u_viewMatrix;
+            uniform mat4 u_modelMatrix;
+
+            void main(){
+                gl_Position = u_projectionMatrix * u_viewMatrix * vec4(a_Position, 1.0);
+                p_TextureCoords = a_TexCoords;
+            }
+        )";
+        std::string fragmentSrc2 = R"(
+            #version 330 core
+            out vec4 color;
+            in vec2 p_TextureCoords;
+            uniform sampler2D u_textureDiffuse;
+            void main(){
+                color = texture(u_textureDiffuse, p_TextureCoords);
+            }
+        )";
+        m_Shader2.reset(Shader::Create(vertexSrc2, fragmentSrc2));
+        ShaderUniforms uniforms2 = {
+            { ShaderDataType::Int, "u_textureDiffuse" },
+            { ShaderDataType::Mat4, "u_viewMatrix" },
+            { ShaderDataType::Mat4, "u_projectionMatrix" },
+            { ShaderDataType::Mat4, "u_modelMatrix" }
+        };
+        m_Shader2->AddUniforms(uniforms2);
         
         Renderer::AddShader(m_Shader);
+        Renderer::AddShader(m_Shader2);
         m_Camera.reset(new ProjectionCamera());
 
-        auto e = Application::Get().GetActiveScene()->CreateEntity();
-        e.AddComponent<ComponentMesh>(0);
-        e.AddComponent<ComponentShader>(0);
-        e.AddComponent<ComponentTransform>(glm::mat4(1.0));
+        //auto e = Application::Get().GetActiveScene()->CreateEntity();
+        //e.AddComponent<ComponentMesh>(0);
+        //e.AddComponent<ComponentShader>(0);
+        //e.AddComponent<ComponentTransform>(glm::mat4(1.0));
+
+        auto e2 = Application::Get().GetActiveScene()->CreateEntity();
+        e2.AddComponent<ComponentModel>(0);
+        e2.AddComponent<ComponentShader>(1);
+        e2.AddComponent<ComponentTransform>(glm::mat4(1.0));
     }
     void OnDetach() {}
     void OnUpdate(Timestep ts) {
@@ -99,9 +137,6 @@ public:
         m_Camera->Update(ts);
         RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.f });
         RenderCommand::Clear();
-        m_Shader->Bind();
-        m_Shader->SetUniform("u_colorAdd", totalTime);
-        m_Shader->SetUniform("u_viewMatrix", m_Camera->GetViewMatrix());
         
         auto e = Application::Get().GetActiveScene()->GetAllEntitiesWith<ComponentTransform>();
         auto t = Application::Get().GetActiveScene()->GetComponent<ComponentTransform>(e[0]);
@@ -112,7 +147,18 @@ public:
 
         auto& window = Application::Get().GetWindow();
         glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)window.GetWidth() / (float)window.GetHeight(), 0.1f, 100.0f);
+
+
+        m_Shader->Bind();
+        m_Shader->SetUniform("u_colorAdd", totalTime);
+        m_Shader->SetUniform("u_viewMatrix", m_Camera->GetViewMatrix());
         m_Shader->SetUniform("u_projectionMatrix", projection);
+
+
+        m_Shader2->Bind();
+        
+        m_Shader2->SetUniform("u_viewMatrix", m_Camera->GetViewMatrix());
+        m_Shader2->SetUniform("u_projectionMatrix", projection);
     }
     void OnEvent(Event& e) {
         EventDispatcher dispatcher(e);
@@ -126,6 +172,7 @@ public:
 private:
     float totalTime = 0.f;
     std::shared_ptr<Shader> m_Shader;
+    std::shared_ptr<Shader> m_Shader2;
     std::shared_ptr<Camera> m_Camera;
 };
 

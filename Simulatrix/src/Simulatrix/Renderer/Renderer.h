@@ -2,7 +2,6 @@
 #include "RenderCommand.h"
 #include "Simulatrix/Scene/Scene.h"
 #include "Simulatrix/Renderer/Shader.h"
-#include "Simulatrix/Scene/Mesh.h"
 #include <vector>
 namespace Simulatrix {
     struct Mesh {

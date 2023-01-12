@@ -10,9 +10,9 @@
 #include <Simulatrix/Renderer/Buffer.h>
 #include <Simulatrix/Renderer/VertexArray.h>
 #include <Simulatrix/Core/Camera.h>
-#include <Simulatrix/Core/ResourceManager.h>
 #include <Simulatrix/Scene/Scene.h>
 
+#include <Simulatrix/ResourceManager/ResourceManager.h>
 namespace Simulatrix {
     class Application
     {

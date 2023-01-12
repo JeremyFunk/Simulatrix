@@ -1,253 +1,311 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Simulatrix">
-      <UniqueIdentifier>{17AA9415-0362-D662-6C69-AFBE58407153}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Core">
-      <UniqueIdentifier>{CFB42E78-3B40-9C3C-4451-1F31B05BF83C}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix">
+      <UniqueIdentifier>{CE469B4C-BA14-8F52-A3A8-FF788F156BB7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Debug">
-      <UniqueIdentifier>{CDA9117E-B9A2-30D0-E2D4-1555CE2C10DC}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix\Core">
+      <UniqueIdentifier>{E6DB9692-523D-74A0-DBAA-BA52470BAB5F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Events">
-      <UniqueIdentifier>{1B36D143-874C-CFD9-D0C3-5AFB3C19A061}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix\Debug">
+      <UniqueIdentifier>{C4B37EE5-B042-08AF-5961-1CAA45CF1855}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\ImGui">
-      <UniqueIdentifier>{8114707E-6D0D-8FD0-963F-745582976EDC}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix\Events">
+      <UniqueIdentifier>{F27EDF98-5EEB-9A93-27DF-32F1930ABDFB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Platform">
-      <UniqueIdentifier>{4B301599-B791-F2A6-40FF-3859AC5F2966}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix\ImGui">
+      <UniqueIdentifier>{781EDDE5-64AD-66AF-0DCC-7AAAF9397755}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Platform\OpenGL">
-      <UniqueIdentifier>{1F370561-0B47-B131-7400-1650602FA0CA}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix\Platform">
+      <UniqueIdentifier>{E20AD96A-4E42-2102-574C-8525C30248FB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Platform\Windows">
-      <UniqueIdentifier>{85F5C7D9-F102-F6BF-7AE9-F1AAE6F5C176}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix\Platform\OpenGL">
+      <UniqueIdentifier>{D66184A3-C287-4E0A-ABCD-D3D5979273D6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Renderer">
-      <UniqueIdentifier>{9D37F273-0999-CF81-9206-1634FE660641}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix\Platform\OpenGL\Loader">
+      <UniqueIdentifier>{DCF3FD52-48B8-FC42-111E-2D0D7DA19878}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Simulatrix\Scene">
-      <UniqueIdentifier>{740C207F-6005-3FD1-8937-2456758F1EDD}</UniqueIdentifier>
+    <Filter Include="src\Simulatrix\Platform\Windows">
+      <UniqueIdentifier>{1C772C6C-885A-3BAC-915D-69E8FDBF01FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Simulatrix\Renderer">
+      <UniqueIdentifier>{3412B645-A049-FEDC-A953-6200150A25D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Simulatrix\ResourceManager">
+      <UniqueIdentifier>{E00B9EC1-CC31-6828-B577-EDF3A13C8DF4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Simulatrix\ResourceManager\Loader">
+      <UniqueIdentifier>{A6AEE66C-1273-E55C-DBD8-1527475C8192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Simulatrix\ResourceManager\Parser">
+      <UniqueIdentifier>{5C8C4775-C850-4665-91B6-762FFD39E29A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Simulatrix\Scene">
+      <UniqueIdentifier>{6B168DE6-57A5-16B0-00C4-2AABEC312756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\stbi_image">
+      <UniqueIdentifier>{96843F7B-029B-3D11-4B12-C932B7670E99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Simulatrix.h" />
+    <ClInclude Include="src\Simulatrix.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Application.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Camera.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Core.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Entrypoint.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\FileWatcher.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\IOWrapper.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Input.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\KeyCode.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Layer.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\LayerStack.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\MouseCodes.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\OrthographicCamera.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\ProjectionCamera.h">
-      <Filter>Simulatrix\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Simulatrix\Core\ResourceManager.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Timestep.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Window.h">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Debug\Log.h">
-      <Filter>Simulatrix\Debug</Filter>
+      <Filter>src\Simulatrix\Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Events\ApplicationEvent.h">
-      <Filter>Simulatrix\Events</Filter>
+      <Filter>src\Simulatrix\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Events\Event.h">
-      <Filter>Simulatrix\Events</Filter>
+      <Filter>src\Simulatrix\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Events\KeyEvent.h">
-      <Filter>Simulatrix\Events</Filter>
+      <Filter>src\Simulatrix\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Events\MouseEvent.h">
-      <Filter>Simulatrix\Events</Filter>
+      <Filter>src\Simulatrix\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\ImGui\ImGuiLayer.h">
-      <Filter>Simulatrix\ImGui</Filter>
+      <Filter>src\Simulatrix\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.h">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.h">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.h">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.h">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.h">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsIOWrapper.h">
-      <Filter>Simulatrix\Platform\Windows</Filter>
+      <Filter>src\Simulatrix\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsInput.h">
-      <Filter>Simulatrix\Platform\Windows</Filter>
+      <Filter>src\Simulatrix\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsWindow.h">
-      <Filter>Simulatrix\Platform\Windows</Filter>
+      <Filter>src\Simulatrix\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\Buffer.h">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\GraphicsContext.h">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\RenderCommand.h">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\Renderer.h">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\RendererAPI.h">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\Shader.h">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\VertexArray.h">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\ResourceManager\Loader\MeshLoader.h">
+      <Filter>src\Simulatrix\ResourceManager\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\ResourceManager\Parser\DefaultTextureParser.h">
+      <Filter>src\Simulatrix\ResourceManager\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\ResourceManager\Parser\ModelParser.h">
+      <Filter>src\Simulatrix\ResourceManager\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\ResourceManager\Parser\OBJParser.h">
+      <Filter>src\Simulatrix\ResourceManager\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\ResourceManager\Parser\TextureParser.h">
+      <Filter>src\Simulatrix\ResourceManager\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\ResourceManager\ResourceData.h">
+      <Filter>src\Simulatrix\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\ResourceManager\ResourceManager.h">
+      <Filter>src\Simulatrix\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Scene\Components.h">
+      <Filter>src\Simulatrix\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Scene\Entity.h">
-      <Filter>Simulatrix\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Simulatrix\Scene\Mesh.h">
-      <Filter>Simulatrix\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Simulatrix\Scene\OBJParser.h">
-      <Filter>Simulatrix\Scene</Filter>
+      <Filter>src\Simulatrix\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Scene\Scene.h">
-      <Filter>Simulatrix\Scene</Filter>
+      <Filter>src\Simulatrix\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\simixpch.h" />
-    <ClInclude Include="src\Simulatrix\Scene\ModelParser.h">
-      <Filter>Simulatrix\Scene</Filter>
+    <ClInclude Include="src\Simulatrix\Scene\SceneData.h">
+      <Filter>src\Simulatrix\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\Simulatrix\Scene\SceneData.h" />
+    <ClInclude Include="src\simixpch.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\stbi_image\stbi_image.h">
+      <Filter>vendor\stbi_image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Core\UUID.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\Texture.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLTexture2D.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\Loader\OpenGLMeshLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\FileWatcher.cpp">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\Layer.cpp">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\LayerStack.cpp">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\OrthographicCamera.cpp">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\ProjectionCamera.cpp">
-      <Filter>Simulatrix\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Simulatrix\Core\ResourceManager.cpp">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\Window.cpp">
-      <Filter>Simulatrix\Core</Filter>
+      <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Debug\Log.cpp">
-      <Filter>Simulatrix\Debug</Filter>
+      <Filter>src\Simulatrix\Debug</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Events\Event.cpp">
-      <Filter>Simulatrix\Events</Filter>
+      <Filter>src\Simulatrix\Events</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\ImGui\ImGuiBuild.cpp">
-      <Filter>Simulatrix\ImGui</Filter>
+      <Filter>src\Simulatrix\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\ImGui\ImGuiLayer.cpp">
-      <Filter>Simulatrix\ImGui</Filter>
+      <Filter>src\Simulatrix\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.cpp">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.cpp">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.cpp">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>Simulatrix\Platform\OpenGL</Filter>
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsIOWrapper.cpp">
-      <Filter>Simulatrix\Platform\Windows</Filter>
+      <Filter>src\Simulatrix\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsInput.cpp">
-      <Filter>Simulatrix\Platform\Windows</Filter>
+      <Filter>src\Simulatrix\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Simulatrix\Platform\Windows</Filter>
+      <Filter>src\Simulatrix\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\Buffer.cpp">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\RenderCommand.cpp">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\Renderer.cpp">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\RendererAPI.cpp">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\Shader.cpp">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\VertexArray.cpp">
-      <Filter>Simulatrix\Renderer</Filter>
+      <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Simulatrix\Scene\OBJParser.cpp">
-      <Filter>Simulatrix\Scene</Filter>
+    <ClCompile Include="src\Simulatrix\ResourceManager\Parser\DefaultTextureParser.cpp">
+      <Filter>src\Simulatrix\ResourceManager\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\ResourceManager\Parser\OBJParser.cpp">
+      <Filter>src\Simulatrix\ResourceManager\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\ResourceManager\ResourceManager.cpp">
+      <Filter>src\Simulatrix\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Scene\Scene.cpp">
-      <Filter>Simulatrix\Scene</Filter>
+      <Filter>src\Simulatrix\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\simixpch.cpp" />
+    <ClCompile Include="src\simixpch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\stbi_image\stbi_image.cpp">
+      <Filter>vendor\stbi_image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Core\UUID.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\Texture.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLTexture2D.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\Loader\OpenGLMeshLoader.cpp" />
   </ItemGroup>
 </Project>

@@ -1,50 +1,24 @@
 #pragma once
-#include <glm/glm.hpp>
+#include "Simulatrix/Renderer/VertexArray.h"
+#include "Simulatrix/Renderer/Texture.h"
 
 namespace Simulatrix {
-
-#define MAX_BONE_INFLUENCE 4
-    struct ResourceVertex {
-        // position
-        glm::vec3 Position;
-        // normal
-        glm::vec3 Normal;
-        // texCoords
-        glm::vec2 TexCoords;
-        // tangent
-        glm::vec3 Tangent;
-        // bitangent
-        glm::vec3 Bitangent;
-        //bone indexes which will influence this vertex
-        int m_BoneIDs[MAX_BONE_INFLUENCE];
-        //weights from each bone
-        float m_Weights[MAX_BONE_INFLUENCE];
-    };
-
-    struct ResourceTexture {
-        std::string type;
-        std::string path;
-    };
-
-    class ResourceMesh {
-    public:
-        // mesh Data
-        std::vector<ResourceVertex>       vertices;
-        std::vector<unsigned int>         indices;
-        std::vector<ResourceTexture>      textures;
-
-        // constructor
-        ResourceMesh(std::vector<ResourceVertex> vertices, std::vector<unsigned int> indices, std::vector<ResourceTexture> textures)
-        {
-            this->vertices = vertices;
-            this->indices = indices;
-            this->textures = textures;
+    struct SceneMesh {
+        std::shared_ptr<VertexArray> VAO;
+        unsigned int IndexCount;
+        SceneMesh(std::shared_ptr<VertexArray> VAO, unsigned int IndexCount) : VAO(VAO), IndexCount(IndexCount){}
+        SceneMesh(VertexArray* vao, unsigned int IndexCount) : IndexCount(IndexCount) {
+            VAO.reset(vao);
         }
     };
 
-    struct ResourceModel {
-        std::vector<ResourceTexture> TexturesLoaded;
-        std::vector<ResourceMesh> Meshes;
+    enum class ColorFormat {
+        R, RG, RGB, RGBA
     };
 
+    struct SceneModel {
+        unsigned int ID;
+        std::vector<SceneMesh> Meshes;
+        std::vector<std::shared_ptr<Texture2D>> Textures;
+    };
 }

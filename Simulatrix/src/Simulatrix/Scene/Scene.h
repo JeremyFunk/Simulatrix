@@ -1,6 +1,6 @@
 #pragma once
 #include "entt.hpp"
-#include "Mesh.h"
+#include "Components.h"
 #include "Simulatrix/Core/Core.h"
 #include "Simulatrix/Renderer/Shader.h"
 #include "Entity.h"
@@ -21,28 +21,26 @@ namespace Simulatrix {
         }
 
         template<typename... Components>
-        auto HasComponents()
+        bool HasComponents()
         {
             return m_Registry.all_of<Components...>();
         }
 
         template<typename... Components>
         auto GetComponents(entt::entity e) {
-            SIMIX_CORE_ASSERT(HasComponents<Components>(), "Entity does not have components!");
-
+            //SIMIX_CORE_ASSERT(e.HasComponents<Components...>(), "Entity does not have components!");
             return m_Registry.get<Components...>(e);
         }
 
         template<typename T>
         auto GetComponent(entt::entity e) {
-            SIMIX_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
-
+            //SIMIX_CORE_ASSERT(e.HasComponent<T>(), "Entity does not have component!");
             return m_Registry.get<T>(e);
         }
 
         template<typename T>
         auto ReplaceComponent(entt::entity e, T component) {
-            SIMIX_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
+            //SIMIX_CORE_ASSERT(e.HasComponent<T>(), "Entity does not have component!");
 
             return m_Registry.replace<T>(e, component);
         }

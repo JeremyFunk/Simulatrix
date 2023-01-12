@@ -3,14 +3,16 @@
 #include "Simulatrix/Core/Core.h"
 namespace Simulatrix {
     void loadModel(Path const& path, ResourceModel& result);
-    void processNode(aiNode* node, const aiScene* scene, ResourceModel& result);
-    ResourceMesh processMesh(aiMesh* mesh, const aiScene* scene, ResourceModel& result);
-    std::vector<ResourceTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, ResourceModel& result);
+    void processNode(aiNode* node, const aiScene* scene, const Path& path, ResourceModel& result);
+    ResourceMesh processMesh(aiMesh* mesh, const aiScene* scene, const Path& path, ResourceModel& result);
+    std::vector<ResourceTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, const Path& path, ResourceModel& result);
+
+    OBJParser::OBJParser() {
+        m_SupportedElements.push_back("obj");
+    }
 
     std::vector<std::string> OBJParser::GetAvailableFileEndings()
     {
-        m_SupportedElements.push_back("obj");
-        m_SupportedElements.push_back("mtl");
         return m_SupportedElements;
     }
     bool OBJParser::CanParseFile(Path path)
@@ -31,7 +33,7 @@ namespace Simulatrix {
         return result;
     }
 
-    void loadModel(Path const& path, ResourceModel& result)
+    void loadModel(const Path& path, ResourceModel& result)
     {
         // read file via ASSIMP
         Assimp::Importer importer;
@@ -44,37 +46,37 @@ namespace Simulatrix {
         }
 
         // process ASSIMP's root node recursively
-        processNode(scene->mRootNode, scene, result);
+        processNode(scene->mRootNode, scene, path, result);
     }
 
     // processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
-    void processNode(aiNode* node, const aiScene* scene, ResourceModel& result)
+    void processNode(aiNode* node, const aiScene* scene, const Path& path, ResourceModel& result)
     {
         // process each mesh located at the current node
-        for (unsigned int i = 0; i < node->mNumMeshes; i++)
+        for (uint32_t i = 0; i < node->mNumMeshes; i++)
         {
             // the node object only contains indices to index the actual objects in the scene. 
             // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-            result.Meshes.push_back(processMesh(mesh, scene, result));
+            result.Meshes.push_back(processMesh(mesh, scene, path, result));
         }
         // after we've processed all of the meshes (if any) we then recursively process each of the children nodes
-        for (unsigned int i = 0; i < node->mNumChildren; i++)
+        for (uint32_t i = 0; i < node->mNumChildren; i++)
         {
-            processNode(node->mChildren[i], scene, result);
+            processNode(node->mChildren[i], scene, path, result);
         }
 
     }
 
-    ResourceMesh processMesh(aiMesh* mesh, const aiScene* scene, ResourceModel& result)
+    ResourceMesh processMesh(aiMesh* mesh, const aiScene* scene, const Path& path, ResourceModel& result)
     {
         // data to fill
         std::vector<ResourceVertex> vertices;
-        std::vector<unsigned int> indices;
+        std::vector<uint32_t> indices;
         std::vector<ResourceTexture> textures;
 
         // walk through each of the mesh's vertices
-        for (unsigned int i = 0; i < mesh->mNumVertices; i++)
+        for (uint32_t i = 0; i < mesh->mNumVertices; i++)
         {
             ResourceVertex vertex;
             glm::vec3 vector; // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
@@ -117,11 +119,11 @@ namespace Simulatrix {
             vertices.push_back(vertex);
         }
         // now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
-        for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+        for (uint32_t i = 0; i < mesh->mNumFaces; i++)
         {
             aiFace face = mesh->mFaces[i];
             // retrieve all indices of the face and store them in the indices vector
-            for (unsigned int j = 0; j < face.mNumIndices; j++)
+            for (uint32_t j = 0; j < face.mNumIndices; j++)
                 indices.push_back(face.mIndices[j]);
         }
         // process materials
@@ -134,17 +136,17 @@ namespace Simulatrix {
         // normal: texture_normalN
 
         // 1. diffuse maps
-        std::vector<ResourceTexture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", result);
+        std::vector<ResourceTexture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", path, result);
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
         // 2. specular maps
-        std::vector<ResourceTexture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", result);
-        textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-        // 3. normal maps
-        std::vector<ResourceTexture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal", result);
-        textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-        // 4. height maps
-        std::vector<ResourceTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", result);
-        textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+        //std::vector<ResourceTexture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", result);
+        //textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+        //// 3. normal maps
+        //std::vector<ResourceTexture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal", result);
+        //textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+        //// 4. height maps
+        //std::vector<ResourceTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", result);
+        //textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
         // return a mesh object created from the extracted mesh data
         return ResourceMesh(vertices, indices, textures);
@@ -152,16 +154,16 @@ namespace Simulatrix {
 
     // checks all material textures of a given type and loads the textures if they're not loaded yet.
     // the required info is returned as a Texture struct.
-    std::vector<ResourceTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, ResourceModel& result)
+    std::vector<ResourceTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, const Path& path, ResourceModel& result)
     {
         std::vector<ResourceTexture> textures;
-        for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+        for (uint32_t i = 0; i < mat->GetTextureCount(type); i++)
         {
             aiString str;
             mat->GetTexture(type, i, &str);
             // check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
             bool skip = false;
-            for (unsigned int j = 0; j < result.TexturesLoaded.size(); j++)
+            for (uint32_t j = 0; j < result.TexturesLoaded.size(); j++)
             {
                 if (std::strcmp(result.TexturesLoaded[j].path.data(), str.C_Str()) == 0)
                 {
@@ -173,8 +175,7 @@ namespace Simulatrix {
             if (!skip)
             {   // if texture hasn't been loaded already, load it
                 ResourceTexture texture;
-                texture.type = typeName;
-                texture.path = str.C_Str();
+                texture.path = path.Directory + str.C_Str();
                 textures.push_back(texture);
                 result.TexturesLoaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
             }

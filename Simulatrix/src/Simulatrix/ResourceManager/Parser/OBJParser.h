@@ -9,7 +9,7 @@ namespace Simulatrix {
 
     class OBJParser : public ModelParser {
     public:
-        OBJParser() = default;
+        OBJParser();
         virtual std::vector<std::string> GetAvailableFileEndings() override;
         virtual bool CanParseFile(Path path) override;
         virtual ResourceModel Parse(Path path) override;

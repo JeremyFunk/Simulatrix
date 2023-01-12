@@ -1,10 +1,11 @@
 #pragma once
 #include "Simulatrix/Renderer/Buffer.h"
-
+#include "Simulatrix/ResourceManager/ResourceData.h"
 namespace Simulatrix {
     class OpenGLVertexBuffer : public VertexBuffer {
     public:
         OpenGLVertexBuffer(float* vertices, uint32_t size);
+        OpenGLVertexBuffer(std::vector<ResourceVertex> vertices);
         virtual ~OpenGLVertexBuffer();
 
         virtual void Bind() const override;
@@ -20,6 +21,7 @@ namespace Simulatrix {
     class OpenGLIndexBuffer : public IndexBuffer {
     public:
         OpenGLIndexBuffer(uint32_t* indices, uint32_t count);
+        OpenGLIndexBuffer(std::vector<uint32_t> indices);
         virtual ~OpenGLIndexBuffer();
 
         virtual uint32_t GetCount() const override;

@@ -14,6 +14,7 @@ workspace "Simulatrix"
     IncludeDir["ImGui"] = "Simulatrix/vendor/imgui"
     IncludeDir["GLM"] = "Simulatrix/vendor/glm"
     IncludeDir["entt"] = "Simulatrix/vendor/entt/include"
+    IncludeDir["stbi"] = "Simulatrix/vendor/stbi_image"
 
     include "Simulatrix/vendor/GLFW"
     include "Simulatrix/vendor/Glad"
@@ -34,7 +35,9 @@ project "Simulatrix"
 
     files{
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+		"Simulatrix/vendor/stbi_image/**.h",
+		"Simulatrix/vendor/stbi_image/**.cpp"
     }
 
     includedirs{
@@ -44,7 +47,8 @@ project "Simulatrix"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.GLM}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.stbi}"
     }
 
     defines 
@@ -103,7 +107,8 @@ project "Sandbox"
         "Simulatrix/vendor/spdlog/include",
         "Simulatrix/src",
         "%{IncludeDir.GLM}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.stbi}"
     }
 
     links {

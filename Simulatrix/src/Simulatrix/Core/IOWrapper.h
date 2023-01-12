@@ -11,6 +11,7 @@ namespace Simulatrix {
         std::string FileEnding;
         std::string FileName;
         std::string FileNameNoEnding;
+        std::string Directory;
         PathType Type;
 
         Path(const std::string& path, PathType type) {
@@ -20,7 +21,14 @@ namespace Simulatrix {
                 FileName = path.substr(path.find_last_of("\\") + 1);
                 FileEnding = FileName.substr(FileName.find_last_of(".") + 1);
                 FileNameNoEnding = FileName.substr(0, FileName.size() - FileEnding.size() - 1   );
+                Directory = path.substr(0, path.find_last_of("\\") + 1);
             }
+            else {
+                Directory = path;
+            }
+        }
+        Path() {
+
         }
         std::ostream& operator<<(std::ostream& os) {
             return os << PathString;

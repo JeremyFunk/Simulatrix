@@ -15,7 +15,7 @@ namespace Simulatrix {
     {
         glfwMakeContextCurrent(m_WindowHandle);
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-        SIMIX_CORE_ASSERT(success, "Failed to initialize Glad!");
+        SIMIX_CORE_ASSERT(status, "Failed to initialize Glad!");
     }
     void OpenGLContext::SwapBuffers()
     {

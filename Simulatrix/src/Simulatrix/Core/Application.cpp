@@ -2,6 +2,7 @@
 #include "Simulatrix/Debug/Log.h"
 #include "Application.h"
 #include "Simulatrix/Renderer/Renderer.h"
+#include "Simulatrix/Renderer/RendererAPI.h"
 #include <GLFW/glfw3.h>
 #include "Simulatrix/Core/OrthographicCamera.h"
 #include "IOWrapper.h"
@@ -20,6 +21,7 @@ namespace Simulatrix {
         SIMIX_CORE_ASSERT(!s_Instance, "Application already exists!");
         s_Instance = this;
 
+        RenderCommand::Init();
         m_ImGuiLayer = new ImGuiLayer();
         PushOverlay(m_ImGuiLayer);
 

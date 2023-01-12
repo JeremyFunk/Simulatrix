@@ -1,10 +1,12 @@
 #pragma once
+#define SIMIX_ENABLE_ASSERTS
 
 #ifdef SIMIX_PLATFORM_WINDOWS
-
 #else
 #error Only Windows supported!
 #endif
+
+#include "Simulatrix/Debug/Log.h"
 
 #ifdef SIMIX_ENABLE_ASSERTS
     #define SIMIX_ASSERT(x, ...) {if(!(x)) {SIMIX_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); }}
