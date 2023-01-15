@@ -4,6 +4,7 @@
 #include "Simulatrix/Core/Core.h"
 #include "Simulatrix/Renderer/Shader.h"
 #include "Entity.h"
+#include <Simulatrix/Core/Camera.h>
 namespace Simulatrix {
     class Scene {
     public:
@@ -44,9 +45,19 @@ namespace Simulatrix {
 
             return m_Registry.replace<T>(e, component);
         }
+
+        Ref<Camera> GetCamera() {
+            return m_Camera;
+        }
+        void SetCamera(Ref<Camera> cam) {
+            m_Camera = cam;
+        }
     private:
+        Ref<Camera> m_Camera;
+
         entt::registry m_Registry;
         friend class Entity;
+        friend class SceneHierarchy;
     };
     
 }

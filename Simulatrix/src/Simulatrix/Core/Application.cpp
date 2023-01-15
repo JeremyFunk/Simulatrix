@@ -16,14 +16,14 @@ namespace Simulatrix {
         auto temp = m_ResourceManager->GetIO()->GetCurrentDir();
         SIMIX_CORE_INFO("Starting in directory {0}", m_ResourceManager->GetIO()->GetCurrentDir().PathString);
 
-        m_Window = std::unique_ptr<Window>(Window::Create());
+        m_Window = Scope<Window>(Window::Create());
         m_Window->SetEventCallback(SIMIX_BIND_EVENT_FN(Application::OnEvent));
         SIMIX_CORE_ASSERT(!s_Instance, "Application already exists!");
         s_Instance = this;
 
         RenderCommand::Init();
         m_ImGuiLayer = new ImGuiLayer();
-        PushOverlay(m_ImGuiLayer);
+        m_ImGuiLayer->OnAttach();
 
         m_ActiveScene.reset(new Scene());
     }
@@ -53,17 +53,28 @@ namespace Simulatrix {
             float time = (float)glfwGetTime();
             Timestep timestep = time - m_LastFrameTime;
             m_LastFrameTime = time;
-            
+
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate(timestep);
 
             for (Layer* layer : m_LayerStack)
+                layer->OnPreRender();
+            for (Layer* layer : m_LayerStack)
                 layer->OnRender();
-
             Renderer::Render(m_ActiveScene);
+            for (Layer* layer : m_LayerStack)
+                layer->OnPostRender();
+
+            m_ImGuiLayer->Begin();
 
             for (Layer* layer : m_LayerStack)
+                layer->OnPreRenderOverlay();
+            for (Layer* layer : m_LayerStack)
                 layer->OnRenderOverlay();
+            for (Layer* layer : m_LayerStack)
+                layer->OnPostRenderOverlay();
+
+            m_ImGuiLayer->End();
 
             Renderer::EndScene(m_ActiveScene);
             m_Window->OnUpdate();

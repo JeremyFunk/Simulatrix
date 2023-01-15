@@ -67,6 +67,7 @@ namespace Simulatrix {
 
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
-		return os << e.ToString();
+		//return os << e.ToString();
+		return os;
 	}
 }

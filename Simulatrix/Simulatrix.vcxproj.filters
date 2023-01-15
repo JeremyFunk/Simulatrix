@@ -99,6 +99,9 @@
     <ClInclude Include="src\Simulatrix\Core\Timestep.h">
       <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Core\UUID.h">
+      <Filter>src\Simulatrix\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Core\Window.h">
       <Filter>src\Simulatrix\Core</Filter>
     </ClInclude>
@@ -120,16 +123,25 @@
     <ClInclude Include="src\Simulatrix\ImGui\ImGuiLayer.h">
       <Filter>src\Simulatrix\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\Loader\OpenGLMeshLoader.h">
+      <Filter>src\Simulatrix\Platform\OpenGL\Loader</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLFramebuffer.h">
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLTexture2D.h">
       <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.h">
@@ -147,6 +159,9 @@
     <ClInclude Include="src\Simulatrix\Renderer\Buffer.h">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Renderer\Framebuffer.h">
+      <Filter>src\Simulatrix\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\GraphicsContext.h">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
@@ -160,6 +175,9 @@
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\Shader.h">
+      <Filter>src\Simulatrix\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Renderer\Texture.h">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\VertexArray.h">
@@ -204,10 +222,8 @@
     <ClInclude Include="vendor\stbi_image\stbi_image.h">
       <Filter>vendor\stbi_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Simulatrix\Core\UUID.h" />
-    <ClInclude Include="src\Simulatrix\Renderer\Texture.h" />
-    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLTexture2D.h" />
-    <ClInclude Include="src\Simulatrix\Platform\OpenGL\Loader\OpenGLMeshLoader.h" />
+    <ClInclude Include="src\Simulatrix\Util\ToggleUtil.h" />
+    <ClInclude Include="src\Simulatrix\Util\StringUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
@@ -228,6 +244,9 @@
     <ClCompile Include="src\Simulatrix\Core\ProjectionCamera.cpp">
       <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Core\UUID.cpp">
+      <Filter>src\Simulatrix\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\Simulatrix\Core\Window.cpp">
       <Filter>src\Simulatrix\Core</Filter>
     </ClCompile>
@@ -243,16 +262,25 @@
     <ClCompile Include="src\Simulatrix\ImGui\ImGuiLayer.cpp">
       <Filter>src\Simulatrix\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\Loader\OpenGLMeshLoader.cpp">
+      <Filter>src\Simulatrix\Platform\OpenGL\Loader</Filter>
+    </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Simulatrix\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLTexture2D.cpp">
       <Filter>src\Simulatrix\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLVertexArray.cpp">
@@ -270,6 +298,9 @@
     <ClCompile Include="src\Simulatrix\Renderer\Buffer.cpp">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Renderer\Framebuffer.cpp">
+      <Filter>src\Simulatrix\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\RenderCommand.cpp">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
@@ -280,6 +311,9 @@
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\Shader.cpp">
+      <Filter>src\Simulatrix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Renderer\Texture.cpp">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\VertexArray.cpp">
@@ -303,9 +337,7 @@
     <ClCompile Include="vendor\stbi_image\stbi_image.cpp">
       <Filter>vendor\stbi_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Simulatrix\Core\UUID.cpp" />
-    <ClCompile Include="src\Simulatrix\Renderer\Texture.cpp" />
-    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLTexture2D.cpp" />
-    <ClCompile Include="src\Simulatrix\Platform\OpenGL\Loader\OpenGLMeshLoader.cpp" />
+    <ClCompile Include="src\Simulatrix\Util\ToggleUtil.cpp" />
+    <ClCompile Include="src\Simulatrix\Util\StringUtil.cpp" />
   </ItemGroup>
 </Project>

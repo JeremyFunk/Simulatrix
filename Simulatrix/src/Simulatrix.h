@@ -27,6 +27,7 @@
 #include "Simulatrix/Scene/SceneData.h"
 #include "Simulatrix/Scene/Scene.h"
 
+#include "Simulatrix/Util/ToggleUtil.h"
 
 // Entry point
 #include "Simulatrix/Core/Entrypoint.h"

@@ -1,21 +1,24 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "Simulatrix/Core/UUID.h"
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
 namespace Simulatrix {
-    struct IDComponent {
+    struct ComponentID {
         UUID ID;
 
-        IDComponent() = default;
-        IDComponent(const IDComponent&) = default;
-        IDComponent(const UUID& id) : ID(id) {}
+        ComponentID() = default;
+        ComponentID(const ComponentID&) = default;
+        ComponentID(const UUID& id) : ID(id) {}
     };
 
-    struct TagComponent {
+    struct ComponentTag {
         std::string Tag;
 
-        TagComponent() = default;
-        TagComponent(const TagComponent&) = default;
-        TagComponent(const std::string& tag) : Tag(tag) {}
+        ComponentTag() = default;
+        ComponentTag(const ComponentTag&) = default;
+        ComponentTag(const std::string& tag) : Tag(tag) {}
     };
 
     struct ComponentMesh {
@@ -43,11 +46,22 @@ namespace Simulatrix {
         }
     };
     struct ComponentTransform {
-        glm::mat4 Transform;
+        glm::vec3 Translation = { 0.0f, 0.0f, 0.0f };
+        glm::vec3 Rotation = { 0.0f, 0.0f, 0.0f };
+        glm::vec3 Scale = { 1.0f, 1.0f, 1.0f };
         ComponentTransform() = default;
-        ComponentTransform(glm::mat4 Transform) : Transform(Transform)
+        ComponentTransform(const glm::vec3& translation) : Translation(translation)
         {
 
+        }
+
+        glm::mat4 GetTransform() const
+        {
+            glm::mat4 rotation = glm::toMat4(glm::quat(Rotation));
+
+            return glm::translate(glm::mat4(1.0f), Translation)
+                * rotation
+                * glm::scale(glm::mat4(1.0f), Scale);
         }
     };
     struct ComponentMaterial {

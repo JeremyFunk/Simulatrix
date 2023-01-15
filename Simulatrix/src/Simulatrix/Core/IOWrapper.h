@@ -36,6 +36,9 @@ namespace Simulatrix {
         std::string to_string() const {
             return PathString;
         }
+        Path GetParentDir() {
+            return Path(Directory.substr(0, Directory.find_last_of("\\") + 1), PathType::Directory);
+        }
     };
 
 

@@ -64,12 +64,6 @@ namespace Simulatrix {
 	void ImGuiLayer::OnUpdate(Timestep ts) {
 	}
 	void ImGuiLayer::OnRenderOverlay() {
-		Begin();
-		ImGui::Begin("AHA");
-		ImGui::Text("LOLO");
-
-		ImGui::End();
-		End();
 	}
 	void ImGuiLayer::OnEvent(Event& e)
 	{

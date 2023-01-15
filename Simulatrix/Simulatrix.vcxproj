@@ -169,6 +169,7 @@
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\Loader\OpenGLMeshLoader.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLTexture2D.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Simulatrix\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Buffer.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Simulatrix\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Simulatrix\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Renderer.h" />
@@ -196,6 +198,8 @@
     <ClInclude Include="src\Simulatrix\Scene\Scene.h" />
     <ClInclude Include="src\Simulatrix\Scene\SceneData.h" />
     <ClInclude Include="src\simixpch.h" />
+    <ClInclude Include="src\Simulatrix\Util\StringUtil.h" />
+    <ClInclude Include="src\Simulatrix\Util\ToggleUtil.h" />
     <ClInclude Include="vendor\stbi_image\stbi_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +218,7 @@
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\Loader\OpenGLMeshLoader.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLTexture2D.cpp" />
@@ -222,6 +227,7 @@
     <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\RendererAPI.cpp" />
@@ -235,6 +241,8 @@
     <ClCompile Include="src\simixpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Util\StringUtil.cpp" />
+    <ClCompile Include="src\Simulatrix\Util\ToggleUtil.cpp" />
     <ClCompile Include="vendor\stbi_image\stbi_image.cpp" />
   </ItemGroup>
   <ItemGroup>

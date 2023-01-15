@@ -31,10 +31,10 @@ namespace Simulatrix {
     {
         glBindVertexArray(0);
     }
-    void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
+    void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
     {
         SIMIX_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex buffer has no layout!");
-        
+
         glBindVertexArray(m_RendererID);
         vertexBuffer->Bind();
 
@@ -55,13 +55,13 @@ namespace Simulatrix {
 
         m_VertexBuffers.push_back(vertexBuffer);
     }
-    void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+    void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
     {
         glBindVertexArray(m_RendererID);
         indexBuffer->Bind();
         m_IndexBuffer = indexBuffer;
     }
-    const std::shared_ptr<IndexBuffer>& OpenGLVertexArray::GetIndexBuffer()
+    const Ref<IndexBuffer>& OpenGLVertexArray::GetIndexBuffer()
     {
         return m_IndexBuffer;
     }

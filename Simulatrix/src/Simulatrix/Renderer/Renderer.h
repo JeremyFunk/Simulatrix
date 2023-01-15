@@ -5,32 +5,32 @@
 #include <vector>
 namespace Simulatrix {
     struct Mesh {
-        std::shared_ptr<VertexArray> vertexArray;
+        Ref<VertexArray> vertexArray;
 
-        Mesh(std::shared_ptr<VertexArray> vertexArray) : vertexArray(vertexArray) {
+        Mesh(Ref<VertexArray> vertexArray) : vertexArray(vertexArray) {
 
         }
     };
 
     class Renderer {
     public:
-        static void BeginScene(std::shared_ptr<Scene> scene);
-        static void EndScene(std::shared_ptr<Scene> scene);
+        static void BeginScene(Ref<Scene> scene);
+        static void EndScene(Ref<Scene> scene);
 
-        static void Render(std::shared_ptr<Scene> scene);
-        static void AddMesh(std::shared_ptr<Mesh> mesh) {
+        static void Render(Ref<Scene> scene);
+        static void AddMesh(Ref<Mesh> mesh) {
             s_Meshes.push_back(mesh);
         }
         static void AddMesh(Mesh mesh) {
             s_Meshes.push_back(std::make_shared<Mesh>(mesh));
         }
-        static void AddShader(std::shared_ptr <Shader> shader) {
+        static void AddShader(Ref <Shader> shader) {
             s_Shaders.push_back(shader);
         }
 
         static inline RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
     private:
-        static std::vector<std::shared_ptr<Mesh>> s_Meshes;
-        static std::vector<std::shared_ptr<Shader>> s_Shaders;
+        static std::vector<Ref<Mesh>> s_Meshes;
+        static std::vector<Ref<Shader>> s_Shaders;
     };
 }

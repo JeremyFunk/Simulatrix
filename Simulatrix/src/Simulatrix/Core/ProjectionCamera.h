@@ -21,6 +21,7 @@ namespace Simulatrix {
         virtual glm::mat4x4 GetViewMatrix() const override;
         virtual void SetPosition(glm::vec3 position) override;
         virtual void Update(Timestep delta) override;
+        void SetFreecam(bool freecam);
     private:
         virtual void UpdateVectors();
     private:
@@ -32,5 +33,6 @@ namespace Simulatrix {
         float m_Yaw;
         float m_Velocity;
         float m_Pitch;
+        bool m_Freecam = false;
     };
 }

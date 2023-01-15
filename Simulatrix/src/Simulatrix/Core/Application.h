@@ -11,6 +11,7 @@
 #include <Simulatrix/Renderer/VertexArray.h>
 #include <Simulatrix/Core/Camera.h>
 #include <Simulatrix/Scene/Scene.h>
+#include <Simulatrix/Renderer/Framebuffer.h>
 
 #include <Simulatrix/ResourceManager/ResourceManager.h>
 namespace Simulatrix {
@@ -27,7 +28,7 @@ namespace Simulatrix {
 
         void PushLayer(Layer* layer);
         void PushOverlay(Layer* overlay);
-        std::shared_ptr<Scene>& GetActiveScene() {
+        Ref<Scene>& GetActiveScene() {
             return m_ActiveScene;
         }
     private:
@@ -40,8 +41,8 @@ namespace Simulatrix {
         static Application* s_Instance;
         float m_LastFrameTime = 0.0f;
         ImGuiLayer* m_ImGuiLayer;
-        std::shared_ptr<ResourceManager> m_ResourceManager;
-        std::shared_ptr<Scene> m_ActiveScene;
+        Ref<ResourceManager> m_ResourceManager;
+        Ref<Scene> m_ActiveScene;
     };
     // To be defined in client.
     Application* CreateApplication();

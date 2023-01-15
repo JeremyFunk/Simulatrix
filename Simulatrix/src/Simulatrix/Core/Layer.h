@@ -13,8 +13,12 @@ namespace Simulatrix {
 
         virtual void OnAttach(){}
         virtual void OnDetach() {}
+        virtual void OnPreRender() {}
         virtual void OnRender() {}
+        virtual void OnPostRender() {}
+        virtual void OnPreRenderOverlay() {}
         virtual void OnRenderOverlay() {}
+        virtual void OnPostRenderOverlay() {}
         virtual void OnUpdate(Timestep ts) {}
         virtual void OnEvent(Event& e) {}
 

@@ -2,8 +2,11 @@
 #include "simixpch.h"
 #include "FileWatcher.h"
 #include <thread>
+#include "Simulatrix/Core/Core.h"
+#include <Simulatrix/Util/StringUtil.h>
 
 namespace Simulatrix {
+    // Path has to end on backslash
     FileWatcher::FileWatcher(std::string pathToWatch, std::chrono::duration<int, std::milli> delay) : m_PathToWatch(pathToWatch), m_Delay(delay) {
         /*for (auto& file : std::filesystem::recursive_directory_iterator(pathToWatch)) {
             m_Paths[file.path().string()] = std::filesystem::last_write_time(file);
@@ -25,6 +28,8 @@ namespace Simulatrix {
                     it++;
                 }
             }
+            File root;
+            root.SetName(m_PathToWatch.substr(0, m_PathToWatch.size() - 1));
 
             for (auto& file : std::filesystem::recursive_directory_iterator(m_PathToWatch)) {
                 auto currentFileLastWriteTime = std::filesystem::last_write_time(file);
@@ -39,7 +44,19 @@ namespace Simulatrix {
                         toAdd.push_back(std::pair<Path, FileStatus>(Path(file.path().string(), std::filesystem::is_directory(file.path().string()) ? PathType::Directory : PathType::File), FileStatus::Modified));
                     }
                 }
+
+                auto relativePath = file.path().string().substr(m_PathToWatch.size());
+                auto elements = Split(Replace(relativePath, '\\', '/'), '/');
+                
+                root.AddFile(elements, m_PathToWatch.substr(0, m_PathToWatch.size() - 1), file.is_directory());
             }
+            while (!m_FileStructureMutex.try_lock()) {
+                offset++;
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            }
+            m_FileStructure = root;
+            m_FileStructure.SetParents();
+            m_FileStructureMutex.unlock();
 
             while (!m_LastFileChangesMutex.try_lock()) {
                 offset++;

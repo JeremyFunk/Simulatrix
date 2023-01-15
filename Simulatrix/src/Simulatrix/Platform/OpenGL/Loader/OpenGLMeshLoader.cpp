@@ -6,13 +6,14 @@
 
 namespace Simulatrix {
     SceneMesh OpenGLMeshLoader::Load(ResourceMesh& t) {
-        auto VAO = new OpenGLVertexArray();
+
+        auto VAO = CreateRef<OpenGLVertexArray>();
         VAO->Bind();
-        
-        auto VBO = new OpenGLVertexBuffer(t.vertices);
+
+        auto VBO = CreateRef<OpenGLVertexBuffer>(t.vertices);
         VBO->Bind();
 
-        auto EBO = new OpenGLIndexBuffer(t.indices);
+        auto EBO = CreateRef<OpenGLIndexBuffer>(t.indices);
         EBO->Bind();
 
         BufferLayout layout{
@@ -25,13 +26,8 @@ namespace Simulatrix {
             { ShaderDataType::Vec4, "a_Weights" },*/
         };
         VBO->SetLayout(layout);
-        std::shared_ptr<VertexBuffer> VBO_P;
-        VBO_P.reset(VBO);
-        VAO->AddVertexBuffer(VBO_P);
-
-        std::shared_ptr<IndexBuffer> EBO_P;
-        EBO_P.reset(EBO);
-        VAO->SetIndexBuffer(EBO_P);
+        VAO->AddVertexBuffer(VBO);
+        VAO->SetIndexBuffer(EBO);
 
         return SceneMesh(VAO, t.indices.size() * sizeof(unsigned int));
     }

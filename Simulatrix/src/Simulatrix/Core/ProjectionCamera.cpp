@@ -8,40 +8,47 @@
 
 namespace Simulatrix {
     void ProjectionCamera::Update(Timestep delta) {
-        if (Input::IsKeyPressed(Key::W)) {
-            auto front = m_Front;
-            front.y = 0;
-            m_Position += glm::normalize(front) * m_Velocity * delta.GetSeconds();
-        }
-        if (Input::IsKeyPressed(Key::S)) {
-            auto front = m_Front;
-            front.y = 0;
-            m_Position -= glm::normalize(front) * m_Velocity * delta.GetSeconds();
-        }
-        if (Input::IsKeyPressed(Key::A)) {
-            m_Position -= m_Right * m_Velocity * m_Velocity * delta.GetSeconds();
-        }
-        if (Input::IsKeyPressed(Key::D)) {
-            m_Position += m_Right * m_Velocity * m_Velocity * delta.GetSeconds();
-        }
-        if (Input::IsKeyPressed(Key::LeftShift)) {
-            m_Position.y -= m_Velocity * m_Velocity * delta.GetSeconds();
-        }
-        if (Input::IsKeyPressed(Key::Space)) {
-            m_Position.y += m_Velocity * m_Velocity * delta.GetSeconds();
-        }
-        float xoffset = Input::GetMouseDX() * SENSITIVITY;
-        float yoffset = Input::GetMouseDY() * SENSITIVITY;
 
-        m_Yaw += xoffset;
-        m_Pitch += yoffset;
+        if (m_Freecam) {
+            if (Input::IsKeyPressed(Key::W)) {
+                auto front = m_Front;
+                front.y = 0;
+                m_Position += glm::normalize(front) * m_Velocity * delta.GetSeconds();
+            }
+            if (Input::IsKeyPressed(Key::S)) {
+                auto front = m_Front;
+                front.y = 0;
+                m_Position -= glm::normalize(front) * m_Velocity * delta.GetSeconds();
+            }
+            if (Input::IsKeyPressed(Key::A)) {
+                m_Position -= m_Right * m_Velocity * m_Velocity * delta.GetSeconds();
+            }
+            if (Input::IsKeyPressed(Key::D)) {
+                m_Position += m_Right * m_Velocity * m_Velocity * delta.GetSeconds();
+            }
+            if (Input::IsKeyPressed(Key::LeftShift)) {
+                m_Position.y -= m_Velocity * m_Velocity * delta.GetSeconds();
+            }
+            if (Input::IsKeyPressed(Key::Space)) {
+                m_Position.y += m_Velocity * m_Velocity * delta.GetSeconds();
+            }
+            float xoffset = Input::GetMouseDX() * SENSITIVITY;
+            float yoffset = Input::GetMouseDY() * SENSITIVITY;
 
-        if (m_Pitch > 89.0f)
-            m_Pitch = 89.0f;
-        if (m_Pitch < -89.0f)
-            m_Pitch = -89.0f;
+            m_Yaw += xoffset;
+            m_Pitch += yoffset;
+
+            if (m_Pitch > 89.0f)
+                m_Pitch = 89.0f;
+            if (m_Pitch < -89.0f)
+                m_Pitch = -89.0f;
+        }
 
         UpdateVectors();
+    }
+
+    void ProjectionCamera::SetFreecam(bool freecam) {
+        m_Freecam = freecam;
     }
     
     void ProjectionCamera::UpdateVectors() {

@@ -15,7 +15,7 @@
 
 namespace Simulatrix {
     ResourceManager* ResourceManager::s_Instance = nullptr;
-    void RunThread(std::shared_ptr<FileWatcher> m_ResourceWatcher) {
+    void RunThread(Ref<FileWatcher> m_ResourceWatcher) {
         m_ResourceWatcher->Start();
     }
 
@@ -74,7 +74,7 @@ namespace Simulatrix {
     void ResourceManager::LoadTexture(Path& p) {
         //auto resource = parser->Parse(p);
         auto texture = Texture2D::Create(p);
-        auto pointer = std::shared_ptr<Texture2D>();
+        auto pointer = Ref<Texture2D>();
         pointer.reset(texture);
         //auto result = m_TextureLoader->Load(resource);
 
@@ -90,10 +90,10 @@ namespace Simulatrix {
     const SceneModel& ResourceManager::GetModel(uint32_t id) {
         return m_LoadedModels[id];
     }
-    const std::shared_ptr<Texture2D> ResourceManager::GetTexture(Path& path) {
+    const Ref<Texture2D> ResourceManager::GetTexture(Path& path) {
         return m_LoadedTextures[m_LoadedTextureIDs[path.PathString]];
     }
-    const std::shared_ptr<Texture2D> ResourceManager::GetTexture(uint32_t id) {
+    const Ref<Texture2D> ResourceManager::GetTexture(uint32_t id) {
         return m_LoadedTextures[id];
     }
     const std::string TEXTURE_FILE_ENDINGS[] = {

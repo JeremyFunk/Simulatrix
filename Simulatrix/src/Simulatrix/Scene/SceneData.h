@@ -4,12 +4,9 @@
 
 namespace Simulatrix {
     struct SceneMesh {
-        std::shared_ptr<VertexArray> VAO;
+        Ref<VertexArray> VAO;
         unsigned int IndexCount;
-        SceneMesh(std::shared_ptr<VertexArray> VAO, unsigned int IndexCount) : VAO(VAO), IndexCount(IndexCount){}
-        SceneMesh(VertexArray* vao, unsigned int IndexCount) : IndexCount(IndexCount) {
-            VAO.reset(vao);
-        }
+        SceneMesh(Ref<VertexArray> VAO, unsigned int IndexCount) : VAO(VAO), IndexCount(IndexCount){}
     };
 
     enum class ColorFormat {
@@ -19,6 +16,6 @@ namespace Simulatrix {
     struct SceneModel {
         unsigned int ID;
         std::vector<SceneMesh> Meshes;
-        std::vector<std::shared_ptr<Texture2D>> Textures;
+        std::vector<Ref<Texture2D>> Textures;
     };
 }

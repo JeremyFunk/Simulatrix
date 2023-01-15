@@ -88,8 +88,8 @@ project "Simulatrix"
         buildoptions "/MD"
         optimize "on"
 
-project "Sandbox"
-    location "Sandbox"
+project "Editor"
+    location "Editor"
     kind "ConsoleApp"
     language "C++"
     staticruntime "on"
@@ -107,6 +107,7 @@ project "Sandbox"
         "Simulatrix/vendor/spdlog/include",
         "Simulatrix/src",
         "%{IncludeDir.GLM}",
+        "%{IncludeDir.ImGui}",
         "%{IncludeDir.entt}",
         "%{IncludeDir.stbi}"
     }
@@ -136,3 +137,55 @@ project "Sandbox"
         defines "SIMIX_DIST"
         buildoptions "/MD"
         optimize "on"
+
+
+
+        project "Sandbox"
+        location "Sandbox"
+        kind "ConsoleApp"
+        language "C++"
+        staticruntime "on"
+        cppdialect "C++17"
+    
+        targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+        objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    
+        files{
+            "%{prj.name}/src/**.h",
+            "%{prj.name}/src/**.cpp"
+        }
+    
+        includedirs{
+            "Simulatrix/vendor/spdlog/include",
+            "Simulatrix/src",
+            "%{IncludeDir.GLM}",
+            "%{IncludeDir.ImGui}",
+            "%{IncludeDir.entt}",
+            "%{IncludeDir.stbi}"
+        }
+    
+        links {
+            "Simulatrix"
+        }
+        
+        filter "system:windows"
+            systemversion "latest"
+    
+            defines{
+                "SIMIX_PLATFORM_WINDOWS"
+            }
+    
+        filter "configurations:Debug"
+            defines "SIMIX_DEBUG"
+            buildoptions "/MDd"
+            symbols "on"
+    
+        filter "configurations:Release"
+            defines "SIMIX_RELEASE"
+            buildoptions "/MD"
+            optimize "on"
+    
+        filter "configurations:Dist"
+            defines "SIMIX_DIST"
+            buildoptions "/MD"
+            optimize "on"

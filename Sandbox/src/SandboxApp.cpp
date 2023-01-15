@@ -2,6 +2,7 @@
 #include <Simulatrix.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "ImGui/ImGuiEditor.h"
 using namespace Simulatrix;
 
 class ExampleLayer : public Layer {
@@ -13,16 +14,15 @@ public:
     }
 
     void OnAttach() {
-        std::shared_ptr<VertexArray> vertexArray;
-        vertexArray.reset(VertexArray::Create());
+
+        auto vertexArray = Ref<VertexArray>(VertexArray::Create());
 
         float vertices[3 * 3 + 3 * 4] = {
             -0.5, -0.5, -2.0f, 1.0f, 0.0f, 0.0f, 1.0f,
             0.5, -0.5, -2.0f, 0.0f, 1.0f, 0.0f, 1.0f,
             0.0, 0.5, -2.0f, 0.0f, 0.0f, 1.0f, 1.0f,
         };
-        std::shared_ptr<VertexBuffer> vertexBuffer;
-        vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+        auto vertexBuffer = Ref<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
         BufferLayout layout{
             { ShaderDataType::Vec3, "a_Position" },
             { ShaderDataType::Vec4, "a_Color" },
@@ -32,8 +32,7 @@ public:
 
 
         unsigned int indices[3] = { 0, 1, 2 };
-        std::shared_ptr<IndexBuffer> indexBuffer;
-        indexBuffer.reset(IndexBuffer::Create(indices, 3));
+        auto indexBuffer = Ref<IndexBuffer>(IndexBuffer::Create(indices, 3));
         vertexArray->SetIndexBuffer(indexBuffer);
 
         Renderer::AddMesh(Mesh(vertexArray));
@@ -133,6 +132,7 @@ public:
             m_Camera->SetPosition(m_Camera->GetPosition() + glm::vec3(0.0, -0.01, 0.0));
         }*/
 
+
         totalTime += ts;
         m_Camera->Update(ts);
         RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.f });
@@ -148,12 +148,10 @@ public:
         auto& window = Application::Get().GetWindow();
         glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)window.GetWidth() / (float)window.GetHeight(), 0.1f, 100.0f);
 
-
         m_Shader->Bind();
         m_Shader->SetUniform("u_colorAdd", totalTime);
         m_Shader->SetUniform("u_viewMatrix", m_Camera->GetViewMatrix());
         m_Shader->SetUniform("u_projectionMatrix", projection);
-
 
         m_Shader2->Bind();
         
@@ -171,9 +169,9 @@ public:
 
 private:
     float totalTime = 0.f;
-    std::shared_ptr<Shader> m_Shader;
-    std::shared_ptr<Shader> m_Shader2;
-    std::shared_ptr<Camera> m_Camera;
+    Ref<Shader> m_Shader;
+    Ref<Shader> m_Shader2;
+    Ref<Camera> m_Camera;
 };
 
 class Sandbox : public Simulatrix::Application
@@ -181,6 +179,7 @@ class Sandbox : public Simulatrix::Application
 public:
     Sandbox() {
         PushLayer(new ExampleLayer());
+        PushOverlay();
     }
 
     ~Sandbox() {
