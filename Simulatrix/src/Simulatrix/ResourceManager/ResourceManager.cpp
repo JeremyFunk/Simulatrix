@@ -23,22 +23,25 @@ namespace Simulatrix {
 #ifdef SIMIX_PLATFORM_WINDOWS
         m_Wrapper.reset(new WindowsIOWrapper());
 #endif 
-        m_ResourceWatcher.reset(new FileWatcher(m_Wrapper->GetCurrentDir().PathString + "\\resources\\raw\\", std::chrono::milliseconds(250)));
-        m_FileWatcherThread = std::thread(RunThread, m_ResourceWatcher);
         SIMIX_CORE_ASSERT(!s_Instance, "Resource Manager already exists!");
-        s_Instance = this;
         m_ModelParsers.push_back(new OBJParser());
         m_TextureParsers.push_back(new DefaultTextureParser());
-        
+
         switch (Renderer::GetAPI()) {
-            case RendererAPI::API::None: SIMIX_CORE_ASSERT(false, "RendererAPI::None is not supported!");
-            case RendererAPI::API::OpenGL: 
-                m_MeshLoader = new OpenGLMeshLoader();
-                //m_TextureLoader = new OpenGLTextureLoader();
-                break;
-            default:
-                SIMIX_CORE_ASSERT(false, "Unknown renderer API!");
+        case RendererAPI::API::None: SIMIX_CORE_ASSERT(false, "RendererAPI::None is not supported!");
+        case RendererAPI::API::OpenGL:
+            m_MeshLoader = new OpenGLMeshLoader();
+            //m_TextureLoader = new OpenGLTextureLoader();
+            break;
+        default:
+            SIMIX_CORE_ASSERT(false, "Unknown renderer API!");
         }
+
+        m_ResourceWatcher.reset(new FileWatcher(m_Wrapper->GetCurrentDir().PathString + "\\resources\\raw\\", std::chrono::milliseconds(250)));
+        m_ResourceWatcher->RunIteration();
+        Update();
+        m_FileWatcherThread = std::thread(RunThread, m_ResourceWatcher);
+        s_Instance = this;
     }
 
     ResourceManager::~ResourceManager() {
@@ -58,16 +61,14 @@ namespace Simulatrix {
                 LoadTexture(texPath);
             }
 
-            model.Textures.push_back(m_LoadedTextures[m_LoadedTextureIDs[tex.path]]);
+            model.Textures.push_back(m_LoadedTextureIDs[tex.path]);
         }
 
         for (auto& mesh : resource.Meshes) {
             auto result = m_MeshLoader->Load(mesh);
             model.Meshes.push_back(result);
         }
-        model.ID = m_LoadedModelIDs.size();
-
-        m_LoadedModelIDs.emplace(p.FileName, model.ID);
+        m_LoadedModelIDs.emplace(p.PathString, model.ID);
         m_LoadedModels.emplace(model.ID, model);
     }
 
@@ -77,23 +78,28 @@ namespace Simulatrix {
         auto pointer = Ref<Texture2D>();
         pointer.reset(texture);
         //auto result = m_TextureLoader->Load(resource);
-
-        uint32_t ID = m_LoadedTextureIDs.size();
-        m_LoadedTextureIDs.emplace(p.FileName, ID);
-        m_LoadedTextures.emplace(ID, pointer);
+        UUID uuid;
+        m_LoadedTextureIDs.emplace(p.PathString, uuid);
+        m_LoadedTextures.emplace(uuid, pointer);
     }
 
 
     const SceneModel& ResourceManager::GetModel(Path& path) {
         return m_LoadedModels[m_LoadedModelIDs[path.PathString]];
     }
-    const SceneModel& ResourceManager::GetModel(uint32_t id) {
+    const UUID ResourceManager::GetModelID(Path& path) {
+        return m_LoadedModelIDs[path.PathString];
+    }
+    const SceneModel& ResourceManager::GetModel(UUID id) {
         return m_LoadedModels[id];
     }
     const Ref<Texture2D> ResourceManager::GetTexture(Path& path) {
         return m_LoadedTextures[m_LoadedTextureIDs[path.PathString]];
     }
-    const Ref<Texture2D> ResourceManager::GetTexture(uint32_t id) {
+    const UUID ResourceManager::GetTextureID(Path& path) {
+        return m_LoadedTextureIDs[path.PathString];
+    }
+    const Ref<Texture2D> ResourceManager::GetTexture(UUID id) {
         return m_LoadedTextures[id];
     }
     const std::string TEXTURE_FILE_ENDINGS[] = {
@@ -105,6 +111,9 @@ namespace Simulatrix {
     void ResourceManager::Load(Path& path) {
         for (auto parser : m_ModelParsers) {
             if (parser->CanParseFile(path)) {
+                if (m_LoadedModels.size() > 0) {
+                    std::cout << "SS" << std::endl;
+                }
                 LoadModel(path, parser);
                 return;
             }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Simulatrix/Renderer/VertexArray.h"
 #include "Simulatrix/Renderer/Texture.h"
+#include "Simulatrix/Core/UUID.h"
 
 namespace Simulatrix {
     struct SceneMesh {
@@ -14,8 +15,8 @@ namespace Simulatrix {
     };
 
     struct SceneModel {
-        unsigned int ID;
+        UUID ID;
         std::vector<SceneMesh> Meshes;
-        std::vector<Ref<Texture2D>> Textures;
+        std::vector<UUID> Textures;
     };
 }

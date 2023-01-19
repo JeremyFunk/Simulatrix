@@ -22,25 +22,17 @@ namespace Simulatrix {
     };
 
     struct ComponentMesh {
-        uint32_t RendererID;
+        UUID ID;
         ComponentMesh() = default;
-        ComponentMesh(uint32_t RendererID) : RendererID(RendererID)
+        ComponentMesh(UUID ID) : ID(ID)
         {
 
         }
     };
     struct ComponentModel {
-        uint32_t ModelID;
+        UUID ID;
         ComponentModel() = default;
-        ComponentModel(uint32_t ModelID) : ModelID(ModelID)
-        {
-
-        }
-    };
-    struct ComponentTexture {
-        uint32_t RendererID;
-        ComponentTexture() = default;
-        ComponentTexture(uint32_t RendererID) : RendererID(RendererID)
+        ComponentModel(UUID ID) : ID(ID)
         {
 
         }
@@ -64,18 +56,26 @@ namespace Simulatrix {
                 * glm::scale(glm::mat4(1.0f), Scale);
         }
     };
-    struct ComponentMaterial {
+    struct ComponentColorMaterial {
         glm::vec3 Color;
-        ComponentMaterial() = default;
-        ComponentMaterial(glm::vec3 Color) : Color(Color)
+        ComponentColorMaterial() = default;
+        ComponentColorMaterial(glm::vec3 Color) : Color(Color)
+        {
+
+        }
+    };
+    struct ComponentTextureMaterial {
+        UUID ID;
+        ComponentTextureMaterial() = default;
+        ComponentTextureMaterial(UUID ID) : ID(ID)
         {
 
         }
     };
     struct ComponentShader {
-        uint32_t RendererID;
+        UUID ID;
         ComponentShader() = default;
-        ComponentShader(uint32_t RendererID) : RendererID(RendererID)
+        ComponentShader(UUID ID) : ID(ID)
         {
 
         }

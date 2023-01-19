@@ -221,14 +221,17 @@ namespace Simulatrix {
 
 		ImGui::PopItemWidth();
 
-		DrawComponent<ComponentTransform>("Transform", entity, [](auto& component)
-			{
-				DrawVec3Control("Translation", component.Translation);
-				glm::vec3 rotation = glm::degrees(component.Rotation);
-				DrawVec3Control("Rotation", rotation);
-				component.Rotation = glm::radians(rotation);
-				DrawVec3Control("Scale", component.Scale, 1.0f);
-			});
+		DrawComponent<ComponentTransform>("Transform", entity, [](auto& component){
+			DrawVec3Control("Translation", component.Translation);
+			glm::vec3 rotation = glm::degrees(component.Rotation);
+			DrawVec3Control("Rotation", rotation);
+			component.Rotation = glm::radians(rotation);
+			DrawVec3Control("Scale", component.Scale, 1.0f);
+		});
+
+		/*DrawComponent<ComponentTextureMaterial>("Texture", entity, [](auto& component) {
+			ImGui::ImageButton(component.RendererID, ImVec2(64, 64));
+		});*/
 
 		//DrawComponent<CameraComponent>("Camera", entity, [](auto& component)
 		//	{

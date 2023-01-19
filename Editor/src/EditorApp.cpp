@@ -8,6 +8,8 @@
 #include "ImGui/ContentBrowser.h"
 #include "ImGui/Properties.h"
 #include "ImGui/IconLibrary.h"
+#include "Simulatrix/Core/UUID.h"
+
 using namespace Simulatrix;
 
 class ExampleLayer : public Layer {
@@ -98,7 +100,7 @@ public:
             uniform mat4 u_modelMatrix;
 
             void main(){
-                gl_Position = u_projectionMatrix * u_viewMatrix * u_modelMatrix' * vec4(a_Position, 1.0);
+                gl_Position = u_projectionMatrix * u_viewMatrix * u_modelMatrix * vec4(a_Position, 1.0);
                 p_TextureCoords = a_TexCoords;
             }
         )";
@@ -108,6 +110,7 @@ public:
             in vec2 p_TextureCoords;
             uniform sampler2D u_textureDiffuse;
             void main(){
+                //color = vec4(1.0);
                 color = texture(u_textureDiffuse, p_TextureCoords);
             }
         )";
@@ -120,8 +123,8 @@ public:
         };
         m_Shader2->AddUniforms(uniforms2);
         
-        Renderer::AddShader(m_Shader);
-        Renderer::AddShader(m_Shader2);
+        m_ShaderID1 = Renderer::AddShader(m_Shader);
+        m_ShaderID2 = Renderer::AddShader(m_Shader2);
         m_Camera.reset(new ProjectionCamera());
         Application::Get().GetActiveScene()->SetCamera(m_Camera);
 
@@ -130,11 +133,13 @@ public:
         //e.AddComponent<ComponentShader>(0);
         //e.AddComponent<ComponentTransform>(glm::mat4(1.0));
 
+
         auto e2 = Application::Get().GetActiveScene()->CreateEntity();
-        e2.AddComponent<ComponentModel>(0);
-        e2.AddComponent<ComponentShader>(1);
+        e2.AddComponent<ComponentModel>(ResourceManager::Get()->GetModelID(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\assets\\Backpack\\backpack.obj", PathType::File)));
+        e2.AddComponent<ComponentShader>(m_ShaderID2);
         e2.AddComponent<ComponentTag>("Backpack");
         e2.AddComponent<ComponentTransform>();
+        e2.AddComponent<ComponentTextureMaterial>(ResourceManager::Get()->GetTextureID(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\assets\\Backpack\\diffuse.jpg", PathType::File)));
 
         m_IconLib.reset(new IconLibrary());
         m_IconLib->LoadIconByName("add");
@@ -254,6 +259,8 @@ private:
     float totalTime = 0.f;
     Ref<Shader> m_Shader;
     Ref<Shader> m_Shader2;
+    Simulatrix::UUID m_ShaderID1;
+    Simulatrix::UUID m_ShaderID2;
     Ref<ProjectionCamera> m_Camera;
     Ref<Framebuffer> m_Framebuffer;
     Ref<SceneHierarchy> m_SceneHierarchy;

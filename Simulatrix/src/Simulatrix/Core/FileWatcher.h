@@ -101,6 +101,7 @@ namespace Simulatrix {
             m_FileStructureMutex.unlock();
         }
         void Start();
+        int RunIteration();
         // Make sure this object is locked before attempting a clear.
         void Clear() {
             m_LastFileChanges.clear();
