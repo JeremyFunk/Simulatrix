@@ -14,38 +14,27 @@ namespace Simulatrix {
     }
 
     void Renderer::Render(Ref<Scene> scene) {
-
-        auto meshes = scene->GetAllEntitiesWith<ComponentMesh, ComponentTransform, ComponentShader>();
         auto v = scene->GetCamera()->GetViewMatrix();
-        for (auto& m : meshes) {
-            auto [meshC, transformC, shaderC] = scene->GetComponents<ComponentMesh, ComponentTransform, ComponentShader>(m);
-
-            auto& shader = s_Shaders[shaderC.ID];
-            shader->Bind();
-            shader->SetUniform("u_viewMatrix", v);
-
-            auto& mesh = s_Meshes[meshC.ID];
-            mesh->vertexArray->Bind();
-            shader->SetUniform("u_modelMatrix", transformC.GetTransform());
-            RenderCommand::DrawIndexed(mesh->vertexArray);
-        }
-
-        auto models = scene->GetAllEntitiesWith<ComponentModel, ComponentTransform, ComponentShader, ComponentTextureMaterial>();
+        auto models = scene->GetAllEntitiesWith<ComponentModel, ComponentTransform, ComponentShader>();
         for (auto& m : models) {
-            auto [modelC, transformC, shaderC, textureC] = scene->GetComponents<ComponentModel, ComponentTransform, ComponentShader, ComponentTextureMaterial>(m);
+            auto [modelC, transformC, shaderC] = scene->GetComponents<ComponentModel, ComponentTransform, ComponentShader>(m);
 
             auto& shader = s_Shaders[shaderC.ID];
             shader->Bind();
             
             auto& model = ResourceManager::Get()->GetModel(modelC.ID);
+            shader->SetUniform("u_modelMatrix", transformC.GetTransform());
+            shader->SetUniform("u_viewMatrix", v);
 
+            if (scene->HasComponents<ComponentTextureMaterial>(m)) {
+                auto& textureC = scene->GetComponent< ComponentTextureMaterial>(m);
+                if (textureC.Diffuse != nullptr) {
+                    shader->SetUniform("u_textureDiffuse", textureC.Diffuse->GetRendererID());
+                    textureC.Diffuse->Bind();
+                }
+            }
             for (auto& mesh : model.Meshes) {
                 mesh.VAO->Bind();
-                shader->SetUniform("u_modelMatrix", transformC.GetTransform());
-                shader->SetUniform("u_viewMatrix", v);
-                //shader->SetUniform("u_textureDiffuse", model.Textures[0]->GetRendererID());
-                shader->SetUniform("u_textureDiffuse", textureC.Diffuse->GetRendererID());
-                textureC.Diffuse->Bind();
                 RenderCommand::DrawIndexed(mesh.VAO);
             }
         }

@@ -87,6 +87,14 @@ namespace Simulatrix {
     const SceneModel& ResourceManager::GetModel(Path& path) {
         return m_LoadedModels[m_LoadedModelIDs[path.PathString]];
     }
+    const UUID ResourceManager::GetOrLoadModel(Path& path) {
+        auto index = m_LoadedModelIDs.find(path.PathString);
+        if (index == m_LoadedModelIDs.end()) {
+            Load(path);
+        }
+        return m_LoadedModelIDs[path.PathString];
+    }
+
     const UUID ResourceManager::GetModelID(Path& path) {
         return m_LoadedModelIDs[path.PathString];
     }

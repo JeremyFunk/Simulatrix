@@ -22,9 +22,9 @@ namespace Simulatrix {
         }
 
         template<typename... Components>
-        bool HasComponents()
+        bool HasComponents(entt::entity e)
         {
-            return m_Registry.all_of<Components...>();
+            return m_Registry.all_of<Components...>(e);
         }
 
         template<typename... Components>
@@ -52,8 +52,14 @@ namespace Simulatrix {
         void SetCamera(Ref<Camera> cam) {
             m_Camera = cam;
         }
+        void SetDefaultShader(UUID shaderID) {
+            m_DefaultShaderID = shaderID;
+        }
+
+        void FileDropped(Path& path);
     private:
         Ref<Camera> m_Camera;
+        UUID m_DefaultShaderID;
 
         entt::registry m_Registry;
         friend class Entity;

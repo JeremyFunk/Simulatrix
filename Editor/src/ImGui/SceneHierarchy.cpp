@@ -216,7 +216,8 @@ namespace Simulatrix {
 
 		if (ImGui::BeginPopup("AddComponent"))
 		{
-
+			DisplayAddComponentEntry<ComponentTextureMaterial>("Texture Material");
+			DisplayAddComponentEntry<ComponentShader>("Shader");
 			ImGui::EndPopup();
 		}
 
@@ -229,9 +230,15 @@ namespace Simulatrix {
 			component.Rotation = glm::radians(rotation);
 			DrawVec3Control("Scale", component.Scale, 1.0f);
 		});
-
-		DrawComponent<ComponentTextureMaterial>("Texture", entity, [](ComponentTextureMaterial& component) {
-			ImGui::ImageButton((void*)(intptr_t)component.Diffuse->GetRendererID(), ImVec2(64, 64));
+		auto iconLib = m_IconLibrary.get();
+		DrawComponent<ComponentTextureMaterial>("Texture", entity, [iconLib](ComponentTextureMaterial& component) {
+			if (component.Diffuse == nullptr) {
+				ImGui::ImageButton((void*)(intptr_t)iconLib->GetIconByName("close")->GetRendererID(), ImVec2(64, 64));
+				
+			}
+			else {
+				ImGui::ImageButton((void*)(intptr_t)component.Diffuse->GetRendererID(), ImVec2(64, 64));
+			}
 
 			if (ImGui::BeginDragDropTarget()) {
 				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
@@ -245,6 +252,11 @@ namespace Simulatrix {
 
 			ImGui::SameLine();
 			ImGui::Text("Diffuse Texture");
+		});
+
+
+		DrawComponent<ComponentShader>("Shader", entity, [](ComponentShader& component) {
+
 		});
 
 		//DrawComponent<CameraComponent>("Camera", entity, [](auto& component)

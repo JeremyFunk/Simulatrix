@@ -60,24 +60,21 @@ public:
             #version 330 core
             
             layout(location = 0) in vec3 a_Position;
-            layout(location = 1) in vec4 a_Color;
-            out vec4 p_Color;
+            layout(location = 1) in vec3 a_Normal;
+            layout(location = 2) in vec2 a_TexCoords;
             uniform mat4 u_projectionMatrix;
             uniform mat4 u_viewMatrix;
             uniform mat4 u_modelMatrix;
 
             void main(){
                 gl_Position = u_projectionMatrix * u_viewMatrix * u_modelMatrix * vec4(a_Position, 1.0);
-                p_Color = a_Color;
             }
         )";
         std::string fragmentSrc = R"(
             #version 330 core
             out vec4 color;
-            in vec4 p_Color;
-            uniform float u_colorAdd;
             void main(){
-                color = p_Color + vec4(u_colorAdd * 0.1);
+                color = vec4(1.0);
             }
         )";
         m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
@@ -127,6 +124,7 @@ public:
         m_ShaderID2 = Renderer::AddShader(m_Shader2);
         m_Camera.reset(new ProjectionCamera());
         Application::Get().GetActiveScene()->SetCamera(m_Camera);
+        Application::Get().GetActiveScene()->SetDefaultShader(m_ShaderID2);
 
         //auto e = Application::Get().GetActiveScene()->CreateEntity();
         //e.AddComponent<ComponentMesh>(0);
@@ -182,7 +180,7 @@ public:
         m_IconLib->LoadIconByName("save-as");
 
 
-        m_SceneHierarchy.reset(new SceneHierarchy(Application::Get().GetActiveScene()));
+        m_SceneHierarchy.reset(new SceneHierarchy(Application::Get().GetActiveScene(), m_IconLib));
         m_ContentBrowser.reset(new ContentBrowser(m_IconLib));
         m_Properties.reset(new Properties());
         m_ToggleUtil.reset(new ToggleUtil());
@@ -238,17 +236,17 @@ public:
         }
         m_ViewportSize = viewportSize;
         ImGui::Image((void*)m_Framebuffer->GetColorAttachmentRendererID(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
+
+        if (ImGui::BeginDragDropTarget()) {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
+                const char* path = (const char*)payload->Data;
+                
+                Application::Get().GetActiveScene()->FileDropped(Path(path, PathType::File));
+
+                ImGui::EndDragDropTarget();
+            }
+        }
         ImGui::End();
-
-        //if (ImGui::BeginDragDropTarget()) {
-
-        //    const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM");
-        //    const char* path = (const char*)payload->Data;
-
-
-
-        //    ImGui::EndDragDropTarget();
-        //}
 
         m_SceneHierarchy->Render();
         m_ContentBrowser->Render();

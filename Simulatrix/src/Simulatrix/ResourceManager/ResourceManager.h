@@ -17,6 +17,7 @@ namespace Simulatrix {
         static ResourceManager* Get() { return s_Instance; }
         void Update();
         const SceneModel& GetModel(Path& path);
+        const UUID GetOrLoadModel(Path& path);
         const UUID GetModelID(Path& path);
         const SceneModel& GetModel(UUID id);
         const Ref<Texture2D> GetTexture(Path& path);
