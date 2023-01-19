@@ -2,7 +2,8 @@
 #include "SceneHierarchy.h"
 #include <imgui.h>
 #include <imgui_internal.h>
-
+#include "Simulatrix/ResourceManager/ResourceManager.h"
+#include "Simulatrix/Core/Core.h"
 namespace Simulatrix {
 
 	void SceneHierarchy::SetScene(const Ref<Scene>& context)
@@ -229,9 +230,22 @@ namespace Simulatrix {
 			DrawVec3Control("Scale", component.Scale, 1.0f);
 		});
 
-		/*DrawComponent<ComponentTextureMaterial>("Texture", entity, [](auto& component) {
-			ImGui::ImageButton(component.RendererID, ImVec2(64, 64));
-		});*/
+		DrawComponent<ComponentTextureMaterial>("Texture", entity, [](ComponentTextureMaterial& component) {
+			ImGui::ImageButton((void*)(intptr_t)component.Diffuse->GetRendererID(), ImVec2(64, 64));
+
+			if (ImGui::BeginDragDropTarget()) {
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
+					const char* path = (const char*)payload->Data;
+
+					component.Diffuse = ResourceManager::Get()->GetOrLoadTexture(Path(path, PathType::File));
+
+					ImGui::EndDragDropTarget();
+				}
+			}
+
+			ImGui::SameLine();
+			ImGui::Text("Diffuse Texture");
+		});
 
 		//DrawComponent<CameraComponent>("Camera", entity, [](auto& component)
 		//	{

@@ -46,6 +46,9 @@
     <Filter Include="src\Simulatrix\Scene">
       <UniqueIdentifier>{6B168DE6-57A5-16B0-00C4-2AABEC312756}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Simulatrix\Util">
+      <UniqueIdentifier>{DBCEA092-4730-7EA0-D09D-C4523CFEB45F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
@@ -216,14 +219,18 @@
     <ClInclude Include="src\Simulatrix\Scene\SceneData.h">
       <Filter>src\Simulatrix\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Util\StringUtil.h">
+      <Filter>src\Simulatrix\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Util\ToggleUtil.h">
+      <Filter>src\Simulatrix\Util</Filter>
+    </ClInclude>
     <ClInclude Include="src\simixpch.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="vendor\stbi_image\stbi_image.h">
       <Filter>vendor\stbi_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Simulatrix\Util\ToggleUtil.h" />
-    <ClInclude Include="src\Simulatrix\Util\StringUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
@@ -331,13 +338,17 @@
     <ClCompile Include="src\Simulatrix\Scene\Scene.cpp">
       <Filter>src\Simulatrix\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Util\StringUtil.cpp">
+      <Filter>src\Simulatrix\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Util\ToggleUtil.cpp">
+      <Filter>src\Simulatrix\Util</Filter>
+    </ClCompile>
     <ClCompile Include="src\simixpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="vendor\stbi_image\stbi_image.cpp">
       <Filter>vendor\stbi_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Simulatrix\Util\ToggleUtil.cpp" />
-    <ClCompile Include="src\Simulatrix\Util\StringUtil.cpp" />
   </ItemGroup>
 </Project>

@@ -124,7 +124,7 @@ namespace Simulatrix {
 					}
 					ImGui::PopStyleColor();
 
-					if (ImGui::IsItemHovered() && ImGui::BeginDragDropSource()) {
+					if (ImGui::BeginDragDropSource()) {
 						const char* itemPath = path.PathString.c_str();
 						ImGui::SetDragDropPayload("CONTENT_BROWSER_ITEM", itemPath, (strlen(itemPath) + 1) * sizeof(char), ImGuiCond_Once);
 						ImGui::EndDragDropSource();

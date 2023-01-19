@@ -4,6 +4,8 @@
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
+#include "Simulatrix/Core/Core.h"
+#include <Simulatrix/Renderer/Texture.h>
 namespace Simulatrix {
     struct ComponentID {
         UUID ID;
@@ -66,10 +68,13 @@ namespace Simulatrix {
     };
     struct ComponentTextureMaterial {
         UUID ID;
+        Ref<Texture2D> Diffuse;
         ComponentTextureMaterial() = default;
-        ComponentTextureMaterial(UUID ID) : ID(ID)
+        ComponentTextureMaterial(Ref<Texture2D> diffuse) : Diffuse(diffuse)
         {
-
+        }
+        ComponentTextureMaterial(UUID ID, Ref<Texture2D> diffuse) : ID(ID), Diffuse(diffuse)
+        {
         }
     };
     struct ComponentShader {

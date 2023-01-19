@@ -197,9 +197,9 @@
     <ClInclude Include="src\Simulatrix\Scene\Entity.h" />
     <ClInclude Include="src\Simulatrix\Scene\Scene.h" />
     <ClInclude Include="src\Simulatrix\Scene\SceneData.h" />
-    <ClInclude Include="src\simixpch.h" />
     <ClInclude Include="src\Simulatrix\Util\StringUtil.h" />
     <ClInclude Include="src\Simulatrix\Util\ToggleUtil.h" />
+    <ClInclude Include="src\simixpch.h" />
     <ClInclude Include="vendor\stbi_image\stbi_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -238,11 +238,11 @@
     <ClCompile Include="src\Simulatrix\ResourceManager\Parser\OBJParser.cpp" />
     <ClCompile Include="src\Simulatrix\ResourceManager\ResourceManager.cpp" />
     <ClCompile Include="src\Simulatrix\Scene\Scene.cpp" />
+    <ClCompile Include="src\Simulatrix\Util\StringUtil.cpp" />
+    <ClCompile Include="src\Simulatrix\Util\ToggleUtil.cpp" />
     <ClCompile Include="src\simixpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Simulatrix\Util\StringUtil.cpp" />
-    <ClCompile Include="src\Simulatrix\Util\ToggleUtil.cpp" />
     <ClCompile Include="vendor\stbi_image\stbi_image.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -44,9 +44,8 @@ namespace Simulatrix {
                 shader->SetUniform("u_modelMatrix", transformC.GetTransform());
                 shader->SetUniform("u_viewMatrix", v);
                 //shader->SetUniform("u_textureDiffuse", model.Textures[0]->GetRendererID());
-                auto textureId = ResourceManager::Get()->GetTexture(textureC.ID)->GetRendererID();
-                shader->SetUniform("u_textureDiffuse", textureId);
-                ResourceManager::Get()->GetTexture(textureC.ID)->Bind();
+                shader->SetUniform("u_textureDiffuse", textureC.Diffuse->GetRendererID());
+                textureC.Diffuse->Bind();
                 RenderCommand::DrawIndexed(mesh.VAO);
             }
         }

@@ -6,6 +6,7 @@
 #include "Simulatrix/ResourceManager/Parser/ModelParser.h"
 #include "Simulatrix/ResourceManager/Loader/MeshLoader.h"
 #include "Simulatrix/Core/UUID.h"
+#include "Simulatrix/Core/Core.h"
 
 namespace Simulatrix {
     class ResourceManager {
@@ -19,6 +20,7 @@ namespace Simulatrix {
         const UUID GetModelID(Path& path);
         const SceneModel& GetModel(UUID id);
         const Ref<Texture2D> GetTexture(Path& path);
+        const Ref<Texture2D> GetOrLoadTexture(Path& path);
         const UUID GetTextureID(Path& path);
         const Ref<Texture2D> GetTexture(UUID id);
         const File GetFileStructure() {

@@ -4,27 +4,40 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{C0FF640D-2C14-8DBE-F595-301E616989EF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ImGui\NewFilter1">
-      <UniqueIdentifier>{8f6cea2c-41ce-4895-a210-ed90c3d589d9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ImGui\ContentBrowser.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\ImGui\EditorLayer.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\ImGui\ContentBrowser.h" />
-    <ClInclude Include="src\ImGui\SceneHierarchy.h" />
-    <ClInclude Include="src\ImGui\Properties.h" />
-    <ClInclude Include="src\ImGui\IconLibrary.h" />
+    <ClInclude Include="src\ImGui\IconLibrary.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGui\Properties.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGui\SceneHierarchy.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorApp.cpp" />
+    <ClCompile Include="src\ImGui\ContentBrowser.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\ImGui\EditorLayer.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ImGui\ContentBrowser.cpp" />
-    <ClCompile Include="src\ImGui\SceneHierarchy.cpp" />
-    <ClCompile Include="src\ImGui\Properties.cpp" />
-    <ClCompile Include="src\ImGui\IconLibrary.cpp" />
+    <ClCompile Include="src\ImGui\IconLibrary.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGui\Properties.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGui\SceneHierarchy.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

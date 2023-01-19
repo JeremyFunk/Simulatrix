@@ -139,7 +139,7 @@ public:
         e2.AddComponent<ComponentShader>(m_ShaderID2);
         e2.AddComponent<ComponentTag>("Backpack");
         e2.AddComponent<ComponentTransform>();
-        e2.AddComponent<ComponentTextureMaterial>(ResourceManager::Get()->GetTextureID(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\assets\\Backpack\\diffuse.jpg", PathType::File)));
+        e2.AddComponent<ComponentTextureMaterial>(ResourceManager::Get()->GetTexture(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\assets\\Backpack\\diffuse.jpg", PathType::File)));
 
         m_IconLib.reset(new IconLibrary());
         m_IconLib->LoadIconByName("add");
@@ -239,6 +239,16 @@ public:
         m_ViewportSize = viewportSize;
         ImGui::Image((void*)m_Framebuffer->GetColorAttachmentRendererID(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
+
+        //if (ImGui::BeginDragDropTarget()) {
+
+        //    const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM");
+        //    const char* path = (const char*)payload->Data;
+
+
+
+        //    ImGui::EndDragDropTarget();
+        //}
 
         m_SceneHierarchy->Render();
         m_ContentBrowser->Render();

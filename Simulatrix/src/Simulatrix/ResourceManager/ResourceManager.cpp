@@ -96,6 +96,14 @@ namespace Simulatrix {
     const Ref<Texture2D> ResourceManager::GetTexture(Path& path) {
         return m_LoadedTextures[m_LoadedTextureIDs[path.PathString]];
     }
+    const Ref<Texture2D> ResourceManager::GetOrLoadTexture(Path& path) {
+        auto index = m_LoadedTextureIDs.find(path.PathString);
+        if (index == m_LoadedTextureIDs.end()) {
+            LoadTexture(path);
+        }
+
+        return m_LoadedTextures[m_LoadedTextureIDs[path.PathString]];
+    }
     const UUID ResourceManager::GetTextureID(Path& path) {
         return m_LoadedTextureIDs[path.PathString];
     }
