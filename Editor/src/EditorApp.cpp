@@ -9,7 +9,7 @@
 #include "ImGui/Properties.h"
 #include "ImGui/IconLibrary.h"
 #include "Simulatrix/Core/UUID.h"
-
+#include "DiffuseShader.h"
 using namespace Simulatrix;
 
 class ExampleLayer : public Layer {
@@ -56,6 +56,8 @@ public:
 
         Renderer::AddMesh(Mesh(vertexArray));
 
+        //auto diffuseShader = DiffuseShader(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\shaders\\diffuse\\vs.vs", PathType::File), Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\shaders\\diffuse\\fs.fs", PathType::File));
+
         std::string vertexSrc = R"(
             #version 330 core
             
@@ -85,6 +87,8 @@ public:
             { ShaderDataType::Mat4, "u_modelMatrix" }
         };
         m_Shader->AddUniforms(uniforms);
+        m_Shader->SetName("Single Color Shader");
+
         std::string vertexSrc2 = R"(
             #version 330 core
             
@@ -111,6 +115,7 @@ public:
                 color = texture(u_textureDiffuse, p_TextureCoords);
             }
         )";
+
         m_Shader2.reset(Shader::Create(vertexSrc2, fragmentSrc2));
         ShaderUniforms uniforms2 = {
             { ShaderDataType::Int, "u_textureDiffuse" },
@@ -119,22 +124,21 @@ public:
             { ShaderDataType::Mat4, "u_modelMatrix" }
         };
         m_Shader2->AddUniforms(uniforms2);
+        m_Shader2->SetName("Diffuse Shader");
         
-        m_ShaderID1 = Renderer::AddShader(m_Shader);
-        m_ShaderID2 = Renderer::AddShader(m_Shader2);
         m_Camera.reset(new ProjectionCamera());
         Application::Get().GetActiveScene()->SetCamera(m_Camera);
-        Application::Get().GetActiveScene()->SetDefaultShader(m_ShaderID2);
+        Application::Get().GetActiveScene()->AddShader(m_Shader);
+        Application::Get().GetActiveScene()->AddShader(m_Shader2);
 
         //auto e = Application::Get().GetActiveScene()->CreateEntity();
         //e.AddComponent<ComponentMesh>(0);
         //e.AddComponent<ComponentShader>(0);
         //e.AddComponent<ComponentTransform>(glm::mat4(1.0));
 
-
         auto e2 = Application::Get().GetActiveScene()->CreateEntity();
         e2.AddComponent<ComponentModel>(ResourceManager::Get()->GetModelID(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\assets\\Backpack\\backpack.obj", PathType::File)));
-        e2.AddComponent<ComponentShader>(m_ShaderID2);
+        e2.AddComponent<ComponentShader>(m_Shader2);
         e2.AddComponent<ComponentTag>("Backpack");
         e2.AddComponent<ComponentTransform>();
         e2.AddComponent<ComponentTextureMaterial>(ResourceManager::Get()->GetTexture(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\assets\\Backpack\\diffuse.jpg", PathType::File)));
@@ -179,7 +183,6 @@ public:
         m_IconLib->LoadIconByName("save-all");
         m_IconLib->LoadIconByName("save-as");
 
-
         m_SceneHierarchy.reset(new SceneHierarchy(Application::Get().GetActiveScene(), m_IconLib));
         m_ContentBrowser.reset(new ContentBrowser(m_IconLib));
         m_Properties.reset(new Properties());
@@ -191,7 +194,6 @@ public:
             return false;
         };
         m_ToggleUtil->RegisterToggle(Key::F, fn);
-
     }
 
     void OnDetach() {}
@@ -217,11 +219,9 @@ public:
         glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)m_ViewportSize.x / (float)m_ViewportSize.y, 0.1f, 100.0f);
 
         m_Shader->Bind();
-        m_Shader->SetUniform("u_colorAdd", totalTime);
         m_Shader->SetUniform("u_projectionMatrix", projection);
 
         m_Shader2->Bind();
-
         m_Shader2->SetUniform("u_projectionMatrix", projection);
     }
 
@@ -253,7 +253,6 @@ public:
         m_Properties->Render();
     }
 
-
     void OnEvent(Event& e) {
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<KeyPressedEvent>(SIMIX_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
@@ -262,7 +261,6 @@ public:
     bool OnKeyPressedEvent(KeyPressedEvent& e) {
         return m_ToggleUtil->OnKeyPressed(e);
     }
-
 private:
     float totalTime = 0.f;
     Ref<Shader> m_Shader;

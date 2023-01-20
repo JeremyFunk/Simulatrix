@@ -39,6 +39,8 @@ namespace Simulatrix {
     public:
         virtual void Bind() const = 0;
         virtual void Unbind() const = 0;
+        virtual void SetName(std::string name) = 0;
+        virtual std::string GetName() const = 0;
         virtual void AddUniform(ShaderUniform uniform) = 0;
         virtual void AddUniforms(ShaderUniforms uniforms) = 0;
         virtual void SetUniform(uint32_t rendererID, float value) = 0;

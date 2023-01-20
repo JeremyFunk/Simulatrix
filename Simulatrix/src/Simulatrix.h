@@ -11,7 +11,6 @@
 #include "Simulatrix/Core/Application.h"
 #include "Simulatrix/Core/Layer.h"
 #include "Simulatrix/Core/Camera.h"
-#include "Simulatrix/ResourceManager/ResourceManager.h"
 #include "Simulatrix/Core/KeyCode.h"
 #include "Simulatrix/Core/Layer.h"
 #include "Simulatrix/Core/Timestep.h"
@@ -19,6 +18,9 @@
 #include "Simulatrix/Core/ProjectionCamera.h"
 #include "Simulatrix/Core/OrthographicCamera.h"
 #include "Simulatrix/Core/Input.h"
+#include "Simulatrix/Core/IOWrapper.h"
+
+#include "Simulatrix/ResourceManager/ResourceManager.h"
 
 #include "Simulatrix/Events/KeyEvent.h"
 #include "Simulatrix/Events/MouseEvent.h"

@@ -5,6 +5,7 @@
 #include "Simulatrix/Renderer/Shader.h"
 #include "Entity.h"
 #include <Simulatrix/Core/Camera.h>
+#include "Simulatrix/Renderer/ShaderImplementation.h"
 namespace Simulatrix {
     class Scene {
     public:
@@ -52,14 +53,25 @@ namespace Simulatrix {
         void SetCamera(Ref<Camera> cam) {
             m_Camera = cam;
         }
-        void SetDefaultShader(UUID shaderID) {
-            m_DefaultShaderID = shaderID;
+        void AddShader(Ref<Shader> shader) {
+            m_Shaders.push_back(shader);
+        }
+        Ref<Shader> GetShader(std::string name) {
+            for (auto shader : m_Shaders) {
+                if (shader->GetName() == name) {
+                    return shader;
+                }
+            }
+            return nullptr;
+        }
+        const std::vector<Ref<Shader>> GetShaders() {
+            return m_Shaders;
         }
 
         void FileDropped(Path& path);
     private:
         Ref<Camera> m_Camera;
-        UUID m_DefaultShaderID;
+        std::vector<Ref<Shader>> m_Shaders;
 
         entt::registry m_Registry;
         friend class Entity;

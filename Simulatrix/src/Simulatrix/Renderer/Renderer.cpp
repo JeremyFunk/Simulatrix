@@ -4,7 +4,6 @@
 
 namespace Simulatrix {
     std::vector<Ref<Mesh>> Renderer::s_Meshes = std::vector<Ref<Mesh>>();
-    std::unordered_map<UUID, Ref<Shader>> Renderer::s_Shaders = std::unordered_map<UUID, Ref<Shader>>();
 
     void Renderer::BeginScene(Ref<Scene> scene)
     {
@@ -18,18 +17,19 @@ namespace Simulatrix {
         auto models = scene->GetAllEntitiesWith<ComponentModel, ComponentTransform, ComponentShader>();
         for (auto& m : models) {
             auto [modelC, transformC, shaderC] = scene->GetComponents<ComponentModel, ComponentTransform, ComponentShader>(m);
-
-            auto& shader = s_Shaders[shaderC.ID];
-            shader->Bind();
+            if (shaderC.ShaderRef == nullptr) {
+                continue;
+            }
+            shaderC.ShaderRef->Bind();
             
             auto& model = ResourceManager::Get()->GetModel(modelC.ID);
-            shader->SetUniform("u_modelMatrix", transformC.GetTransform());
-            shader->SetUniform("u_viewMatrix", v);
+            shaderC.ShaderRef->SetUniform("u_modelMatrix", transformC.GetTransform());
+            shaderC.ShaderRef->SetUniform("u_viewMatrix", v);
 
             if (scene->HasComponents<ComponentTextureMaterial>(m)) {
                 auto& textureC = scene->GetComponent< ComponentTextureMaterial>(m);
                 if (textureC.Diffuse != nullptr) {
-                    shader->SetUniform("u_textureDiffuse", textureC.Diffuse->GetRendererID());
+                    shaderC.ShaderRef->SetUniform("u_textureDiffuse", textureC.Diffuse->GetRendererID());
                     textureC.Diffuse->Bind();
                 }
             }

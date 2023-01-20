@@ -231,6 +231,8 @@
     <ClInclude Include="vendor\stbi_image\stbi_image.h">
       <Filter>vendor\stbi_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Util\IdentifierMap.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\ShaderImplementation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">

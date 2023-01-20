@@ -157,6 +157,7 @@
     <ClInclude Include="src\Simulatrix\Core\MouseCodes.h" />
     <ClInclude Include="src\Simulatrix\Core\OrthographicCamera.h" />
     <ClInclude Include="src\Simulatrix\Core\ProjectionCamera.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\ShaderImplementation.h" />
     <ClInclude Include="src\Simulatrix\Core\Timestep.h" />
     <ClInclude Include="src\Simulatrix\Core\UUID.h" />
     <ClInclude Include="src\Simulatrix\Core\Window.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="src\Simulatrix\Scene\Entity.h" />
     <ClInclude Include="src\Simulatrix\Scene\Scene.h" />
     <ClInclude Include="src\Simulatrix\Scene\SceneData.h" />
+    <ClInclude Include="src\Simulatrix\Util\IdentifierMap.h" />
     <ClInclude Include="src\Simulatrix\Util\StringUtil.h" />
     <ClInclude Include="src\Simulatrix\Util\ToggleUtil.h" />
     <ClInclude Include="src\simixpch.h" />

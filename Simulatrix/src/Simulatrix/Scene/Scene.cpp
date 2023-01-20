@@ -17,8 +17,6 @@ namespace Simulatrix {
             e2.AddComponent<ComponentModel>(id);
             e2.AddComponent<ComponentTag>("Backpack");
             e2.AddComponent<ComponentTransform>();
-            e2.AddComponent<ComponentShader>(m_DefaultShaderID);
-            //e2.AddComponent<ComponentTextureMaterial>();
         }
     }
 }

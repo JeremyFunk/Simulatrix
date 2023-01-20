@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\DiffuseShader.h" />
     <ClInclude Include="src\ImGui\ContentBrowser.h" />
     <ClInclude Include="src\ImGui\EditorLayer.h" />
     <ClInclude Include="src\ImGui\IconLibrary.h" />

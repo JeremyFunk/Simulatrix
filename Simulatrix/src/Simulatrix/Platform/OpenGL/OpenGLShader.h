@@ -16,8 +16,17 @@ namespace Simulatrix {
         virtual void SetUniform(const char* name, float value) override;
         virtual void SetUniform(uint32_t rendererID, const glm::mat4& value) override;
         virtual void SetUniform(const char* name, const glm::mat4& value) override;
+
+        virtual void SetName(std::string name) {
+            m_Name = name;
+        }
+        virtual std::string GetName() const {
+            return m_Name;
+        }
+
         virtual const ShaderUniforms& GetUniforms() const override;
     private:
+        std::string m_Name = "Shader";
         uint32_t m_RendererID;
         ShaderUniforms m_Uniforms;
     };

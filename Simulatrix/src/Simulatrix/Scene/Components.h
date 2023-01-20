@@ -6,6 +6,7 @@
 #include <glm/gtx/quaternion.hpp>
 #include "Simulatrix/Core/Core.h"
 #include <Simulatrix/Renderer/Texture.h>
+#include <Simulatrix/Renderer/Shader.h>
 namespace Simulatrix {
     struct ComponentID {
         UUID ID;
@@ -79,8 +80,13 @@ namespace Simulatrix {
     };
     struct ComponentShader {
         UUID ID;
+        Ref<Shader> ShaderRef;
         ComponentShader() = default;
-        ComponentShader(UUID ID) : ID(ID)
+        ComponentShader(Ref<Shader> shader) : ShaderRef(shader)
+        {
+
+        }
+        ComponentShader(UUID ID, Ref<Shader> shader) : ID(ID), ShaderRef(shader)
         {
 
         }

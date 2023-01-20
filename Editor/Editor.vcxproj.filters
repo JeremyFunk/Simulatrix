@@ -21,6 +21,7 @@
     <ClInclude Include="src\ImGui\SceneHierarchy.h">
       <Filter>ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\DiffuseShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorApp.cpp" />

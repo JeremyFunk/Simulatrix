@@ -234,7 +234,6 @@ namespace Simulatrix {
 		DrawComponent<ComponentTextureMaterial>("Texture", entity, [iconLib](ComponentTextureMaterial& component) {
 			if (component.Diffuse == nullptr) {
 				ImGui::ImageButton((void*)(intptr_t)iconLib->GetIconByName("close")->GetRendererID(), ImVec2(64, 64));
-				
 			}
 			else {
 				ImGui::ImageButton((void*)(intptr_t)component.Diffuse->GetRendererID(), ImVec2(64, 64));
@@ -254,9 +253,22 @@ namespace Simulatrix {
 			ImGui::Text("Diffuse Texture");
 		});
 
+		auto scene = m_Scene.get();
+		DrawComponent<ComponentShader>("Shader", entity, [scene](ComponentShader& component) {
+			std::string selectedShaderName = "None";
+			if (component.ShaderRef != nullptr) {
+				selectedShaderName = component.ShaderRef->GetName();
+			}
 
-		DrawComponent<ComponentShader>("Shader", entity, [](ComponentShader& component) {
+			if (ImGui::BeginCombo("Shader Name", selectedShaderName.c_str())) {
+				for (auto shader : scene->GetShaders()) {
+					if (ImGui::Button(shader->GetName().c_str())) {
+						component.ShaderRef = shader;
+					}
+				}
 
+				ImGui::EndCombo();
+			}
 		});
 
 		//DrawComponent<CameraComponent>("Camera", entity, [](auto& component)

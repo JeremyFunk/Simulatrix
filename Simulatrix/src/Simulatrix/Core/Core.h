@@ -35,4 +35,10 @@ namespace Simulatrix {
 	{
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
+
+
+	template<typename T, typename... Ts>
+	struct is_one_of {
+		static constexpr bool value = std::disjunction_v<std::is_same<T, Ts>...>;
+	};
 }

@@ -24,15 +24,9 @@ namespace Simulatrix {
         static void AddMesh(Mesh mesh) {
             s_Meshes.push_back(std::make_shared<Mesh>(mesh));
         }
-        static UUID AddShader(Ref <Shader> shader) {
-            UUID result;
-            s_Shaders.emplace(result, shader);
-            return result;
-        }
 
         static inline RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
     private:
         static std::vector<Ref<Mesh>> s_Meshes;
-        static std::unordered_map<UUID, Ref<Shader>> s_Shaders;
     };
 }
