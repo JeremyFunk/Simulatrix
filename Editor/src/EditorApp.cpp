@@ -2,14 +2,18 @@
 #include <Simulatrix.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "ImGui/EditorLayer.h"
-#include <imgui.h>
+#include <ImGui/imgui.h>
 #include "ImGui/SceneHierarchy.h"
 #include "ImGui/ContentBrowser.h"
 #include "ImGui/Properties.h"
 #include "ImGui/IconLibrary.h"
 #include "Simulatrix/Core/UUID.h"
 #include "DiffuseShader.h"
+#include <ImGuizmo.h>
+#include "Simulatrix/Scene/SceneSerializer.h"
+#include "Simulatrix/Util/MathUtil.h"
 using namespace Simulatrix;
 
 class ExampleLayer : public Layer {
@@ -57,91 +61,13 @@ public:
         Renderer::AddMesh(Mesh(vertexArray));
 
         //auto diffuseShader = DiffuseShader(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\shaders\\diffuse\\vs.vs", PathType::File), Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\shaders\\diffuse\\fs.fs", PathType::File));
-
-        std::string vertexSrc = R"(
-            #version 330 core
-            
-            layout(location = 0) in vec3 a_Position;
-            layout(location = 1) in vec3 a_Normal;
-            layout(location = 2) in vec2 a_TexCoords;
-            uniform mat4 u_projectionMatrix;
-            uniform mat4 u_viewMatrix;
-            uniform mat4 u_modelMatrix;
-
-            void main(){
-                gl_Position = u_projectionMatrix * u_viewMatrix * u_modelMatrix * vec4(a_Position, 1.0);
-            }
-        )";
-        std::string fragmentSrc = R"(
-            #version 330 core
-            out vec4 color;
-            void main(){
-                color = vec4(1.0);
-            }
-        )";
-        m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
-        ShaderUniforms uniforms = {
-            { ShaderDataType::Float, "u_colorAdd" },
-            { ShaderDataType::Mat4, "u_viewMatrix" },
-            { ShaderDataType::Mat4, "u_projectionMatrix" },
-            { ShaderDataType::Mat4, "u_modelMatrix" }
-        };
-        m_Shader->AddUniforms(uniforms);
-        m_Shader->SetName("Single Color Shader");
-
-        std::string vertexSrc2 = R"(
-            #version 330 core
-            
-            layout(location = 0) in vec3 a_Position;
-            layout(location = 1) in vec3 a_Normal;
-            layout(location = 2) in vec2 a_TexCoords;
-            out vec2 p_TextureCoords;
-            uniform mat4 u_projectionMatrix;
-            uniform mat4 u_viewMatrix;
-            uniform mat4 u_modelMatrix;
-
-            void main(){
-                gl_Position = u_projectionMatrix * u_viewMatrix * u_modelMatrix * vec4(a_Position, 1.0);
-                p_TextureCoords = a_TexCoords;
-            }
-        )";
-        std::string fragmentSrc2 = R"(
-            #version 330 core
-            out vec4 color;
-            in vec2 p_TextureCoords;
-            uniform sampler2D u_textureDiffuse;
-            void main(){
-                //color = vec4(1.0);
-                color = texture(u_textureDiffuse, p_TextureCoords);
-            }
-        )";
-
-        m_Shader2.reset(Shader::Create(vertexSrc2, fragmentSrc2));
-        ShaderUniforms uniforms2 = {
-            { ShaderDataType::Int, "u_textureDiffuse" },
-            { ShaderDataType::Mat4, "u_viewMatrix" },
-            { ShaderDataType::Mat4, "u_projectionMatrix" },
-            { ShaderDataType::Mat4, "u_modelMatrix" }
-        };
-        m_Shader2->AddUniforms(uniforms2);
-        m_Shader2->SetName("Diffuse Shader");
-        
         m_Camera.reset(new ProjectionCamera());
         Application::Get().GetActiveScene()->SetCamera(m_Camera);
-        Application::Get().GetActiveScene()->AddShader(m_Shader);
-        Application::Get().GetActiveScene()->AddShader(m_Shader2);
 
         //auto e = Application::Get().GetActiveScene()->CreateEntity();
         //e.AddComponent<ComponentMesh>(0);
         //e.AddComponent<ComponentShader>(0);
         //e.AddComponent<ComponentTransform>(glm::mat4(1.0));
-
-        auto e2 = Application::Get().GetActiveScene()->CreateEntity();
-        e2.AddComponent<ComponentModel>(ResourceManager::Get()->GetModelID(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\assets\\Backpack\\backpack.obj", PathType::File)));
-        e2.AddComponent<ComponentShader>(m_Shader2);
-        e2.AddComponent<ComponentTag>("Backpack");
-        e2.AddComponent<ComponentTransform>();
-        e2.AddComponent<ComponentTextureMaterial>(ResourceManager::Get()->GetTexture(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\assets\\Backpack\\diffuse.jpg", PathType::File)));
 
         m_IconLib.reset(new IconLibrary());
         m_IconLib->LoadIconByName("add");
@@ -202,12 +128,6 @@ public:
     void OnUpdate(Timestep ts) {
         totalTime += ts;
         m_Camera->Update(ts);
-        
-        auto e = Application::Get().GetActiveScene()->GetAllEntitiesWith<ComponentTransform>();
-        auto t = Application::Get().GetActiveScene()->GetComponent<ComponentTransform>(e[0]);
-
-        Application::Get().GetActiveScene()->ReplaceComponent<ComponentTransform>(e[0], t);
-
     }
 
     void OnRender() {
@@ -218,11 +138,7 @@ public:
 
         glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)m_ViewportSize.x / (float)m_ViewportSize.y, 0.1f, 100.0f);
 
-        m_Shader->Bind();
-        m_Shader->SetUniform("u_projectionMatrix", projection);
-
-        m_Shader2->Bind();
-        m_Shader2->SetUniform("u_projectionMatrix", projection);
+        Renderer::SetProjectionMatrix(projection);
     }
 
     void OnRenderOverlay()
@@ -246,7 +162,58 @@ public:
                 ImGui::EndDragDropTarget();
             }
         }
+
+        // Gizmos
+        auto selectedEntity = m_SceneHierarchy->GetSelectedEntity();
+        if (selectedEntity) {
+            ImGuizmo::SetOrthographic(false);
+            ImGuizmo::SetDrawlist();
+            ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
+
+            auto& tc = selectedEntity.GetComponent<ComponentTransform>();
+            glm::mat4 transform = tc.GetTransform();
+
+            bool snap = Input::IsKeyPressed(Key::LeftControl);
+            float snapValue = 0.5f; // Snap to 0.5m for translation/scale
+            // Snap to 45 degrees for rotation
+           /* if (m_GizmoType == ImGuizmo::OPERATION::ROTATE)
+                snapValue = 45.0f;*/
+
+            float snapValues[3] = { snapValue, snapValue, snapValue };
+
+            ImGuizmo::Manipulate(glm::value_ptr(Application::Get().GetActiveScene()->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()),
+                ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, glm::value_ptr(transform),
+                nullptr, snap ? snapValues : nullptr);
+
+            if (ImGuizmo::IsUsing())
+            {
+                glm::vec3 translation, rotation, scale;
+                Math::DecomposeTransform(transform, translation, rotation, scale);
+
+                glm::vec3 deltaRotation = rotation - tc.Rotation;
+                tc.Translation = translation;
+                tc.Rotation += deltaRotation;
+                tc.Scale = scale;
+            }
+        }
+
         ImGui::End();
+
+        ImGui::BeginMainMenuBar();
+
+        if (ImGui::Button("Save")) {
+            auto path = ResourceManager::GetIO()->SaveFile("");
+            auto serializer = SceneSerializer(Application::Get().GetActiveScene());
+            serializer.Serialize(path);
+        }
+
+        if (ImGui::Button("Load")) {
+            auto path = ResourceManager::GetIO()->OpenFile("");
+            auto serializer = SceneSerializer(Application::Get().GetActiveScene());
+            serializer.Deserialize(path);
+        }
+
+        ImGui::EndMainMenuBar();
 
         m_SceneHierarchy->Render();
         m_ContentBrowser->Render();
@@ -263,8 +230,6 @@ public:
     }
 private:
     float totalTime = 0.f;
-    Ref<Shader> m_Shader;
-    Ref<Shader> m_Shader2;
     Simulatrix::UUID m_ShaderID1;
     Simulatrix::UUID m_ShaderID2;
     Ref<ProjectionCamera> m_Camera;

@@ -13,3 +13,9 @@
 [submodule "Simulatrix/vendor/assimp"]
 	path = Simulatrix/vendor/assimp
 	url = https://github.com/assimp/assimp
+[submodule "Simulatrix/vendor/imguizmo"]
+	path = Simulatrix/vendor/imguizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo
+[submodule "Simulatrix/vendor/yaml-cpp"]
+	path = Simulatrix/vendor/yaml-cpp
+	url = https://github.com/thecherno/yaml-cpp

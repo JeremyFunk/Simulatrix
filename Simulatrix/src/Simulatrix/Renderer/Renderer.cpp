@@ -4,6 +4,7 @@
 
 namespace Simulatrix {
     std::vector<Ref<Mesh>> Renderer::s_Meshes = std::vector<Ref<Mesh>>();
+    glm::mat4 Renderer::s_Projection = glm::mat4(1.0);
 
     void Renderer::BeginScene(Ref<Scene> scene)
     {
@@ -22,9 +23,9 @@ namespace Simulatrix {
             }
             shaderC.ShaderRef->Bind();
             
-            auto& model = ResourceManager::Get()->GetModel(modelC.ID);
             shaderC.ShaderRef->SetUniform("u_modelMatrix", transformC.GetTransform());
             shaderC.ShaderRef->SetUniform("u_viewMatrix", v);
+            shaderC.ShaderRef->SetUniform("u_projectionMatrix", s_Projection);
 
             if (scene->HasComponents<ComponentTextureMaterial>(m)) {
                 auto& textureC = scene->GetComponent< ComponentTextureMaterial>(m);
@@ -33,7 +34,7 @@ namespace Simulatrix {
                     textureC.Diffuse->Bind();
                 }
             }
-            for (auto& mesh : model.Meshes) {
+            for (auto& mesh : modelC.Model->Meshes) {
                 mesh.VAO->Bind();
                 RenderCommand::DrawIndexed(mesh.VAO);
             }

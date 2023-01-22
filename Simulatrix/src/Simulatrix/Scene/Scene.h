@@ -16,6 +16,12 @@ namespace Simulatrix {
             return Entity(m_Registry.create(), this);
         }
 
+        Entity CreateEntityWithUUID(UUID& uuid) {
+            auto e = Entity(m_Registry.create(), this);
+            e.AddComponent<ComponentID>(uuid);
+            return e;
+        }
+
         template<typename... Components>
         auto GetAllEntitiesWith()
         {
@@ -75,6 +81,7 @@ namespace Simulatrix {
 
         entt::registry m_Registry;
         friend class Entity;
+        friend class SceneSerializer;
         friend class SceneHierarchy;
     };
     

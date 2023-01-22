@@ -1,6 +1,6 @@
 #include "simixpch.h"
 #include "Properties.h"
-#include <imgui.h>
+#include <ImGui/imgui.h>
 
 namespace Simulatrix {
     void Properties::Render() {

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Simulatrix/Renderer/Texture.h"
 #include "Simulatrix/Core/IOWrapper.h"
 
@@ -24,12 +23,20 @@ namespace Simulatrix {
 
 		virtual void Bind(uint32_t slot = 0) const override;
 
+		virtual UUID GetID() const override {
+			return m_ID;
+		}
+		virtual void SetID(UUID& id) override {
+			m_ID = id;
+		}
+
 		virtual bool IsLoaded() const override { return m_IsLoaded; }
 	private:
 		Path m_Path;
 		bool m_IsLoaded = false;
 		uint32_t m_Width, m_Height;
 		uint32_t m_RendererID;
+		UUID m_ID;
 		GLenum m_InternalFormat, m_DataFormat;
 	};
 

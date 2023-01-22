@@ -44,6 +44,9 @@ namespace Simulatrix {
 
     class IOWrapper {
     public:
+
+        virtual Path OpenFile(const char* filter) = 0;
+        virtual Path SaveFile(const char* filter) = 0;
         virtual bool Exists(const Path& path) = 0;
         virtual std::vector<Path> GetDirectoryContent(const Path& path) = 0;
         virtual bool CreateDir(const Path& path) = 0;

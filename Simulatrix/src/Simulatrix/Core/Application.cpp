@@ -16,10 +16,10 @@ namespace Simulatrix {
         m_Window->SetEventCallback(SIMIX_BIND_EVENT_FN(Application::OnEvent));
         SIMIX_CORE_ASSERT(!s_Instance, "Application already exists!");
         s_Instance = this;
+        m_ResourceManager.reset(new ResourceManager());
 
         RenderCommand::Init();
 
-        m_ResourceManager.reset(new ResourceManager());
         SIMIX_CORE_INFO("Starting in directory {0}", m_ResourceManager->GetIO()->GetCurrentDir().PathString);
 
         m_ImGuiLayer = new ImGuiLayer();

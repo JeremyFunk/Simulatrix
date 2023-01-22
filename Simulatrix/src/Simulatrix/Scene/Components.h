@@ -7,6 +7,7 @@
 #include "Simulatrix/Core/Core.h"
 #include <Simulatrix/Renderer/Texture.h>
 #include <Simulatrix/Renderer/Shader.h>
+#include <Simulatrix/Scene/SceneData.h>
 namespace Simulatrix {
     struct ComponentID {
         UUID ID;
@@ -24,20 +25,19 @@ namespace Simulatrix {
         ComponentTag(const std::string& tag) : Tag(tag) {}
     };
 
-    struct ComponentMesh {
+    /*struct ComponentMesh {
         UUID ID;
         ComponentMesh() = default;
         ComponentMesh(UUID ID) : ID(ID)
         {
 
         }
-    };
+    };*/
     struct ComponentModel {
-        UUID ID;
+        Ref<SceneModel> Model;
         ComponentModel() = default;
-        ComponentModel(UUID ID) : ID(ID)
+        ComponentModel(Ref<SceneModel> model) : Model(model)
         {
-
         }
     };
     struct ComponentTransform {
@@ -68,25 +68,16 @@ namespace Simulatrix {
         }
     };
     struct ComponentTextureMaterial {
-        UUID ID;
         Ref<Texture2D> Diffuse;
         ComponentTextureMaterial() = default;
         ComponentTextureMaterial(Ref<Texture2D> diffuse) : Diffuse(diffuse)
         {
         }
-        ComponentTextureMaterial(UUID ID, Ref<Texture2D> diffuse) : ID(ID), Diffuse(diffuse)
-        {
-        }
     };
     struct ComponentShader {
-        UUID ID;
         Ref<Shader> ShaderRef;
         ComponentShader() = default;
         ComponentShader(Ref<Shader> shader) : ShaderRef(shader)
-        {
-
-        }
-        ComponentShader(UUID ID, Ref<Shader> shader) : ID(ID), ShaderRef(shader)
         {
 
         }

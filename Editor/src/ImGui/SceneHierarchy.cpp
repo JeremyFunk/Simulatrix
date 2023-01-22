@@ -1,7 +1,7 @@
 #include "simixpch.h"
 #include "SceneHierarchy.h"
-#include <imgui.h>
-#include <imgui_internal.h>
+#include <ImGui/imgui.h>
+#include <ImGui/imgui_internal.h>
 #include "Simulatrix/ResourceManager/ResourceManager.h"
 #include "Simulatrix/Core/Core.h"
 namespace Simulatrix {
@@ -231,7 +231,7 @@ namespace Simulatrix {
 			DrawVec3Control("Scale", component.Scale, 1.0f);
 		});
 		auto iconLib = m_IconLibrary.get();
-		DrawComponent<ComponentTextureMaterial>("Texture", entity, [iconLib](ComponentTextureMaterial& component) {
+		DrawComponent<ComponentTextureMaterial>("Diffuse Material", entity, [iconLib](ComponentTextureMaterial& component) {
 			if (component.Diffuse == nullptr) {
 				ImGui::ImageButton((void*)(intptr_t)iconLib->GetIconByName("close")->GetRendererID(), ImVec2(64, 64));
 			}
@@ -255,7 +255,7 @@ namespace Simulatrix {
 
 		auto scene = m_Scene.get();
 		DrawComponent<ComponentShader>("Shader", entity, [scene](ComponentShader& component) {
-			std::string selectedShaderName = "None";
+			/*std::string selectedShaderName = "None";
 			if (component.ShaderRef != nullptr) {
 				selectedShaderName = component.ShaderRef->GetName();
 			}
@@ -268,7 +268,24 @@ namespace Simulatrix {
 				}
 
 				ImGui::EndCombo();
+			}*/
+			std::string selectedShaderName = "None";
+			if (component.ShaderRef != nullptr) {
+				selectedShaderName = component.ShaderRef->GetName();
 			}
+
+			ImGui::Button(selectedShaderName.c_str());
+
+			if (ImGui::BeginDragDropTarget()) {
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
+					const char* path = (const char*)payload->Data;
+
+					component.ShaderRef = ResourceManager::Get()->GetOrLoadShader(Path(path, PathType::File));
+
+					ImGui::EndDragDropTarget();
+				}
+			}
+
 		});
 
 		//DrawComponent<CameraComponent>("Camera", entity, [](auto& component)

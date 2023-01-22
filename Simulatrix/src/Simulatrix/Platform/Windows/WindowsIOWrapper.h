@@ -7,6 +7,9 @@ namespace Simulatrix {
         WindowsIOWrapper() {
 
         }
+        virtual Path OpenFile(const char* filter) override;
+        virtual Path SaveFile(const char* filter) override;
+
         virtual bool Exists(const Path& path) override;
         virtual std::vector<Path> GetDirectoryContent(const Path& path) override;
         virtual bool CreateDir(const Path& path) override;

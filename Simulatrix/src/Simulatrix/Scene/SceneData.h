@@ -6,8 +6,8 @@
 namespace Simulatrix {
     struct SceneMesh {
         Ref<VertexArray> VAO;
-        unsigned int IndexCount;
-        SceneMesh(Ref<VertexArray> VAO, unsigned int IndexCount) : VAO(VAO), IndexCount(IndexCount){}
+        uint32_t IndexCount;
+        SceneMesh(Ref<VertexArray> VAO, uint32_t IndexCount) : VAO(VAO), IndexCount(IndexCount){}
     };
 
     enum class ColorFormat {
@@ -16,7 +16,8 @@ namespace Simulatrix {
 
     struct SceneModel {
         UUID ID;
+        Path Path;
         std::vector<SceneMesh> Meshes;
-        std::vector<UUID> Textures;
+        std::vector<Ref<Texture2D>> Textures;
     };
 }

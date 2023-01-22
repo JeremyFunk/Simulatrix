@@ -14,6 +14,7 @@ namespace Simulatrix {
             auto id = ResourceManager::Get()->GetOrLoadModel(path);
 
             auto e2 = CreateEntity();
+            e2.AddComponent<ComponentID>();
             e2.AddComponent<ComponentModel>(id);
             e2.AddComponent<ComponentTag>("Backpack");
             e2.AddComponent<ComponentTransform>();

@@ -1,0 +1,24 @@
+Scene: Untitled
+Textures:
+  - Texture: 5707888502629559468
+    Path: C:\Users\Jerem\Documents\GitHub\Simulatrix\Editor\resources\raw\assets\Backpack\diffuse.jpg
+Shaders:
+  - Shader: 12228347411175644459
+    Path: C:\Users\Jerem\Documents\GitHub\Simulatrix\Editor\resources\raw\shaders\diffuse\diffuse.glsl
+Models:
+  - Model: 9690870519652781980
+    Path: C:\Users\Jerem\Documents\GitHub\Simulatrix\Editor\resources\raw\assets\Backpack\backpack.obj
+Entities:
+  - Entity: 7338017654224815761
+    ComponentModel:
+      ModelID: 9690870519652781980
+    ComponentShader:
+      ShaderID: 12228347411175644459
+    ComponentTag:
+      Tag: Backpack
+    ComponentTextureMaterial:
+      TextureID: 5707888502629559468
+    ComponentTransform:
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]

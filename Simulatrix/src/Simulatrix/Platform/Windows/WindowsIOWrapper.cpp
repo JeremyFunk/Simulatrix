@@ -1,6 +1,12 @@
 #include <simixpch.h>
 #include "WindowsIOWrapper.h"
 
+#include "Simulatrix/Core/Application.h"
+#include <commdlg.h>
+#include <GLFW/glfw3.h>
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>
+
 namespace Simulatrix {
     template <typename TP>
     std::time_t to_time_t(TP tp)
@@ -9,6 +15,53 @@ namespace Simulatrix {
         auto sctp = time_point_cast<system_clock::duration>(tp - TP::clock::now()
             + system_clock::now());
         return system_clock::to_time_t(sctp);
+    }
+
+
+    Path WindowsIOWrapper::OpenFile(const char* filter) {
+
+        OPENFILENAMEA ofn;
+        CHAR szFile[260] = { 0 };
+        CHAR currentDir[256] = { 0 };
+        ZeroMemory(&ofn, sizeof(OPENFILENAME));
+        ofn.lStructSize = sizeof(OPENFILENAME);
+        ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
+        ofn.lpstrFile = szFile;
+        ofn.nMaxFile = sizeof(szFile);
+        if (GetCurrentDirectoryA(256, currentDir))
+            ofn.lpstrInitialDir = currentDir;
+        ofn.lpstrFilter = filter;
+        ofn.nFilterIndex = 1;
+        ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+
+        if (GetOpenFileNameA(&ofn) == TRUE)
+            return Path(ofn.lpstrFile, PathType::File);
+            
+        return Path(ofn.lpstrFile, PathType::File);
+
+    }
+    Path WindowsIOWrapper::SaveFile(const char* filter) {
+        OPENFILENAMEA ofn;
+        CHAR szFile[260] = { 0 };
+        CHAR currentDir[256] = { 0 };
+        ZeroMemory(&ofn, sizeof(OPENFILENAME));
+        ofn.lStructSize = sizeof(OPENFILENAME);
+        ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
+        ofn.lpstrFile = szFile;
+        ofn.nMaxFile = sizeof(szFile);
+        if (GetCurrentDirectoryA(256, currentDir))
+            ofn.lpstrInitialDir = currentDir;
+        ofn.lpstrFilter = filter;
+        ofn.nFilterIndex = 1;
+        ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT | OFN_NOCHANGEDIR;
+
+        // Sets the default extension by extracting it from the filter
+        ofn.lpstrDefExt = strchr(filter, '\0') + 1;
+
+        if (GetSaveFileNameA(&ofn) == TRUE)
+            return Path(ofn.lpstrFile, PathType::File);
+
+        return Path(ofn.lpstrFile, PathType::File);
     }
 
     bool WindowsIOWrapper::Exists(const Path& path)

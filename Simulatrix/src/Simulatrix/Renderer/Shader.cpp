@@ -12,4 +12,12 @@ namespace Simulatrix {
         }
         SIMIX_CORE_ASSERT(false, "Unknown renderer API!");
     }
+    Shader* Shader::Create(Path& path)
+    {
+        switch (Renderer::GetAPI()) {
+        case RendererAPI::API::None: SIMIX_CORE_ASSERT(false, "RendererAPI::None is not supported!");
+        case RendererAPI::API::OpenGL: return new OpenGLShader(path);
+        }
+        SIMIX_CORE_ASSERT(false, "Unknown renderer API!");
+    }
 }

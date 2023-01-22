@@ -25,8 +25,16 @@ namespace Simulatrix {
             s_Meshes.push_back(std::make_shared<Mesh>(mesh));
         }
 
+        static void SetProjectionMatrix(glm::mat4 projection) {
+            s_Projection = projection;
+        }
+        static const glm::mat4& GetProjectionMatrix() {
+            return s_Projection;
+        }
+
         static inline RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
     private:
+        static glm::mat4 s_Projection;
         static std::vector<Ref<Mesh>> s_Meshes;
     };
 }

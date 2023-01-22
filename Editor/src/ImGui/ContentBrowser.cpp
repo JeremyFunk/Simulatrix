@@ -1,6 +1,6 @@
 #include "simixpch.h"
 #include "ContentBrowser.h"
-#include <imgui.h>
+#include <ImGui/imgui.h>
 #include "Simulatrix/ResourceManager/ResourceManager.h"
 #include <Simulatrix/Util/StringUtil.h>
 
@@ -67,6 +67,11 @@ namespace Simulatrix {
         ImGui::Begin("Directories");
 
 		auto SelectedFile = DirectoryTreeViewRecursive(&fileStructure);
+
+		if (SelectedFile == nullptr) {
+			SelectedFile = &fileStructure;
+		}
+
         ImGui::End();
 
         ImGui::Begin("Content");
@@ -78,66 +83,64 @@ namespace Simulatrix {
 		if (columns < 1) {
 			columns = 1;
 		}
-		if (SelectedFile != nullptr) {
-			File* relevantFile = SelectedFile;
-			if (SelectedFile->IsFile()) {
-				relevantFile = SelectedFile->GetParent();
-			}
-			if (ImGui::BeginTable("Files", columns, ImGuiTableFlags_SizingFixedFit, ImVec2(cellSize * columns, cellSize))) {
-				int i = 0;
-				for (File& file : relevantFile->GetFiles()) {
-					ImGui::TableNextColumn();
-					Ref<Texture2D> icon;
-					Path& path = file.GetPath();
-					bool isSelected = path.PathString == s_SelectedPath;
-					if (file.IsDirectory()) {
-						icon = m_IconLibrary->GetIconByName("folder");
-					}
-					else if (path.FileEnding == "bmp") {
-						icon = m_IconLibrary->GetIconByName("bmp");
-					}
-					else if (path.FileEnding == "jpg") {
-						icon = m_IconLibrary->GetIconByName("jpg");
-					}
-					else if (path.FileEnding == "mp3") {
-						icon = m_IconLibrary->GetIconByName("mp3");
-					}
-					else if (path.FileEnding == "png") {
-						icon = m_IconLibrary->GetIconByName("png");
-					}
-					else {
-						icon = m_IconLibrary->GetIconByName("document");
-					}
-					auto cursor = ImGui::GetCursorScreenPos();
-
-					ImVec4 bgColor = ImVec4(0.0, 0.0, 0.0, 0.0);
-					if (isSelected) {
-						bgColor = ImVec4(0.6f, 0.6f, 0.6f, 0.4f);
-					}
-					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-					ImGui::ImageButton((void*)(intptr_t)icon->GetRendererID(), ImVec2(thumbnailSize, thumbnailSize), ImVec2(0, 1), ImVec2(1, 0), 0, bgColor);
-					if (file.IsDirectory() && ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
-						s_SelectedPath = path.PathString;
-					}
-					else if (file.IsFile() && ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
-						s_SelectedPath = path.PathString;
-					}
-					ImGui::PopStyleColor();
-
-					if (ImGui::IsItemHovered() && ImGui::BeginDragDropSource()) {
-						const char* itemPath = path.PathString.c_str();
-						ImGui::SetDragDropPayload("CONTENT_BROWSER_ITEM", itemPath, (strlen(itemPath) + 1) * sizeof(char), ImGuiCond_Once);
-						ImGui::EndDragDropSource();
-					}
-
-					float currentWidth = ImGui::GetColumnWidth(i);
-					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (thumbnailSize - ImGui::CalcTextSize(file.GetName().c_str()).x) / 2.f);
-					ImGui::Text(file.GetName().c_str());
-
-					i++;
+		File* relevantFile = SelectedFile;
+		if (SelectedFile->IsFile()) {
+			relevantFile = SelectedFile->GetParent();
+		}
+		if (ImGui::BeginTable("Files", columns, ImGuiTableFlags_SizingFixedFit, ImVec2(cellSize * columns, cellSize))) {
+			int i = 0;
+			for (File& file : relevantFile->GetFiles()) {
+				ImGui::TableNextColumn();
+				Ref<Texture2D> icon;
+				Path& path = file.GetPath();
+				bool isSelected = path.PathString == s_SelectedPath;
+				if (file.IsDirectory()) {
+					icon = m_IconLibrary->GetIconByName("folder");
 				}
-				ImGui::EndTable();
+				else if (path.FileEnding == "bmp") {
+					icon = m_IconLibrary->GetIconByName("bmp");
+				}
+				else if (path.FileEnding == "jpg") {
+					icon = m_IconLibrary->GetIconByName("jpg");
+				}
+				else if (path.FileEnding == "mp3") {
+					icon = m_IconLibrary->GetIconByName("mp3");
+				}
+				else if (path.FileEnding == "png") {
+					icon = m_IconLibrary->GetIconByName("png");
+				}
+				else {
+					icon = m_IconLibrary->GetIconByName("document");
+				}
+				auto cursor = ImGui::GetCursorScreenPos();
+
+				ImVec4 bgColor = ImVec4(0.0, 0.0, 0.0, 0.0);
+				if (isSelected) {
+					bgColor = ImVec4(0.6f, 0.6f, 0.6f, 0.4f);
+				}
+				ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+				ImGui::ImageButton((void*)(intptr_t)icon->GetRendererID(), ImVec2(thumbnailSize, thumbnailSize), ImVec2(0, 1), ImVec2(1, 0), 0, bgColor);
+				if (file.IsDirectory() && ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+					s_SelectedPath = path.PathString;
+				}
+				else if (file.IsFile() && ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+					s_SelectedPath = path.PathString;
+				}
+				ImGui::PopStyleColor();
+
+				if (ImGui::IsItemHovered() && ImGui::BeginDragDropSource()) {
+					const char* itemPath = path.PathString.c_str();
+					ImGui::SetDragDropPayload("CONTENT_BROWSER_ITEM", itemPath, (strlen(itemPath) + 1) * sizeof(char), ImGuiCond_Once);
+					ImGui::EndDragDropSource();
+				}
+
+				float currentWidth = ImGui::GetColumnWidth(i);
+				ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (thumbnailSize - ImGui::CalcTextSize(file.GetName().c_str()).x) / 2.f);
+				ImGui::Text(file.GetName().c_str());
+
+				i++;
 			}
+			ImGui::EndTable();
 		}
 		
         ImGui::End();

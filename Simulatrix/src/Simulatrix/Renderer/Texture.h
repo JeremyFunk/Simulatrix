@@ -1,5 +1,6 @@
 #pragma once
 #include "Simulatrix/Core/IOWrapper.h"
+#include "Simulatrix/Core/Core.h"
 
 namespace Simulatrix {
     class Texture {
@@ -17,6 +18,9 @@ namespace Simulatrix {
         virtual void Bind(uint32_t slot = 0) const = 0;
 
         virtual bool IsLoaded() const = 0;
+
+        virtual UUID GetID() const = 0;
+        virtual void SetID(UUID& id) = 0;
     };
 
     class Texture2D : public Texture

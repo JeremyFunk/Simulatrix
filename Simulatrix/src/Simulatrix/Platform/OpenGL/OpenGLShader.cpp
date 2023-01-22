@@ -2,9 +2,82 @@
 #include "OpenGLShader.h"
 #include <glad/glad.h>
 #include <Simulatrix/Debug/Log.h>
+#include <Simulatrix/ResourceManager/ResourceManager.h>
+#include <Simulatrix/Util/StringUtil.h>
 namespace Simulatrix {
-    OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+    OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc) : m_Path(Path())
     {
+        Compile(vertexSrc, fragmentSrc);
+    }
+
+    OpenGLShader::OpenGLShader(Path& path) : m_Path(path) {
+        ReadFromFile(path);
+    }
+    void OpenGLShader::ReadFromFile(Path& path) {
+        auto lines = ResourceManager::GetIO()->ReadTextLines(path);
+
+        std::string vertexSrc = "";
+        std::string fragmentSrc = "";
+
+        int mode = 0; // 0 = None, 1 = VS, 2 = FS
+
+        ShaderUniforms uniforms;
+
+        for (auto line : lines) {
+            auto trimmed = trim_copy(line);
+
+            if (trimmed == "#VS") {
+                mode = 1;
+            }
+            else if (trimmed == "#FS") {
+                mode = 2;
+            }
+            else {
+                if (mode == 1) {
+                    vertexSrc += line + "\n";
+                }
+                else {
+                    fragmentSrc += line + "\n";
+                }
+
+                if (trimmed.rfind("uniform", 0) == 0) {
+                    auto split = Split(trimmed, ' ');
+                    auto name = split[2].substr(0, split[2].size() - 1);
+                    if (split[1] == "vec2")
+                        uniforms.push_back(ShaderUniform(ShaderDataType::Vec2, name));
+                    else if (split[1] == "vec3")
+                        uniforms.push_back(ShaderUniform(ShaderDataType::Vec3, name));
+                    else if (split[1] == "vec4")
+                        uniforms.push_back(ShaderUniform(ShaderDataType::Vec4, name));
+
+                    else if (split[1] == "mat3")
+                        uniforms.push_back(ShaderUniform(ShaderDataType::Mat3, name));
+                    else if (split[1] == "mat4")
+                        uniforms.push_back(ShaderUniform(ShaderDataType::Mat4, name));
+
+                    else if (split[1] == "float")
+                        uniforms.push_back(ShaderUniform(ShaderDataType::Float, name));
+                    else if (split[1] == "int" || split[1] == "sampler2D")
+                        uniforms.push_back(ShaderUniform(ShaderDataType::Int, name));
+                }
+            }
+        }
+
+        Compile(vertexSrc, fragmentSrc);
+        Bind();
+        AddUniforms(uniforms);
+    }
+
+    void OpenGLShader::Reload(std::string& vertexSrc, std::string& fragmentSrc) {
+        glDeleteProgram(m_RendererID);
+        Compile(vertexSrc, fragmentSrc);
+    }
+    void OpenGLShader::Reload(Path& path) {
+        glDeleteProgram(m_RendererID);
+        ReadFromFile(path);
+    }
+
+    void OpenGLShader::Compile(std::string vertexSrc, std::string fragmentSrc) {
         GLint Result = GL_FALSE;
         int InfoLogLength;
 
@@ -70,6 +143,7 @@ namespace Simulatrix {
         glDeleteShader(VertexShaderID);
         glDeleteShader(FragmentShaderID);
     }
+
     OpenGLShader::~OpenGLShader()
     {
         glDeleteProgram(m_RendererID);
@@ -96,6 +170,10 @@ namespace Simulatrix {
     void OpenGLShader::SetUniform(uint32_t rendererID, float value)
     {
         glUniform1f(rendererID, value);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, uint32_t value)
+    {
+        glUniform1i(rendererID, value);
     }
     void OpenGLShader::SetUniform(const char* name, float value)
     {

@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <Simulatrix/Renderer/Buffer.h>
+#include <Simulatrix/Core/IOWrapper.h>
+#include <Simulatrix/Core/Core.h>
 
 namespace Simulatrix {
     struct ShaderUniform {
@@ -44,10 +46,17 @@ namespace Simulatrix {
         virtual void AddUniform(ShaderUniform uniform) = 0;
         virtual void AddUniforms(ShaderUniforms uniforms) = 0;
         virtual void SetUniform(uint32_t rendererID, float value) = 0;
+        virtual void SetUniform(uint32_t rendererID, uint32_t value) = 0;
         virtual void SetUniform(const char* name, float value) = 0;
         virtual void SetUniform(uint32_t rendererID, const glm::mat4& value) = 0;
         virtual void SetUniform(const char* name, const glm::mat4& value) = 0;
+        virtual void Reload(std::string& vertexSrc, std::string& fragmentSrc) = 0;
+        virtual void Reload(Path& path) = 0;
+        virtual Path GetPath() = 0;
+        virtual UUID GetID() = 0;
+        virtual void SetID(UUID uuid) = 0;
         virtual const ShaderUniforms& GetUniforms() const = 0;
         static Shader* Create(std::string& vertexSrc, std::string& fragmentSrc);
+        static Shader* Create(Path& path);
     };
 }

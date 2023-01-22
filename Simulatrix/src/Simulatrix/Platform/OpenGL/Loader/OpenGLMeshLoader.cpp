@@ -29,6 +29,6 @@ namespace Simulatrix {
         VAO->AddVertexBuffer(VBO);
         VAO->SetIndexBuffer(EBO);
 
-        return SceneMesh(VAO, t.indices.size() * sizeof(unsigned int));
+        return SceneMesh(VAO, t.indices.size() * sizeof(uint32_t));
     }
 }

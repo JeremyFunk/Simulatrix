@@ -57,15 +57,17 @@ namespace Simulatrix {
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
+		float xposf = (float)xpos;
+		float yposf = (float)ypos;
 		if (m_First) {
 			m_First = false;
 		}
 		else {
-			m_MouseDX = xpos - m_MouseX;
-			m_MouseDY = ypos - m_MouseY;
+			m_MouseDX = xposf - m_MouseX;
+			m_MouseDY = yposf - m_MouseY;
 		}
 
-		m_MouseX = xpos;
-		m_MouseY = ypos;
+		m_MouseX = xposf;
+		m_MouseY = yposf;
 	}
 }
