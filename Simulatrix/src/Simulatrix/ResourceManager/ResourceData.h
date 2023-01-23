@@ -19,6 +19,16 @@ namespace Simulatrix {
         //int m_BoneIDs[MAX_BONE_INFLUENCE];
         ////weights from each bone
         //float m_Weights[MAX_BONE_INFLUENCE];
+
+        ResourceVertex() {}
+        ResourceVertex(glm::vec3 position, glm::vec3 normal, glm::vec2 texCoords, glm::vec3 tangent, glm::vec3 bitangent)
+        {
+            Position = position;
+            Normal = normal;
+            TexCoords = texCoords;
+            Tangent = tangent;
+            Bitangent = bitangent;
+        }
     };
 
     struct ResourceTexture {
@@ -31,6 +41,10 @@ namespace Simulatrix {
         std::vector<ResourceVertex>       vertices;
         std::vector<uint32_t>         indices;
         std::vector<ResourceTexture>      textures;
+
+        ResourceMesh() {
+            
+        }
 
         // constructor
         ResourceMesh(std::vector<ResourceVertex> vertices, std::vector<uint32_t> indices, std::vector<ResourceTexture> textures)

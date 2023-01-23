@@ -9,7 +9,7 @@
 #include "Simulatrix/Core/UUID.h"
 #include "Simulatrix/Core/Core.h"
 #include "Simulatrix/Util/IdentifierMap.h"
-
+#include "Simulatrix/Util/Primitives/PrimitiveLibrary.h"
 namespace Simulatrix {
     class ResourceManager {
     public:
@@ -49,6 +49,20 @@ namespace Simulatrix {
             f.SetParents();
             return f;
         }
+
+        Ref<SceneModel> GetPrimitive(std::string name) {
+            return PrimitiveLibrary::GetModel(name);
+        }
+        Ref<SceneModel> GetPrimitive(UUID uuid) {
+            return PrimitiveLibrary::GetModel(uuid);
+        }
+        std::vector<Ref<SceneModel>> GetPrimitives() {
+            return PrimitiveLibrary::GetModels();
+        }
+
+        
+
+        Ref<SceneModel> SceneModelFromData(ResourceModel& mesh, std::string name, UUID uuid = UUID());
     private:
         void Load(Path& path, UUID uuid = UUID());
         void Reload(Path& path);

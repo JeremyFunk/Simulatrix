@@ -6,7 +6,9 @@
 #include "Entity.h"
 #include <Simulatrix/Core/Camera.h>
 #include "Simulatrix/Renderer/ShaderImplementation.h"
+#include "Simulatrix/ResourceManager/ResourceManager.h"
 namespace Simulatrix {
+
     class Scene {
     public:
         Scene();
@@ -72,6 +74,15 @@ namespace Simulatrix {
         }
         const std::vector<Ref<Shader>> GetShaders() {
             return m_Shaders;
+        }
+
+        Entity InstantiatePrimitive(std::string name) {
+            auto e = CreateEntity();
+            e.AddComponent<ComponentModel>(ResourceManager::Get()->GetPrimitive(name));
+            e.AddComponent<ComponentTag>(name);
+            e.AddComponent<ComponentID>();
+            e.AddComponent<ComponentTransform>();
+            return e;
         }
 
         void FileDropped(Path& path);

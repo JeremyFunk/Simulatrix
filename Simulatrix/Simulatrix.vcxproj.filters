@@ -19,6 +19,9 @@
     <Filter Include="src\Simulatrix\ImGui">
       <UniqueIdentifier>{781EDDE5-64AD-66AF-0DCC-7AAAF9397755}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Simulatrix\ImGui\Components">
+      <UniqueIdentifier>{8D08EF35-F9EB-FD75-02EF-2BB26E51C4C6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Simulatrix\Platform">
       <UniqueIdentifier>{E20AD96A-4E42-2102-574C-8525C30248FB}</UniqueIdentifier>
     </Filter>
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Events\MouseEvent.h">
       <Filter>src\Simulatrix\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\ImGui\Components\ImGuiButtonBar.h">
+      <Filter>src\Simulatrix\ImGui\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\ImGui\ImGuiLayer.h">
       <Filter>src\Simulatrix\ImGui</Filter>
@@ -1515,6 +1521,10 @@
     <ClInclude Include="vendor\stb_image\stbi_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Util\Primitives\Primitive.h" />
+    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitiveLibrary.h" />
+    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitivePlane.h" />
+    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitiveCube.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
@@ -1546,6 +1556,9 @@
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Events\Event.cpp">
       <Filter>src\Simulatrix\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\ImGui\Components\ImGuiButtonBar.cpp">
+      <Filter>src\Simulatrix\ImGui\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\ImGui\ImGuiBuild.cpp">
       <Filter>src\Simulatrix\ImGui</Filter>
@@ -1643,5 +1656,8 @@
     <ClCompile Include="vendor\stb_image\stbi_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitivePlane.cpp" />
+    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitiveLibrary.cpp" />
+    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitiveCube.cpp" />
   </ItemGroup>
 </Project>

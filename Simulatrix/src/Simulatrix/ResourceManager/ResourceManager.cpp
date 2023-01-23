@@ -93,6 +93,26 @@ namespace Simulatrix {
         }
         return m_LoadedModels[path.PathString];
     }
+    Ref<SceneModel> ResourceManager::SceneModelFromData(ResourceModel& mesh, std::string name, UUID uuid) {
+        auto model = new SceneModel();
+        model->ID = uuid;
+        auto pointer = Ref<SceneModel>();
+        pointer.reset(model);
+        for (auto& tex : mesh.TexturesLoaded) {
+            if (!m_LoadedTextures.contains(tex.path)) {
+                LoadTexture(Path(tex.path, PathType::File), UUID());
+            }
+
+            pointer->Textures.push_back(m_LoadedTextures[tex.path]);
+        }
+
+        for (auto& mesh : mesh.Meshes) {
+            auto result = m_MeshLoader->Load(mesh);
+            pointer->Meshes.push_back(result);
+        }
+
+        return pointer;
+    }
 
     const UUID ResourceManager::GetModelID(Path& path) {
         return m_LoadedModels.getUUID(path.PathString);

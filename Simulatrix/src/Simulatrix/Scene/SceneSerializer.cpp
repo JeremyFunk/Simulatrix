@@ -146,6 +146,9 @@ namespace Simulatrix {
 			out << YAML::Key << "ComponentModel";
 			out << YAML::BeginMap;
 			out << YAML::Key << "ModelID" << YAML::Value << component.Model->ID;
+			if (component.Model->IsPrimitive) {
+				out << YAML::Key << "IsPrimitive" << YAML::Value << true;
+			}
 			out << YAML::EndMap;
 		}
 
@@ -196,9 +199,9 @@ namespace Simulatrix {
 
 		out << YAML::Key << "Textures" << YAML::Value << YAML::BeginSeq;
 		for (auto& t : ResourceManager::Get()->GetLoadedTextures()) {
+			out << YAML::BeginMap;
 			out << YAML::Key << "Texture" << YAML::Value << t->GetID();
 
-			out << YAML::BeginMap;
 			out << YAML::Key << "Path" << YAML::Value << t->GetPath().to_string();
 			out << YAML::EndMap;
 		}
@@ -207,9 +210,9 @@ namespace Simulatrix {
 
 		out << YAML::Key << "Shaders" << YAML::Value << YAML::BeginSeq;
 		for (auto& t : ResourceManager::Get()->GetLoadedShaders()) {
+			out << YAML::BeginMap;
 			out << YAML::Key << "Shader" << YAML::Value << t->GetID();
 
-			out << YAML::BeginMap;
 			out << YAML::Key << "Path" << YAML::Value << t->GetPath().to_string();
 			out << YAML::EndMap;
 		}
@@ -218,9 +221,9 @@ namespace Simulatrix {
 
 		out << YAML::Key << "Models" << YAML::Value << YAML::BeginSeq;
 		for (auto& t : ResourceManager::Get()->GetLoadedModels()) {
+			out << YAML::BeginMap;
 			out << YAML::Key << "Model" << YAML::Value << t->ID;
 
-			out << YAML::BeginMap;
 			out << YAML::Key << "Path" << YAML::Value << t->Path.to_string();
 			out << YAML::EndMap;
 		}
@@ -233,8 +236,8 @@ namespace Simulatrix {
 
             SerializeEntity(out, entity);
         });
+		
         out << YAML::EndSeq;
-
         out << YAML::EndMap;
 
         ResourceManager::GetIO()->WriteText(filepath, out.c_str());
@@ -330,7 +333,14 @@ namespace Simulatrix {
 				auto modelComponent = entity["ComponentModel"];
 				if (modelComponent) {
 					auto& tc = deserializedEntity.AddComponent<ComponentModel>();
-					tc.Model = ResourceManager::Get()->GetModel(modelComponent["ModelID"].as<UUID>());
+					auto isPrimitive = modelComponent["IsPrimitive"];
+
+					if (isPrimitive) {
+						tc.Model = ResourceManager::Get()->GetPrimitive(modelComponent["ModelID"].as<UUID>());
+					}
+					else {
+						tc.Model = ResourceManager::Get()->GetModel(modelComponent["ModelID"].as<UUID>());
+					}
 				}
 			}
 		}

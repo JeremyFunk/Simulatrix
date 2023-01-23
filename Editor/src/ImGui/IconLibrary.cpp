@@ -13,4 +13,7 @@ namespace Simulatrix {
     Ref<Texture2D> IconLibrary::GetIconByName(std::string name) {
         return m_Icons[name];
     }
+    void* IconLibrary::GetImGuiIconByName(std::string name) {
+        return (void*)(intptr_t)m_Icons[name]->GetRendererID();
+    }
 }

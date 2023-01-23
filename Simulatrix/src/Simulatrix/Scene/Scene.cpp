@@ -1,6 +1,5 @@
 #include "simixpch.h"
 #include "Scene.h"
-#include "Simulatrix/ResourceManager/ResourceManager.h"
 namespace Simulatrix {
     Scene::Scene() {
         m_Registry = entt::registry();

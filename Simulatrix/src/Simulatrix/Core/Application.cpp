@@ -7,6 +7,7 @@
 #include "Simulatrix/Core/OrthographicCamera.h"
 #include "IOWrapper.h"
 #include "Simulatrix/Core/Input.h"
+#include "Simulatrix/Util/Primitives/PrimitiveLibrary.h"
 namespace Simulatrix {
 
     Application* Application::s_Instance = nullptr;
@@ -17,6 +18,8 @@ namespace Simulatrix {
         SIMIX_CORE_ASSERT(!s_Instance, "Application already exists!");
         s_Instance = this;
         m_ResourceManager.reset(new ResourceManager());
+
+        PrimitiveLibrary::Initialize();
 
         RenderCommand::Init();
 

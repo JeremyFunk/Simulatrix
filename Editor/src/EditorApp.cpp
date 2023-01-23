@@ -7,7 +7,7 @@
 #include <ImGui/imgui.h>
 #include "ImGui/SceneHierarchy.h"
 #include "ImGui/ContentBrowser.h"
-#include "ImGui/Properties.h"
+#include "ImGui/Toolbar.h"
 #include "ImGui/IconLibrary.h"
 #include "Simulatrix/Core/UUID.h"
 #include "DiffuseShader.h"
@@ -108,18 +108,34 @@ public:
         m_IconLib->LoadIconByName("save");
         m_IconLib->LoadIconByName("save-all");
         m_IconLib->LoadIconByName("save-as");
+        m_IconLib->LoadIconByName("move");
+        m_IconLib->LoadIconByName("rotate");
+        m_IconLib->LoadIconByName("scale");
+        m_IconLib->LoadIconByName("model-edit");
+        m_IconLib->LoadIconByName("grid");
 
         m_SceneHierarchy.reset(new SceneHierarchy(Application::Get().GetActiveScene(), m_IconLib));
         m_ContentBrowser.reset(new ContentBrowser(m_IconLib));
-        m_Properties.reset(new Properties());
+        m_Toolbar.reset(new Toolbar(Application::Get().GetActiveScene(), m_IconLib));
         m_ToggleUtil.reset(new ToggleUtil());
         //std::function<bool(bool)> fn = std::bind(Test, this, &std::placeholders::_1);
-        std::function<bool(bool)> fn = [this](bool pressed) {
-            SIMIX_CORE_INFO("PRESSEDEDED {0}", pressed);
+        m_ToggleUtil->RegisterToggle(Key::F, [this](bool pressed) {
             m_Camera->SetFreecam(pressed);
             return false;
-        };
-        m_ToggleUtil->RegisterToggle(Key::F, fn);
+        });
+
+        m_ToggleUtil->RegisterStatelessToggle(Key::S, [this]() {
+            m_Toolbar->SetTranslationMode(ImGuizmo::SCALE);
+            return false;
+        });
+        m_ToggleUtil->RegisterStatelessToggle(Key::R, [this]() {
+            m_Toolbar->SetTranslationMode(ImGuizmo::ROTATE);
+            return false;
+         });
+        m_ToggleUtil->RegisterStatelessToggle(Key::G, [this]() {
+            m_Toolbar->SetTranslationMode(ImGuizmo::TRANSLATE);
+            return false;
+        });
     }
 
     void OnDetach() {}
@@ -164,25 +180,25 @@ public:
         }
 
         // Gizmos
+        ImGuizmo::SetOrthographic(false);
+        ImGuizmo::SetDrawlist();
+        ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
+
         auto selectedEntity = m_SceneHierarchy->GetSelectedEntity();
         if (selectedEntity) {
-            ImGuizmo::SetOrthographic(false);
-            ImGuizmo::SetDrawlist();
-            ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
-
             auto& tc = selectedEntity.GetComponent<ComponentTransform>();
             glm::mat4 transform = tc.GetTransform();
 
             bool snap = Input::IsKeyPressed(Key::LeftControl);
             float snapValue = 0.5f; // Snap to 0.5m for translation/scale
             // Snap to 45 degrees for rotation
-           /* if (m_GizmoType == ImGuizmo::OPERATION::ROTATE)
-                snapValue = 45.0f;*/
+            if (m_Toolbar->GetTranslationMode() == ImGuizmo::OPERATION::ROTATE)
+                snapValue = 45.0f;
 
             float snapValues[3] = { snapValue, snapValue, snapValue };
 
             ImGuizmo::Manipulate(glm::value_ptr(Application::Get().GetActiveScene()->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()),
-                ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, glm::value_ptr(transform),
+                m_Toolbar->GetTranslationMode(), ImGuizmo::LOCAL, glm::value_ptr(transform),
                 nullptr, snap ? snapValues : nullptr);
 
             if (ImGuizmo::IsUsing())
@@ -196,6 +212,9 @@ public:
                 tc.Scale = scale;
             }
         }
+
+        if(m_Toolbar->GetShowGrid())
+            ImGuizmo::DrawGrid(glm::value_ptr(Application::Get().GetActiveScene()->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()), glm::value_ptr(glm::mat4(1.0)), 100.f);
 
         ImGui::End();
 
@@ -217,7 +236,7 @@ public:
 
         m_SceneHierarchy->Render();
         m_ContentBrowser->Render();
-        m_Properties->Render();
+        m_Toolbar->Render();
     }
 
     void OnEvent(Event& e) {
@@ -236,7 +255,7 @@ private:
     Ref<Framebuffer> m_Framebuffer;
     Ref<SceneHierarchy> m_SceneHierarchy;
     Ref<ContentBrowser> m_ContentBrowser;
-    Ref<Properties> m_Properties;
+    Ref<Toolbar> m_Toolbar;
     Ref<ToggleUtil> m_ToggleUtil;
     Ref<IconLibrary> m_IconLib;
     glm::vec2 m_ViewportSize;

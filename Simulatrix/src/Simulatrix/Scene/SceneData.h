@@ -17,6 +17,7 @@ namespace Simulatrix {
     struct SceneModel {
         UUID ID;
         Path Path;
+        bool IsPrimitive = false;
         std::vector<SceneMesh> Meshes;
         std::vector<Ref<Texture2D>> Textures;
     };

@@ -1,24 +1,38 @@
 Scene: Untitled
 Textures:
-  - Texture: 5707888502629559468
+  - Texture: 5456974830323765684
     Path: C:\Users\Jerem\Documents\GitHub\Simulatrix\Editor\resources\raw\assets\Backpack\diffuse.jpg
 Shaders:
-  - Shader: 12228347411175644459
+  - Shader: 8923050428592493273
     Path: C:\Users\Jerem\Documents\GitHub\Simulatrix\Editor\resources\raw\shaders\diffuse\diffuse.glsl
+  - Shader: 12726874670746767367
+    Path: C:\Users\Jerem\Documents\GitHub\Simulatrix\Editor\resources\raw\shaders\diffuse\singleColor.glsl
 Models:
-  - Model: 9690870519652781980
+  - Model: 2565236139627028248
     Path: C:\Users\Jerem\Documents\GitHub\Simulatrix\Editor\resources\raw\assets\Backpack\backpack.obj
 Entities:
-  - Entity: 7338017654224815761
+  - Entity: 12581899091436913985
     ComponentModel:
-      ModelID: 9690870519652781980
+      ModelID: 1000
+      IsPrimitive: true
     ComponentShader:
-      ShaderID: 12228347411175644459
+      ShaderID: 12726874670746767367
+    ComponentTag:
+      Tag: Plane
+    ComponentTransform:
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [10, 1, 10]
+  - Entity: 4847893937424731748
+    ComponentModel:
+      ModelID: 2565236139627028248
+    ComponentShader:
+      ShaderID: 8923050428592493273
     ComponentTag:
       Tag: Backpack
     ComponentTextureMaterial:
-      TextureID: 5707888502629559468
+      TextureID: 5456974830323765684
     ComponentTransform:
-      Translation: [0, 0, 0]
+      Translation: [0, 1.70000005, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
