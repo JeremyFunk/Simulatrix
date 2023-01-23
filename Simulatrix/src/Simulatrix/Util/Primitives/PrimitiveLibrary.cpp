@@ -24,7 +24,7 @@ namespace Simulatrix {
     }
     
     void PrimitiveLibrary::LoadPrimitive(Ref<Primitive> primitive) {
-        auto s = ResourceManager::Get()->SceneModelFromData(primitive->GetPrimitiveData(), primitive->GetName());
+        auto s = ResourceManager::SceneModelFromData(primitive->GetPrimitiveData(), primitive->GetName());
         s->ID = 1000 + s_LoadedModels.size();
         s->IsPrimitive = true;
         s_LoadedModels.push_back(s);

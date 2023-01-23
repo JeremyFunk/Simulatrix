@@ -62,7 +62,7 @@ namespace Simulatrix {
 
     void ContentBrowser::Render() {
 
-        auto fileStructure = ResourceManager::Get()->GetFileStructure();
+        auto fileStructure = ResourceManager::GetFileStructure();
 
         ImGui::Begin("Directories");
 

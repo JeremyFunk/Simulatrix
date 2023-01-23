@@ -10,7 +10,7 @@ namespace Simulatrix {
 
     void Scene::FileDropped(Path& path) {
         if (path.FileEnding == "obj") {
-            auto id = ResourceManager::Get()->GetOrLoadModel(path);
+            auto id = ResourceManager::GetOrLoadModel(path);
 
             auto e2 = CreateEntity();
             e2.AddComponent<ComponentID>();

@@ -14,17 +14,27 @@
 #include "Simulatrix/Platform/OpenGL/Loader/OpenGLMeshLoader.h"
 
 namespace Simulatrix {
-    ResourceManager* ResourceManager::s_Instance = nullptr;
+    bool ResourceManager::m_Initializing = true;
+    Ref<IOWrapper> ResourceManager::m_Wrapper = nullptr;
+    Ref<FileWatcher> ResourceManager::m_ResourceWatcher = nullptr;
+    IdentifierMap<Ref<SceneModel>> ResourceManager::m_LoadedModels = IdentifierMap<Ref<SceneModel>>();
+    IdentifierMap<Ref<Texture2D>> ResourceManager::m_LoadedTextures = IdentifierMap<Ref<Texture2D>>();
+    IdentifierMap<Ref<Shader>> ResourceManager::m_LoadedShaders = IdentifierMap<Ref<Shader>>();
+    std::vector<ModelParser*> ResourceManager::m_ModelParsers = std::vector<ModelParser*>();
+    std::vector<TextureParser*> ResourceManager::m_TextureParsers = std::vector<TextureParser*>();
+    std::vector<Path> ResourceManager::m_LoadedFiles = std::vector<Path>();
+    std::thread ResourceManager::m_FileWatcherThread = std::thread();
+
+    MeshLoader* ResourceManager::m_MeshLoader = nullptr;
+
     void RunThread(Ref<FileWatcher> m_ResourceWatcher) {
         m_ResourceWatcher->Start();
     }
 
-    ResourceManager::ResourceManager() {
+    void ResourceManager::Init() {
 #ifdef SIMIX_PLATFORM_WINDOWS
         m_Wrapper.reset(new WindowsIOWrapper());
 #endif 
-        SIMIX_CORE_ASSERT(!s_Instance, "Resource Manager already exists!");
-        s_Instance = this;
         m_ModelParsers.push_back(new OBJParser());
         m_TextureParsers.push_back(new DefaultTextureParser());
 
@@ -45,7 +55,7 @@ namespace Simulatrix {
         m_FileWatcherThread = std::thread(RunThread, m_ResourceWatcher);
     }
 
-    ResourceManager::~ResourceManager() {
+    void ResourceManager::CleanUp() {
         m_ResourceWatcher->Stop();
         m_FileWatcherThread.join();
         for (auto parser : m_ModelParsers) {

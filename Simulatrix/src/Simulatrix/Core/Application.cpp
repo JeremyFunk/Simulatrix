@@ -17,13 +17,13 @@ namespace Simulatrix {
         m_Window->SetEventCallback(SIMIX_BIND_EVENT_FN(Application::OnEvent));
         SIMIX_CORE_ASSERT(!s_Instance, "Application already exists!");
         s_Instance = this;
-        m_ResourceManager.reset(new ResourceManager());
+        ResourceManager::Init();
 
         PrimitiveLibrary::Initialize();
 
         RenderCommand::Init();
 
-        SIMIX_CORE_INFO("Starting in directory {0}", m_ResourceManager->GetIO()->GetCurrentDir().PathString);
+        SIMIX_CORE_INFO("Starting in directory {0}", ResourceManager::GetIO()->GetCurrentDir().PathString);
 
         m_ImGuiLayer = new ImGuiLayer();
         m_ImGuiLayer->OnAttach();
@@ -31,7 +31,7 @@ namespace Simulatrix {
         m_ActiveScene.reset(new Scene());
     }
     Application::~Application() {
-
+        ResourceManager::CleanUp();
     }
 
     void Application::OnEvent(Event& e) {
@@ -50,7 +50,7 @@ namespace Simulatrix {
     void Application::Run() {
         while (m_Running) {
             Input::PollInputs();
-            m_ResourceManager->Update();
+            ResourceManager::Update();
             Renderer::BeginScene(m_ActiveScene);
 
             float time = (float)glfwGetTime();

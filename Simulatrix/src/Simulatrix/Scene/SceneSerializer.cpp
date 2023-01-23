@@ -198,7 +198,7 @@ namespace Simulatrix {
 		out << YAML::Key << "Scene" << YAML::Value << "Untitled";
 
 		out << YAML::Key << "Textures" << YAML::Value << YAML::BeginSeq;
-		for (auto& t : ResourceManager::Get()->GetLoadedTextures()) {
+		for (auto& t : ResourceManager::GetLoadedTextures()) {
 			out << YAML::BeginMap;
 			out << YAML::Key << "Texture" << YAML::Value << t->GetID();
 
@@ -209,7 +209,7 @@ namespace Simulatrix {
 
 
 		out << YAML::Key << "Shaders" << YAML::Value << YAML::BeginSeq;
-		for (auto& t : ResourceManager::Get()->GetLoadedShaders()) {
+		for (auto& t : ResourceManager::GetLoadedShaders()) {
 			out << YAML::BeginMap;
 			out << YAML::Key << "Shader" << YAML::Value << t->GetID();
 
@@ -220,7 +220,7 @@ namespace Simulatrix {
 
 
 		out << YAML::Key << "Models" << YAML::Value << YAML::BeginSeq;
-		for (auto& t : ResourceManager::Get()->GetLoadedModels()) {
+		for (auto& t : ResourceManager::GetLoadedModels()) {
 			out << YAML::BeginMap;
 			out << YAML::Key << "Model" << YAML::Value << t->ID;
 
@@ -266,7 +266,7 @@ namespace Simulatrix {
 		if (textures) {
 			for (auto texture : textures) {
 				UUID uuid = texture["Texture"].as<UUID>();
-				ResourceManager::Get()->GetOrLoadTexture(Path(texture["Path"].as<std::string>(), PathType::File), uuid);
+				ResourceManager::GetOrLoadTexture(Path(texture["Path"].as<std::string>(), PathType::File), uuid);
 			}
 		}
 
@@ -274,7 +274,7 @@ namespace Simulatrix {
 		if (shaders) {
 			for (auto shader : shaders) {
 				UUID uuid = shader["Shader"].as<UUID>();
-				ResourceManager::Get()->GetOrLoadShader(Path(shader["Path"].as<std::string>(), PathType::File), uuid);
+				ResourceManager::GetOrLoadShader(Path(shader["Path"].as<std::string>(), PathType::File), uuid);
 			}
 		}
 
@@ -282,7 +282,7 @@ namespace Simulatrix {
 		if (models) {
 			for (auto model : models) {
 				UUID uuid = model["Model"].as<UUID>();
-				ResourceManager::Get()->GetOrLoadModel(Path(model["Path"].as<std::string>(), PathType::File), uuid);
+				ResourceManager::GetOrLoadModel(Path(model["Path"].as<std::string>(), PathType::File), uuid);
 			}
 		}
 
@@ -321,13 +321,13 @@ namespace Simulatrix {
 				auto shaderComponent = entity["ComponentShader"];
 				if (shaderComponent) {
 					auto& tc = deserializedEntity.AddComponent<ComponentShader>();
-					tc.ShaderRef = ResourceManager::Get()->GetShader(shaderComponent["ShaderID"].as<UUID>());
+					tc.ShaderRef = ResourceManager::GetShader(shaderComponent["ShaderID"].as<UUID>());
 				}
 
 				auto textureComponent = entity["ComponentTextureMaterial"];
 				if (textureComponent) {
 					auto& tc = deserializedEntity.AddComponent<ComponentTextureMaterial>();
-					tc.Diffuse = ResourceManager::Get()->GetTexture(textureComponent["TextureID"].as<UUID>());
+					tc.Diffuse = ResourceManager::GetTexture(textureComponent["TextureID"].as<UUID>());
 				}
 
 				auto modelComponent = entity["ComponentModel"];
@@ -336,10 +336,10 @@ namespace Simulatrix {
 					auto isPrimitive = modelComponent["IsPrimitive"];
 
 					if (isPrimitive) {
-						tc.Model = ResourceManager::Get()->GetPrimitive(modelComponent["ModelID"].as<UUID>());
+						tc.Model = ResourceManager::GetPrimitive(modelComponent["ModelID"].as<UUID>());
 					}
 					else {
-						tc.Model = ResourceManager::Get()->GetModel(modelComponent["ModelID"].as<UUID>());
+						tc.Model = ResourceManager::GetModel(modelComponent["ModelID"].as<UUID>());
 					}
 				}
 			}

@@ -78,7 +78,7 @@ namespace Simulatrix {
 
         Entity InstantiatePrimitive(std::string name) {
             auto e = CreateEntity();
-            e.AddComponent<ComponentModel>(ResourceManager::Get()->GetPrimitive(name));
+            e.AddComponent<ComponentModel>(ResourceManager::GetPrimitive(name));
             e.AddComponent<ComponentTag>(name);
             e.AddComponent<ComponentID>();
             e.AddComponent<ComponentTransform>();

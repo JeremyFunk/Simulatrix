@@ -41,7 +41,6 @@ namespace Simulatrix {
         static Application* s_Instance;
         float m_LastFrameTime = 0.0f;
         ImGuiLayer* m_ImGuiLayer;
-        Ref<ResourceManager> m_ResourceManager;
         Ref<Scene> m_ActiveScene;
     };
     // To be defined in client.

@@ -13,36 +13,35 @@
 namespace Simulatrix {
     class ResourceManager {
     public:
-        ResourceManager();
-        ~ResourceManager();
-        static Ref<IOWrapper> GetIO() { return s_Instance->m_Wrapper; }
-        static ResourceManager* Get() { return s_Instance; }
-        void Update();
+        static Ref<IOWrapper> GetIO() { return m_Wrapper; }
+        static void Init();
+        static void Update();
+        static void CleanUp();
 
-        const Ref<SceneModel> GetModel(Path& path);
-        const Ref<SceneModel> GetOrLoadModel(Path& path, UUID uuid = UUID());
-        const UUID GetModelID(Path& path);
-        const Ref<SceneModel> GetModel(UUID& id);
+        static const Ref<SceneModel> GetModel(Path& path);
+        static const Ref<SceneModel> GetOrLoadModel(Path& path, UUID uuid = UUID());
+        static const UUID GetModelID(Path& path);
+        static const Ref<SceneModel> GetModel(UUID& id);
 
-        const Ref<Texture2D> GetTexture(Path& path);
-        const Ref<Texture2D> GetOrLoadTexture(Path& path, UUID uuid = UUID());
-        const UUID GetTextureID(Path& path);
-        const Ref<Texture2D> GetTexture(UUID& id);
+        static const Ref<Texture2D> GetTexture(Path& path);
+        static const Ref<Texture2D> GetOrLoadTexture(Path& path, UUID uuid = UUID());
+        static const UUID GetTextureID(Path& path);
+        static const Ref<Texture2D> GetTexture(UUID& id);
 
-        const Ref<Shader> GetOrLoadShader(Path& path, UUID uuid = UUID());
-        const Ref<Shader> GetShader(UUID& id);
+        static const Ref<Shader> GetOrLoadShader(Path& path, UUID uuid = UUID());
+        static const Ref<Shader> GetShader(UUID& id);
 
-        IdentifierMap<Ref<Texture2D>> GetLoadedTextures() {
+        static IdentifierMap<Ref<Texture2D>> GetLoadedTextures() {
             return m_LoadedTextures;
         }
-        IdentifierMap<Ref<SceneModel>> GetLoadedModels() {
+        static IdentifierMap<Ref<SceneModel>> GetLoadedModels() {
             return m_LoadedModels;
         }
-        IdentifierMap<Ref<Shader>> GetLoadedShaders() {
+        static IdentifierMap<Ref<Shader>> GetLoadedShaders() {
             return m_LoadedShaders;
         }
 
-        const File GetFileStructure() {
+        static const File GetFileStructure() {
             while (!m_ResourceWatcher->LockFileStructure()) {}
             auto f = m_ResourceWatcher->GetFileStructure().Clone();
             m_ResourceWatcher->UnlockFileStructure();
@@ -50,39 +49,38 @@ namespace Simulatrix {
             return f;
         }
 
-        Ref<SceneModel> GetPrimitive(std::string name) {
+        static Ref<SceneModel> GetPrimitive(std::string name) {
             return PrimitiveLibrary::GetModel(name);
         }
-        Ref<SceneModel> GetPrimitive(UUID uuid) {
+        static Ref<SceneModel> GetPrimitive(UUID uuid) {
             return PrimitiveLibrary::GetModel(uuid);
         }
-        std::vector<Ref<SceneModel>> GetPrimitives() {
+        static std::vector<Ref<SceneModel>> GetPrimitives() {
             return PrimitiveLibrary::GetModels();
         }
 
         
 
-        Ref<SceneModel> SceneModelFromData(ResourceModel& mesh, std::string name, UUID uuid = UUID());
+        static Ref<SceneModel> SceneModelFromData(ResourceModel& mesh, std::string name, UUID uuid = UUID());
     private:
-        void Load(Path& path, UUID uuid = UUID());
-        void Reload(Path& path);
-        void LoadModel(Path& path, ModelParser* parser, UUID uuid);
-        void LoadTexture(Path& path, UUID uuid);
+        static void Load(Path& path, UUID uuid = UUID());
+        static void Reload(Path& path);
+        static void LoadModel(Path& path, ModelParser* parser, UUID uuid);
+        static void LoadTexture(Path& path, UUID uuid);
     private:
-        static ResourceManager* s_Instance;
-        Ref<IOWrapper> m_Wrapper;
-        Ref <FileWatcher> m_ResourceWatcher;
-        std::vector<ModelParser*> m_ModelParsers;
-        std::vector<TextureParser*> m_TextureParsers;
-        bool m_Initializing = true;
+        static Ref<IOWrapper> m_Wrapper;
+        static Ref <FileWatcher> m_ResourceWatcher;
+        static std::vector<ModelParser*> m_ModelParsers;
+        static std::vector<TextureParser*> m_TextureParsers;
+        static bool m_Initializing;
 
-        IdentifierMap<Ref<SceneModel>> m_LoadedModels;
-        IdentifierMap<Ref<Texture2D>> m_LoadedTextures;
-        IdentifierMap<Ref<Shader>> m_LoadedShaders;
-        std::vector<Path> m_LoadedFiles;
+        static IdentifierMap<Ref<SceneModel>> m_LoadedModels;
+        static IdentifierMap<Ref<Texture2D>> m_LoadedTextures;
+        static IdentifierMap<Ref<Shader>> m_LoadedShaders;
+        static std::vector<Path> m_LoadedFiles;
 
-        std::thread m_FileWatcherThread;
+        static std::thread m_FileWatcherThread;
 
-        MeshLoader* m_MeshLoader;
+        static MeshLoader* m_MeshLoader;
     };
 }
