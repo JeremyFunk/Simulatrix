@@ -21,16 +21,16 @@ namespace Simulatrix {
                 m_Position -= glm::normalize(front) * m_Velocity * delta.GetSeconds();
             }
             if (Input::IsKeyPressed(Key::A)) {
-                m_Position -= m_Right * m_Velocity * m_Velocity * delta.GetSeconds();
+                m_Position -= m_Right * m_Velocity * delta.GetSeconds();
             }
             if (Input::IsKeyPressed(Key::D)) {
-                m_Position += m_Right * m_Velocity * m_Velocity * delta.GetSeconds();
+                m_Position += m_Right * m_Velocity * delta.GetSeconds();
             }
             if (Input::IsKeyPressed(Key::LeftShift)) {
-                m_Position.y -= m_Velocity * m_Velocity * delta.GetSeconds();
+                m_Position.y -= m_Velocity * delta.GetSeconds();
             }
             if (Input::IsKeyPressed(Key::Space)) {
-                m_Position.y += m_Velocity * m_Velocity * delta.GetSeconds();
+                m_Position.y += m_Velocity * delta.GetSeconds();
             }
             float xoffset = Input::GetMouseDX() * SENSITIVITY;
             float yoffset = Input::GetMouseDY() * SENSITIVITY;
