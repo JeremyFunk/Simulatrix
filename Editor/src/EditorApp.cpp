@@ -14,6 +14,10 @@
 #include <ImGuizmo.h>
 #include "Simulatrix/Scene/SceneSerializer.h"
 #include "Simulatrix/Util/MathUtil.h"
+#include "CommandStack/CommandStack.h"
+#include "CommandStack/CommandTransform.h"
+#include "Actions/ActionTransform.h"
+
 using namespace Simulatrix;
 
 class ExampleLayer : public Layer {
@@ -136,6 +140,8 @@ public:
             m_Toolbar->SetTranslationMode(ImGuizmo::TRANSLATE);
             return false;
         });
+
+        m_Action = nullptr;
     }
 
     void OnDetach() {}
@@ -180,6 +186,7 @@ public:
         }
 
         // Gizmos
+        ImGuizmo::Enable(true);
         ImGuizmo::SetOrthographic(false);
         ImGuizmo::SetDrawlist();
         ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
@@ -200,17 +207,40 @@ public:
             ImGuizmo::Manipulate(glm::value_ptr(Application::Get().GetActiveScene()->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()),
                 m_Toolbar->GetTranslationMode(), ImGuizmo::LOCAL, glm::value_ptr(transform),
                 nullptr, snap ? snapValues : nullptr);
-
             if (ImGuizmo::IsUsing())
             {
-                glm::vec3 translation, rotation, scale;
-                Math::DecomposeTransform(transform, translation, rotation, scale);
+                if (m_Action == nullptr)
+                    m_Action = CreateRef<ActionTransform>(selectedEntity);
 
-                glm::vec3 deltaRotation = rotation - tc.Rotation;
-                tc.Translation = translation;
-                tc.Rotation += deltaRotation;
-                tc.Scale = scale;
+                if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+                    m_Action->Cancel();
+                    ImGuizmo::Enable(false);
+                }
+                else {
+                    glm::vec3 translation, rotation, scale;
+                    Math::DecomposeTransform(transform, translation, rotation, scale);
+
+                    glm::vec3 deltaRotation = rotation - tc.Rotation;
+                    tc.Translation = translation;
+                    tc.Rotation += deltaRotation;
+                    tc.Scale = scale;
+                }
             }
+            else {
+                if (m_Action != nullptr) {
+                    auto m_ActionCast = (ActionTransform*)m_Action.get();
+
+                    CommandStack::PushCommand(CreateRef<CommandTransform>(selectedEntity, m_ActionCast->GetLocation(), tc.Translation, m_ActionCast->GetRotation(), tc.Rotation, m_ActionCast->GetScale(), tc.Scale));
+                    m_Action = nullptr;
+                }
+            }
+        }
+
+        if (ImGui::IsKeyReleased(ImGuiKey_Z) && ImGui::IsKeyDown(ImGuiKey_LeftCtrl) && CommandStack::CanUndo()) {
+            CommandStack::Undo();
+        }
+        if (ImGui::IsKeyReleased(ImGuiKey_Y) && ImGui::IsKeyDown(ImGuiKey_LeftCtrl) && CommandStack::CanRedo()) {
+            CommandStack::Redo();
         }
 
         if(m_Toolbar->GetShowGrid())
@@ -258,6 +288,7 @@ private:
     Ref<Toolbar> m_Toolbar;
     Ref<ToggleUtil> m_ToggleUtil;
     Ref<IconLibrary> m_IconLib;
+    Ref<Action> m_Action;
     glm::vec2 m_ViewportSize;
 };
 

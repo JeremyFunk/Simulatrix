@@ -22,6 +22,11 @@
     <ClInclude Include="src\ImGui\Toolbar.h">
       <Filter>ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\CommandStack\Command.h" />
+    <ClInclude Include="src\CommandStack\CommandStack.h" />
+    <ClInclude Include="src\Actions\Action.h" />
+    <ClInclude Include="src\Actions\ActionTransform.h" />
+    <ClInclude Include="src\CommandStack\CommandTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorApp.cpp" />
@@ -40,5 +45,8 @@
     <ClCompile Include="src\ImGui\Toolbar.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\CommandStack\CommandStack.cpp" />
+    <ClCompile Include="src\Actions\ActionTransform.cpp" />
+    <ClCompile Include="src\CommandStack\CommandTransform.cpp" />
   </ItemGroup>
 </Project>

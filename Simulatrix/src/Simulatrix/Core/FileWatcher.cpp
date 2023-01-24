@@ -2,7 +2,6 @@
 #include "simixpch.h"
 #include "FileWatcher.h"
 #include <thread>
-#include "Simulatrix/Core/Core.h"
 #include <Simulatrix/Util/StringUtil.h>
 
 namespace Simulatrix {

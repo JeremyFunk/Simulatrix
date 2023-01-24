@@ -1,4 +1,5 @@
 #pragma once
+#include <unordered_map>
 #include "Simulatrix/Core/IOWrapper.h"
 #include "Simulatrix/Core/UUID.h"
 enum class FileStatus {Created, Modified, Erased};

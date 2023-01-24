@@ -138,6 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Actions\Action.h" />
+    <ClInclude Include="src\Actions\ActionTransform.h" />
+    <ClInclude Include="src\CommandStack\Command.h" />
+    <ClInclude Include="src\CommandStack\CommandStack.h" />
+    <ClInclude Include="src\CommandStack\CommandTransform.h" />
     <ClInclude Include="src\DiffuseShader.h" />
     <ClInclude Include="src\ImGui\ContentBrowser.h" />
     <ClInclude Include="src\ImGui\EditorLayer.h" />
@@ -146,6 +151,9 @@
     <ClInclude Include="src\ImGui\Toolbar.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Actions\ActionTransform.cpp" />
+    <ClCompile Include="src\CommandStack\CommandStack.cpp" />
+    <ClCompile Include="src\CommandStack\CommandTransform.cpp" />
     <ClCompile Include="src\EditorApp.cpp" />
     <ClCompile Include="src\ImGui\ContentBrowser.cpp" />
     <ClCompile Include="src\ImGui\EditorLayer.cpp" />
