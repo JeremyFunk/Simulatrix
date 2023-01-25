@@ -19,3 +19,6 @@
 [submodule "Simulatrix/vendor/yaml-cpp"]
 	path = Simulatrix/vendor/yaml-cpp
 	url = https://github.com/thecherno/yaml-cpp
+[submodule "Simulatrix/vendor/reactphysics3d"]
+	path = Simulatrix/vendor/reactphysics3d
+	url = https://github.com/DanielChappuis/reactphysics3d

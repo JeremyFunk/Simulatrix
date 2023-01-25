@@ -75,7 +75,7 @@ namespace Simulatrix {
 			return false;
 		}
 
-		static GLenum HazelFBTextureFormatToGL(FramebufferTextureFormat format)
+		static GLenum SimulatrixFBTextureFormatToGL(FramebufferTextureFormat format)
 		{
 			switch (format)
 			{
@@ -218,7 +218,7 @@ namespace Simulatrix {
 
 		auto& spec = m_ColorAttachmentSpecifications[attachmentIndex];
 		glClearTexImage(m_ColorAttachments[attachmentIndex], 0,
-			Utils::HazelFBTextureFormatToGL(spec.TextureFormat), GL_INT, &value);
+			Utils::SimulatrixFBTextureFormatToGL(spec.TextureFormat), GL_INT, &value);
 	}
 
 }

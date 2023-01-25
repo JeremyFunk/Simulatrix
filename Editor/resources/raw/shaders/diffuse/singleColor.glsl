@@ -15,8 +15,11 @@ void main(){
 
 #FS
 #version 330 core
-out vec4 color;
+layout(location = 0) out vec4 o_Color;
+layout(location = 1) out int o_entityId;
+uniform int u_entityId;
 void main(){
-	color = vec4(1.0);
+	o_Color = vec4(1.0);
+	o_entityId = u_entityId;
 	//color = texture(u_textureDiffuse, p_TextureCoords);
 }

@@ -52,6 +52,9 @@
     <Filter Include="src\Simulatrix\Util">
       <UniqueIdentifier>{DBCEA092-4730-7EA0-D09D-C4523CFEB45F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Simulatrix\Util\Primitives">
+      <UniqueIdentifier>{D66D9AAD-C293-6414-ABD9-E9DF979E89E0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
@@ -75,6 +78,105 @@
     </Filter>
     <Filter Include="vendor\glm\glm\gtx">
       <UniqueIdentifier>{B3A6A76B-9F8A-68C1-08EB-6214F4ED5243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d">
+      <UniqueIdentifier>{2B86FA69-97F2-B564-60E6-4DC2CC11D8CC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include">
+      <UniqueIdentifier>{9EA89472-0AC1-7B9C-D36D-0B363F451036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d">
+      <UniqueIdentifier>{B6FF288A-A212-29E3-4BFC-05D037EEC530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\body">
+      <UniqueIdentifier>{D363B5A2-3F2A-12BF-8885-A021F48A8023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\collision">
+      <UniqueIdentifier>{71F0633C-5D9A-994B-466B-A16632B4393A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\collision\broadphase">
+      <UniqueIdentifier>{19EDBA0F-850B-CFDC-CED8-D4EE3A360AE6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase">
+      <UniqueIdentifier>{0AEB3A70-F6D6-D2DF-5F4D-92324B587310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\GJK">
+      <UniqueIdentifier>{B55D889A-A15F-CCAA-8AE2-C2A37683C74F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\SAT">
+      <UniqueIdentifier>{A18F889A-8D91-CCAA-7614-C3A362B5C74F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes">
+      <UniqueIdentifier>{245E6845-9026-36C9-59B7-3EDBC53E6604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\components">
+      <UniqueIdentifier>{2B0BAFF6-97F2-99EC-A0E0-9B680C473DAF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\constraint">
+      <UniqueIdentifier>{EA7BCFD5-5663-BACB-5F51-BC47CBB75D8E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\containers">
+      <UniqueIdentifier>{9BE8DBF5-07D0-C6EB-10BE-C8677C246AAE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\engine">
+      <UniqueIdentifier>{9B758C2C-0787-34D3-90D8-C612FCE8BD0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\mathematics">
+      <UniqueIdentifier>{F5349392-E109-DB45-0AB9-1A42F6ECE85C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\memory">
+      <UniqueIdentifier>{7E42963E-EA53-3EE5-73A5-D024DFB5C71E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\systems">
+      <UniqueIdentifier>{DD43520E-C982-FC89-7205-D9BB5E23B2F4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\include\reactphysics3d\utils">
+      <UniqueIdentifier>{B681BCFA-A215-B2A2-0BDA-0B57F78CEC94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src">
+      <UniqueIdentifier>{C261F352-2E24-27DD-77D4-B569E3D5FFBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\body">
+      <UniqueIdentifier>{5FED4A2F-4B13-1596-3459-9A61201E3A62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\collision">
+      <UniqueIdentifier>{7D5169C7-E90A-D471-726A-EE4BDE228AE1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\collision\broadphase">
+      <UniqueIdentifier>{A50E6A0F-918C-BAA8-7A84-784066A1FCD0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\collision\narrowphase">
+      <UniqueIdentifier>{163ECE65-8279-2E29-8B6E-ABB8F728B359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\collision\narrowphase\GJK">
+      <UniqueIdentifier>{C1566600-2D68-0EA7-B6B9-A0E622CA97E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\collision\narrowphase\SAT">
+      <UniqueIdentifier>{AD886600-199A-0EA7-A2EB-A0E60EFC97E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\collision\shapes">
+      <UniqueIdentifier>{B0998C9D-9C01-536B-056D-6781F1F36957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\components">
+      <UniqueIdentifier>{B78D60E2-A374-22DA-4CC5-88F7388B9B40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\constraint">
+      <UniqueIdentifier>{76FE80C1-62E5-42B9-0B36-A9D6F7FBBB1F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\engine">
+      <UniqueIdentifier>{2792AA34-13E3-9576-3C47-843828F728E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\mathematics">
+      <UniqueIdentifier>{010975F4-6DCD-73E4-3633-A4AEA2B60F1A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\memory">
+      <UniqueIdentifier>{0A5FB446-F6AF-9F88-1F14-8E4A0BC432F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\systems">
+      <UniqueIdentifier>{E9F1331A-5560-8999-9E49-44990AF77E35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\reactphysics3d\src\utils">
+      <UniqueIdentifier>{C23C031A-2E20-125A-3723-4096A385D8AA}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor\stb_image">
       <UniqueIdentifier>{0DA0BA59-F998-D9AB-22CB-BE300E23B9B7}</UniqueIdentifier>
@@ -257,6 +359,18 @@
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Util\MathUtil.h">
       <Filter>src\Simulatrix\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Util\Primitives\Primitive.h">
+      <Filter>src\Simulatrix\Util\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitiveCube.h">
+      <Filter>src\Simulatrix\Util\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitiveLibrary.h">
+      <Filter>src\Simulatrix\Util\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitivePlane.h">
+      <Filter>src\Simulatrix\Util\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Util\StringUtil.h">
       <Filter>src\Simulatrix\Util</Filter>
@@ -1518,13 +1632,327 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\body\CollisionBody.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\body</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\body\RigidBody.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\body</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\Collider.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\CollisionCallback.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\ContactManifold.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\ContactManifoldInfo.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\ContactPair.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\ContactPointInfo.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\HalfEdgeStructure.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\OverlapCallback.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\PolygonVertexArray.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\PolyhedronMesh.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\RaycastInfo.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\TriangleMesh.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\TriangleVertexArray.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\broadphase\DynamicAABBTree.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\broadphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\CapsuleVsCapsuleAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\CapsuleVsConvexPolyhedronAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\CollisionDispatch.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\ConvexPolyhedronVsConvexPolyhedronAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\GJK\GJKAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\GJK</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\GJK\VoronoiSimplex.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\GJK</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\NarrowPhaseAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\NarrowPhaseInfoBatch.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\NarrowPhaseInput.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\SAT\SATAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\SAT</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\SphereVsCapsuleAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\SphereVsConvexPolyhedronAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase\SphereVsSphereAlgorithm.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\narrowphase</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\AABB.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\BoxShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\CapsuleShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\CollisionShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\ConcaveMeshShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\ConcaveShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\ConvexMeshShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\ConvexPolyhedronShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\ConvexShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\HeightFieldShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\SphereShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\collision\shapes\TriangleShape.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\BallAndSocketJointComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\ColliderComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\CollisionBodyComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\Components.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\FixedJointComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\HingeJointComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\JointComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\RigidBodyComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\SliderJointComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\components\TransformComponents.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\components</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\configuration.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\constraint\BallAndSocketJoint.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\constraint\ContactPoint.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\constraint\FixedJoint.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\constraint\HingeJoint.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\constraint\Joint.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\constraint\SliderJoint.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\containers\Array.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\containers\Deque.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\containers\LinkedList.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\containers\Map.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\containers\Pair.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\containers\Set.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\containers\Stack.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\containers\containers_common.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\decimal.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\Entity.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\EntityManager.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\EventListener.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\Island.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\Islands.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\Material.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\OverlappingPairs.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\PhysicsCommon.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\engine\PhysicsWorld.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\Matrix2x2.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\Matrix3x3.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\Quaternion.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\Ray.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\Transform.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\Vector2.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\Vector3.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\mathematics.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\mathematics_common.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\mathematics\mathematics_functions.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\memory\DefaultAllocator.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\memory\HeapAllocator.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\memory\MemoryAllocator.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\memory\MemoryManager.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\memory\PoolAllocator.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\memory\SingleFrameAllocator.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\reactphysics3d.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\BroadPhaseSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\CollisionDetectionSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\ConstraintSolverSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\ContactSolverSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\DynamicsSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\SolveBallAndSocketJointSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\SolveFixedJointSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\SolveHingeJointSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\systems\SolveSliderJointSystem.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\utils\DebugRenderer.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\utils\DefaultLogger.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\utils\Logger.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\reactphysics3d\include\reactphysics3d\utils\Profiler.h">
+      <Filter>vendor\reactphysics3d\include\reactphysics3d\utils</Filter>
+    </ClInclude>
     <ClInclude Include="vendor\stb_image\stbi_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Simulatrix\Util\Primitives\Primitive.h" />
-    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitiveLibrary.h" />
-    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitivePlane.h" />
-    <ClInclude Include="src\Simulatrix\Util\Primitives\PrimitiveCube.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
@@ -1641,6 +2069,15 @@
     <ClCompile Include="src\Simulatrix\Util\MathUtil.cpp">
       <Filter>src\Simulatrix\Util</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitiveCube.cpp">
+      <Filter>src\Simulatrix\Util\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitiveLibrary.cpp">
+      <Filter>src\Simulatrix\Util\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitivePlane.cpp">
+      <Filter>src\Simulatrix\Util\Primitives</Filter>
+    </ClCompile>
     <ClCompile Include="src\Simulatrix\Util\StringUtil.cpp">
       <Filter>src\Simulatrix\Util</Filter>
     </ClCompile>
@@ -1653,11 +2090,254 @@
     <ClCompile Include="vendor\ImGuizmo\ImGuizmo.cpp">
       <Filter>vendor\ImGuizmo</Filter>
     </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\body\CollisionBody.cpp">
+      <Filter>vendor\reactphysics3d\src\body</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\body\RigidBody.cpp">
+      <Filter>vendor\reactphysics3d\src\body</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\Collider.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\CollisionCallback.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\ContactManifold.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\HalfEdgeStructure.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\OverlapCallback.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\PolygonVertexArray.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\PolyhedronMesh.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\RaycastInfo.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\TriangleMesh.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\TriangleVertexArray.cpp">
+      <Filter>vendor\reactphysics3d\src\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\broadphase\DynamicAABBTree.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\broadphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\CapsuleVsCapsuleAlgorithm.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\CapsuleVsConvexPolyhedronAlgorithm.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\CollisionDispatch.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\ConvexPolyhedronVsConvexPolyhedronAlgorithm.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\GJK\GJKAlgorithm.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase\GJK</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\GJK\VoronoiSimplex.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase\GJK</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\NarrowPhaseInfoBatch.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\NarrowPhaseInput.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\SAT\SATAlgorithm.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase\SAT</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\SphereVsCapsuleAlgorithm.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\SphereVsConvexPolyhedronAlgorithm.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\narrowphase\SphereVsSphereAlgorithm.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\narrowphase</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\AABB.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\BoxShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\CapsuleShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\CollisionShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\ConcaveMeshShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\ConcaveShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\ConvexMeshShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\ConvexPolyhedronShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\ConvexShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\HeightFieldShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\SphereShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\collision\shapes\TriangleShape.cpp">
+      <Filter>vendor\reactphysics3d\src\collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\BallAndSocketJointComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\ColliderComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\CollisionBodyComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\Components.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\FixedJointComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\HingeJointComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\JointComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\RigidBodyComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\SliderJointComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\components\TransformComponents.cpp">
+      <Filter>vendor\reactphysics3d\src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\constraint\BallAndSocketJoint.cpp">
+      <Filter>vendor\reactphysics3d\src\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\constraint\ContactPoint.cpp">
+      <Filter>vendor\reactphysics3d\src\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\constraint\FixedJoint.cpp">
+      <Filter>vendor\reactphysics3d\src\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\constraint\HingeJoint.cpp">
+      <Filter>vendor\reactphysics3d\src\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\constraint\Joint.cpp">
+      <Filter>vendor\reactphysics3d\src\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\constraint\SliderJoint.cpp">
+      <Filter>vendor\reactphysics3d\src\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\engine\Entity.cpp">
+      <Filter>vendor\reactphysics3d\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\engine\EntityManager.cpp">
+      <Filter>vendor\reactphysics3d\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\engine\Island.cpp">
+      <Filter>vendor\reactphysics3d\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\engine\Material.cpp">
+      <Filter>vendor\reactphysics3d\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\engine\OverlappingPairs.cpp">
+      <Filter>vendor\reactphysics3d\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\engine\PhysicsCommon.cpp">
+      <Filter>vendor\reactphysics3d\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\engine\PhysicsWorld.cpp">
+      <Filter>vendor\reactphysics3d\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\mathematics\Matrix2x2.cpp">
+      <Filter>vendor\reactphysics3d\src\mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\mathematics\Matrix3x3.cpp">
+      <Filter>vendor\reactphysics3d\src\mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\mathematics\Quaternion.cpp">
+      <Filter>vendor\reactphysics3d\src\mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\mathematics\Transform.cpp">
+      <Filter>vendor\reactphysics3d\src\mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\mathematics\Vector2.cpp">
+      <Filter>vendor\reactphysics3d\src\mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\mathematics\Vector3.cpp">
+      <Filter>vendor\reactphysics3d\src\mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\memory\HeapAllocator.cpp">
+      <Filter>vendor\reactphysics3d\src\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\memory\MemoryManager.cpp">
+      <Filter>vendor\reactphysics3d\src\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\memory\PoolAllocator.cpp">
+      <Filter>vendor\reactphysics3d\src\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\memory\SingleFrameAllocator.cpp">
+      <Filter>vendor\reactphysics3d\src\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\BroadPhaseSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\CollisionDetectionSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\ConstraintSolverSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\ContactSolverSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\DynamicsSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\SolveBallAndSocketJointSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\SolveFixedJointSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\SolveHingeJointSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\systems\SolveSliderJointSystem.cpp">
+      <Filter>vendor\reactphysics3d\src\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\utils\DebugRenderer.cpp">
+      <Filter>vendor\reactphysics3d\src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\utils\DefaultLogger.cpp">
+      <Filter>vendor\reactphysics3d\src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\reactphysics3d\src\utils\Profiler.cpp">
+      <Filter>vendor\reactphysics3d\src\utils</Filter>
+    </ClCompile>
     <ClCompile Include="vendor\stb_image\stbi_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitivePlane.cpp" />
-    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitiveLibrary.cpp" />
-    <ClCompile Include="src\Simulatrix\Util\Primitives\PrimitiveCube.cpp" />
   </ItemGroup>
 </Project>

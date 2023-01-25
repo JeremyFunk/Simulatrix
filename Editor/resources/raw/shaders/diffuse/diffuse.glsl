@@ -17,10 +17,12 @@ void main(){
 
 #FS
 #version 330 core
-out vec4 color;
+layout(location = 0) out vec4 o_Color;
+layout(location = 1) out int o_entityId;
+uniform int u_entityId;
 in vec2 p_TextureCoords;
 uniform sampler2D u_textureDiffuse;
 void main(){
-	//color = vec4(1.0);
-	color = texture(u_textureDiffuse, p_TextureCoords);
+	o_Color = texture(u_textureDiffuse, p_TextureCoords);
+	o_entityId = u_entityId;
 }

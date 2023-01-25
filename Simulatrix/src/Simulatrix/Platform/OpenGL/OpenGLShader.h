@@ -19,6 +19,7 @@ namespace Simulatrix {
         virtual void SetUniform(uint32_t rendererID, float value) override;
         virtual void SetUniform(uint32_t rendererID, uint32_t value) override;
         virtual void SetUniform(const char* name, float value) override;
+        virtual void SetUniform(const char* name, uint32_t value) override;
         virtual void SetUniform(uint32_t rendererID, const glm::mat4& value) override;
         virtual void SetUniform(const char* name, const glm::mat4& value) override;
         virtual void Reload(std::string& vertexSrc, std::string& fragmentSrc) override;

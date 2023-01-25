@@ -10,7 +10,7 @@ namespace Simulatrix {
         m_Rotation = transform.Rotation;
         m_Scale = transform.Scale;
     }
-
+    
     ActionTransform::~ActionTransform()
     {
         

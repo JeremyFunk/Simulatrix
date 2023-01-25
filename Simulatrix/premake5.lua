@@ -20,7 +20,10 @@ project "Simulatrix"
 		"vendor/glm/glm/**.inl",
 
 		"vendor/ImGuizmo/ImGuizmo.h",
-		"vendor/ImGuizmo/ImGuizmo.cpp"
+		"vendor/ImGuizmo/ImGuizmo.cpp",
+
+		"vendor/reactphysics3d/include/**.h",
+		"vendor/reactphysics3d/src/**.cpp",
 	}
 
 	defines
@@ -40,7 +43,8 @@ project "Simulatrix"
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.yaml_cpp}",
-		"%{IncludeDir.ImGuizmo}"
+		"%{IncludeDir.ImGuizmo}",
+		"%{IncludeDir.ReactPhysics3D}",
 	}
 
 	links
@@ -53,6 +57,9 @@ project "Simulatrix"
 	}
 
 	filter "files:vendor/ImGuizmo/**.cpp"
+	flags { "NoPCH" }
+
+	filter "files:vendor/reactphysics3d/src/**.cpp"
 	flags { "NoPCH" }
 
 	filter "system:windows"

@@ -7,6 +7,7 @@
 #include <Simulatrix/Core/Camera.h>
 #include "Simulatrix/Renderer/ShaderImplementation.h"
 #include "Simulatrix/ResourceManager/ResourceManager.h"
+#include "reactphysics3d/reactphysics3d.h"
 namespace Simulatrix {
 
     class Scene {
@@ -84,12 +85,12 @@ namespace Simulatrix {
             e.AddComponent<ComponentTransform>();
             return e;
         }
-
-        void FileDropped(Path& path);
     private:
         Ref<Camera> m_Camera;
         std::vector<Ref<Shader>> m_Shaders;
 
+        Ref<reactphysics3d::PhysicsCommon> m_PhysicsCommon;
+        reactphysics3d::PhysicsWorld* m_PhysicsWorld;
         entt::registry m_Registry;
         friend class Entity;
         friend class SceneSerializer;

@@ -9,6 +9,7 @@ IncludeDir["ImGui"] = "%{wks.location}/Simulatrix/vendor/ImGui"
 IncludeDir["ImGuizmo"] = "%{wks.location}/Simulatrix/vendor/ImGuizmo"
 IncludeDir["glm"] = "%{wks.location}/Simulatrix/vendor/glm"
 IncludeDir["entt"] = "%{wks.location}/Simulatrix/vendor/entt/include"
+IncludeDir["ReactPhysics3D"] = "%{wks.location}/Simulatrix/vendor/reactphysics3d/include"
 
 LibraryDir = {}
 

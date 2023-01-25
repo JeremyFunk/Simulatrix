@@ -23,16 +23,9 @@ using namespace Simulatrix;
 class ExampleLayer : public Layer {
 
 public:
-    ExampleLayer()
-        : Layer("Example") {
+    ExampleLayer(Ref<Scene> scene)
+        : Layer("Example"), m_Scene(scene) {
 
-    }
-
-    void OnPreRender() {
-        m_Framebuffer->Bind();
-    }
-    void OnPostRender() {
-        m_Framebuffer->Unbind();
     }
 
     void OnAttach() {
@@ -66,9 +59,9 @@ public:
 
         //auto diffuseShader = DiffuseShader(Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\shaders\\diffuse\\vs.vs", PathType::File), Path("C:\\Users\\Jerem\\Documents\\GitHub\\Simulatrix\\Editor\\resources\\raw\\shaders\\diffuse\\fs.fs", PathType::File));
         m_Camera.reset(new ProjectionCamera());
-        Application::Get().GetActiveScene()->SetCamera(m_Camera);
+        m_Scene->SetCamera(m_Camera);
 
-        //auto e = Application::Get().GetActiveScene()->CreateEntity();
+        //auto e = m_Scene->CreateEntity();
         //e.AddComponent<ComponentMesh>(0);
         //e.AddComponent<ComponentShader>(0);
         //e.AddComponent<ComponentTransform>(glm::mat4(1.0));
@@ -118,28 +111,28 @@ public:
         m_IconLib->LoadIconByName("model-edit");
         m_IconLib->LoadIconByName("grid");
 
-        m_SceneHierarchy.reset(new SceneHierarchy(Application::Get().GetActiveScene(), m_IconLib));
+        m_SceneHierarchy.reset(new SceneHierarchy(m_Scene, m_IconLib));
         m_ContentBrowser.reset(new ContentBrowser(m_IconLib));
-        m_Toolbar.reset(new Toolbar(Application::Get().GetActiveScene(), m_IconLib));
+        m_Toolbar.reset(new Toolbar(m_Scene, m_IconLib));
         m_ToggleUtil.reset(new ToggleUtil());
         //std::function<bool(bool)> fn = std::bind(Test, this, &std::placeholders::_1);
         m_ToggleUtil->RegisterToggle(Key::F, [this](bool pressed) {
             m_Camera->SetFreecam(pressed);
-            return false;
-        });
+        return false;
+            });
 
         m_ToggleUtil->RegisterStatelessToggle(Key::S, [this]() {
             m_Toolbar->SetTranslationMode(ImGuizmo::SCALE);
-            return false;
-        });
+        return false;
+            });
         m_ToggleUtil->RegisterStatelessToggle(Key::R, [this]() {
             m_Toolbar->SetTranslationMode(ImGuizmo::ROTATE);
-            return false;
-         });
+        return false;
+            });
         m_ToggleUtil->RegisterStatelessToggle(Key::G, [this]() {
             m_Toolbar->SetTranslationMode(ImGuizmo::TRANSLATE);
-            return false;
-        });
+        return false;
+            });
 
         m_Action = nullptr;
     }
@@ -152,15 +145,51 @@ public:
         m_Camera->Update(ts);
     }
 
-    void OnRender() {
-        RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.f });
+
+    void OnPreRender() {
+
+        m_Framebuffer->Bind();
+
+        RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         RenderCommand::Clear();
 
-        auto& window = Application::Get().GetWindow();
+        // Clear our entity ID attachment to -1
+        m_Framebuffer->ClearAttachment(1, -1);
 
-        glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)m_ViewportSize.x / (float)m_ViewportSize.y, 0.1f, 100.0f);
+        if (FramebufferSpecification spec = m_Framebuffer->GetSpecification();
+            m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
+            (spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
+        {
+            m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+        }
+    }
+    void OnPostRender() {
+        auto [mx, my] = ImGui::GetMousePos();
+        mx -= m_ViewportBounds[0].x;
+        my -= m_ViewportBounds[0].y;
+        glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
+        my = viewportSize.y - my;
+        int mouseX = (int)mx;
+        int mouseY = (int)my;
 
-        Renderer::SetProjectionMatrix(projection);
+        if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
+        {
+            int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
+            m_HoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_Scene.get());
+
+            if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+                m_SceneHierarchy->SetSelectedEntity(m_HoveredEntity);
+            }
+        }
+        m_Framebuffer->Unbind();
+    }
+    void OnRender() {
+        if (m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f) {
+            auto& window = Application::Get().GetWindow();
+            glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)m_ViewportSize.x / (float)m_ViewportSize.y, 0.1f, 100.0f);
+
+            Renderer::SetProjectionMatrix(projection);
+        }
     }
 
     void OnRenderOverlay()
@@ -168,18 +197,37 @@ public:
         ImGui::DockSpaceOverViewport();
 
         ImGui::Begin("Viewport");
-        glm::vec2 viewportSize = *((glm::vec2*)&ImGui::GetContentRegionAvail());
-        if (m_ViewportSize != viewportSize) {
-            m_Framebuffer->Resize(m_ViewportSize.x, m_ViewportSize.y);
-        }
-        m_ViewportSize = viewportSize;
-        ImGui::Image((void*)m_Framebuffer->GetColorAttachmentRendererID(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
+
+        auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+        auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+        auto viewportOffset = ImGui::GetWindowPos();
+        m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+        m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
+
+        m_ViewportFocused = ImGui::IsWindowFocused();
+        m_ViewportHovered = ImGui::IsWindowHovered();
+        ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+        m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+
+        ImGui::Image((void*)m_Framebuffer->GetColorAttachmentRendererID(), ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
         if (ImGui::BeginDragDropTarget()) {
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
-                const char* path = (const char*)payload->Data;
-                
-                Application::Get().GetActiveScene()->FileDropped(Path(path, PathType::File));
+                auto path = Path((const char*)payload->Data, PathType::File);
+
+                if (path.FileEnding == "obj") {
+                    auto id = ResourceManager::GetOrLoadModel(path);
+
+                    auto e2 = m_Scene->CreateEntity();
+                    e2.AddComponent<ComponentID>();
+                    e2.AddComponent<ComponentModel>(id);
+                    e2.AddComponent<ComponentTag>("Backpack");
+                    e2.AddComponent<ComponentTransform>();
+                }
+                else if (path.FileEnding == "simix") {
+                    auto s = SceneSerializer(m_Scene);
+                    s.Deserialize(path);
+                }
 
                 ImGui::EndDragDropTarget();
             }
@@ -189,7 +237,7 @@ public:
         ImGuizmo::Enable(true);
         ImGuizmo::SetOrthographic(false);
         ImGuizmo::SetDrawlist();
-        ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
+        ImGuizmo::SetRect(m_ViewportBounds[0].x, m_ViewportBounds[0].y, m_ViewportBounds[1].x - m_ViewportBounds[0].x, m_ViewportBounds[1].y - m_ViewportBounds[0].y);
 
         auto selectedEntity = m_SceneHierarchy->GetSelectedEntity();
         if (selectedEntity) {
@@ -204,7 +252,7 @@ public:
 
             float snapValues[3] = { snapValue, snapValue, snapValue };
 
-            ImGuizmo::Manipulate(glm::value_ptr(Application::Get().GetActiveScene()->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()),
+            ImGuizmo::Manipulate(glm::value_ptr(m_Scene->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()),
                 m_Toolbar->GetTranslationMode(), ImGuizmo::LOCAL, glm::value_ptr(transform),
                 nullptr, snap ? snapValues : nullptr);
             if (ImGuizmo::IsUsing())
@@ -243,8 +291,8 @@ public:
             CommandStack::Redo();
         }
 
-        if(m_Toolbar->GetShowGrid())
-            ImGuizmo::DrawGrid(glm::value_ptr(Application::Get().GetActiveScene()->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()), glm::value_ptr(glm::mat4(1.0)), 100.f);
+        if (m_Toolbar->GetShowGrid())
+            ImGuizmo::DrawGrid(glm::value_ptr(m_Scene->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()), glm::value_ptr(glm::mat4(1.0)), 100.f);
 
         ImGui::End();
 
@@ -252,13 +300,13 @@ public:
 
         if (ImGui::Button("Save")) {
             auto path = ResourceManager::GetIO()->SaveFile("");
-            auto serializer = SceneSerializer(Application::Get().GetActiveScene());
+            auto serializer = SceneSerializer(m_Scene);
             serializer.Serialize(path);
         }
 
         if (ImGui::Button("Load")) {
             auto path = ResourceManager::GetIO()->OpenFile("");
-            auto serializer = SceneSerializer(Application::Get().GetActiveScene());
+            auto serializer = SceneSerializer(m_Scene);
             serializer.Deserialize(path);
         }
 
@@ -272,10 +320,14 @@ public:
     void OnEvent(Event& e) {
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<KeyPressedEvent>(SIMIX_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
+        dispatcher.Dispatch<KeyReleasedEvent>(SIMIX_BIND_EVENT_FN(ExampleLayer::OnKeyReleasedEvent));
     }
 
     bool OnKeyPressedEvent(KeyPressedEvent& e) {
         return m_ToggleUtil->OnKeyPressed(e);
+    }
+    bool OnKeyReleasedEvent(KeyReleasedEvent& e) {
+        return m_Toolbar->OnKeyReleasedEvent(e);
     }
 private:
     float totalTime = 0.f;
@@ -289,14 +341,19 @@ private:
     Ref<ToggleUtil> m_ToggleUtil;
     Ref<IconLibrary> m_IconLib;
     Ref<Action> m_Action;
-    glm::vec2 m_ViewportSize;
+    Ref<Scene> m_Scene;
+    Entity m_HoveredEntity;
+    bool m_ViewportFocused = false, m_ViewportHovered = false;
+    glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
+    glm::vec2 m_ViewportBounds[2];
+
 };
 
 class Sandbox : public Simulatrix::Application
 {
 public:
     Sandbox() {
-        PushLayer(new ExampleLayer());
+        PushLayer(new ExampleLayer(Application::Get().GetActiveScene()));
     }
 
     ~Sandbox() {

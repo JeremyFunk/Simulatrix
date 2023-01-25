@@ -20,7 +20,8 @@ project "Editor"
 		"%{wks.location}/Simulatrix/vendor",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.ImGuizmo}"
+		"%{IncludeDir.ImGuizmo}",
+		"%{IncludeDir.ReactPhysics3D}"
 	}
 
 	links

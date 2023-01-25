@@ -1,22 +1,13 @@
 #include "simixpch.h"
 #include "Scene.h"
+#include "Simulatrix/Scene/SceneSerializer.h"
 namespace Simulatrix {
     Scene::Scene() {
         m_Registry = entt::registry();
+        m_PhysicsCommon = Ref<rp3d::PhysicsCommon>(new rp3d::PhysicsCommon());
+        m_PhysicsWorld = m_PhysicsCommon->createPhysicsWorld();
     }
     Scene::~Scene() {
 
-    }
-
-    void Scene::FileDropped(Path& path) {
-        if (path.FileEnding == "obj") {
-            auto id = ResourceManager::GetOrLoadModel(path);
-
-            auto e2 = CreateEntity();
-            e2.AddComponent<ComponentID>();
-            e2.AddComponent<ComponentModel>(id);
-            e2.AddComponent<ComponentTag>("Backpack");
-            e2.AddComponent<ComponentTransform>();
-        }
     }
 }

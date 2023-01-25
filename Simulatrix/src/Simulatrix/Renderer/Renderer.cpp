@@ -26,11 +26,12 @@ namespace Simulatrix {
             shaderC.ShaderRef->SetUniform("u_modelMatrix", transformC.GetTransform());
             shaderC.ShaderRef->SetUniform("u_viewMatrix", v);
             shaderC.ShaderRef->SetUniform("u_projectionMatrix", s_Projection);
+            shaderC.ShaderRef->SetUniform("u_entityId", (uint32_t)m);
 
             if (scene->HasComponents<ComponentTextureMaterial>(m)) {
                 auto& textureC = scene->GetComponent< ComponentTextureMaterial>(m);
                 if (textureC.Diffuse != nullptr) {
-                    shaderC.ShaderRef->SetUniform("u_textureDiffuse", textureC.Diffuse->GetRendererID());
+                    shaderC.ShaderRef->SetUniform("u_textureDiffuse", (float)textureC.Diffuse->GetRendererID());
                     textureC.Diffuse->Bind();
                 }
             }
