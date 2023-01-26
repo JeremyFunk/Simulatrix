@@ -58,7 +58,7 @@ namespace Simulatrix {
         static std::vector<Ref<SceneModel>> GetPrimitives() {
             return PrimitiveLibrary::GetModels();
         }
-
+        static bool FileIsTexture(Path& path);
         
 
         static Ref<SceneModel> SceneModelFromData(ResourceModel& mesh, std::string name, UUID uuid = UUID());

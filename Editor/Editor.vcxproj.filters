@@ -1,74 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Actions">
-      <UniqueIdentifier>{B655A67E-2235-251A-2B4D-B0F097AB8B7B}</UniqueIdentifier>
+    <Filter Include="Simulatrix">
+      <UniqueIdentifier>{17AA9415-0362-D662-6C69-AFBE58407153}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CommandStack">
-      <UniqueIdentifier>{3A8FDDD4-26F2-6C79-CF77-A52FBBB938FC}</UniqueIdentifier>
+    <Filter Include="Simulatrix\vendor">
+      <UniqueIdentifier>{9420EFB4-0037-ED4A-49AE-786CB503BED2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ImGui">
-      <UniqueIdentifier>{C0FF640D-2C14-8DBE-F595-301E616989EF}</UniqueIdentifier>
+    <Filter Include="Simulatrix\vendor\imgui-node-editor">
+      <UniqueIdentifier>{45EC8508-B1A5-F0B2-3A05-0B8DA6BDA622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Actions">
+      <UniqueIdentifier>{CD55E087-390B-597D-C2FF-52542EB44F81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\CommandStack">
+      <UniqueIdentifier>{B135FEE7-9D2E-1D3A-C660-02BFB2B8FC45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ImGui">
+      <UniqueIdentifier>{170E22B3-8378-D629-CCB6-87CF3860B47E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Simulatrix\vendor\imgui-node-editor\crude_json.h">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Simulatrix\vendor\imgui-node-editor\imgui_bezier_math.h">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Simulatrix\vendor\imgui-node-editor\imgui_canvas.h">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Simulatrix\vendor\imgui-node-editor\imgui_extra_math.h">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Simulatrix\vendor\imgui-node-editor\imgui_node_editor.h">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Simulatrix\vendor\imgui-node-editor\imgui_node_editor_internal.h">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClInclude>
     <ClInclude Include="src\Actions\Action.h">
-      <Filter>Actions</Filter>
+      <Filter>src\Actions</Filter>
     </ClInclude>
     <ClInclude Include="src\Actions\ActionTransform.h">
-      <Filter>Actions</Filter>
+      <Filter>src\Actions</Filter>
     </ClInclude>
     <ClInclude Include="src\CommandStack\Command.h">
-      <Filter>CommandStack</Filter>
+      <Filter>src\CommandStack</Filter>
     </ClInclude>
     <ClInclude Include="src\CommandStack\CommandStack.h">
-      <Filter>CommandStack</Filter>
+      <Filter>src\CommandStack</Filter>
     </ClInclude>
     <ClInclude Include="src\CommandStack\CommandTransform.h">
-      <Filter>CommandStack</Filter>
+      <Filter>src\CommandStack</Filter>
     </ClInclude>
-    <ClInclude Include="src\DiffuseShader.h" />
+    <ClInclude Include="src\DiffuseShader.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\ImGui\ContentBrowser.h">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\ImGui\EditorLayer.h">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\ImGui\IconLibrary.h">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGui\MainMenu.h">
+      <Filter>src\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\ImGui\SceneHierarchy.h">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGui\ShaderEditor.h">
+      <Filter>src\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\ImGui\Toolbar.h">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Simulatrix\vendor\imgui-node-editor\crude_json.cpp">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Simulatrix\vendor\imgui-node-editor\imgui_canvas.cpp">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Simulatrix\vendor\imgui-node-editor\imgui_node_editor.cpp">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Simulatrix\vendor\imgui-node-editor\imgui_node_editor_api.cpp">
+      <Filter>Simulatrix\vendor\imgui-node-editor</Filter>
+    </ClCompile>
     <ClCompile Include="src\Actions\ActionTransform.cpp">
-      <Filter>Actions</Filter>
+      <Filter>src\Actions</Filter>
     </ClCompile>
     <ClCompile Include="src\CommandStack\CommandStack.cpp">
-      <Filter>CommandStack</Filter>
+      <Filter>src\CommandStack</Filter>
     </ClCompile>
     <ClCompile Include="src\CommandStack\CommandTransform.cpp">
-      <Filter>CommandStack</Filter>
+      <Filter>src\CommandStack</Filter>
     </ClCompile>
-    <ClCompile Include="src\EditorApp.cpp" />
+    <ClCompile Include="src\EditorApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\ImGui\ContentBrowser.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\ImGui\EditorLayer.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\ImGui\IconLibrary.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGui\MainMenu.cpp">
+      <Filter>src\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\ImGui\SceneHierarchy.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGui\ShaderEditor.cpp">
+      <Filter>src\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\ImGui\Toolbar.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>src\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

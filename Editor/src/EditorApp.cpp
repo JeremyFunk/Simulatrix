@@ -9,6 +9,8 @@
 #include "ImGui/ContentBrowser.h"
 #include "ImGui/Toolbar.h"
 #include "ImGui/IconLibrary.h"
+#include "ImGui/ShaderEditor.h"
+#include "ImGui/MainMenu.h"
 #include "Simulatrix/Core/UUID.h"
 #include "DiffuseShader.h"
 #include <ImGuizmo.h>
@@ -114,6 +116,8 @@ public:
         m_SceneHierarchy.reset(new SceneHierarchy(m_Scene, m_IconLib));
         m_ContentBrowser.reset(new ContentBrowser(m_IconLib));
         m_Toolbar.reset(new Toolbar(m_Scene, m_IconLib));
+        m_MainMenu.reset(new MainMenu(m_Scene, m_IconLib));
+        m_ShaderEditor.reset(new ShaderEditor(m_Scene, m_IconLib));
         m_ToggleUtil.reset(new ToggleUtil());
         //std::function<bool(bool)> fn = std::bind(Test, this, &std::placeholders::_1);
         m_ToggleUtil->RegisterToggle(Key::F, [this](bool pressed) {
@@ -284,34 +288,15 @@ public:
             }
         }
 
-        if (ImGui::IsKeyReleased(ImGuiKey_Z) && ImGui::IsKeyDown(ImGuiKey_LeftCtrl) && CommandStack::CanUndo()) {
-            CommandStack::Undo();
-        }
-        if (ImGui::IsKeyReleased(ImGuiKey_Y) && ImGui::IsKeyDown(ImGuiKey_LeftCtrl) && CommandStack::CanRedo()) {
-            CommandStack::Redo();
-        }
-
         if (m_Toolbar->GetShowGrid())
             ImGuizmo::DrawGrid(glm::value_ptr(m_Scene->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()), glm::value_ptr(glm::mat4(1.0)), 100.f);
 
         ImGui::End();
+;
 
-        ImGui::BeginMainMenuBar();
+        m_MainMenu->Render();
 
-        if (ImGui::Button("Save")) {
-            auto path = ResourceManager::GetIO()->SaveFile("");
-            auto serializer = SceneSerializer(m_Scene);
-            serializer.Serialize(path);
-        }
-
-        if (ImGui::Button("Load")) {
-            auto path = ResourceManager::GetIO()->OpenFile("");
-            auto serializer = SceneSerializer(m_Scene);
-            serializer.Deserialize(path);
-        }
-
-        ImGui::EndMainMenuBar();
-
+        m_ShaderEditor->Render();
         m_SceneHierarchy->Render();
         m_ContentBrowser->Render();
         m_Toolbar->Render();
@@ -337,6 +322,8 @@ private:
     Ref<Framebuffer> m_Framebuffer;
     Ref<SceneHierarchy> m_SceneHierarchy;
     Ref<ContentBrowser> m_ContentBrowser;
+    Ref<ShaderEditor> m_ShaderEditor;
+    Ref<MainMenu> m_MainMenu;
     Ref<Toolbar> m_Toolbar;
     Ref<ToggleUtil> m_ToggleUtil;
     Ref<IconLibrary> m_IconLib;

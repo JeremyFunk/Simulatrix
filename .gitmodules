@@ -22,3 +22,6 @@
 [submodule "Simulatrix/vendor/reactphysics3d"]
 	path = Simulatrix/vendor/reactphysics3d
 	url = https://github.com/DanielChappuis/reactphysics3d
+[submodule "Simulatrix/vendor/imgui-node-editor"]
+	path = Simulatrix/vendor/imgui-node-editor
+	url = https://github.com/thedmd/imgui-node-editor

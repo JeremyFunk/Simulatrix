@@ -242,8 +242,10 @@ namespace Simulatrix {
 			if (ImGui::BeginDragDropTarget()) {
 				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
 					const char* path = (const char*)payload->Data;
-
-					component.Diffuse = ResourceManager::GetOrLoadTexture(Path(path, PathType::File));
+					auto pathO = Path(path, PathType::File);
+					if (ResourceManager::FileIsTexture(pathO)) {
+						component.Diffuse = ResourceManager::GetOrLoadTexture(pathO);
+					}
 
 					ImGui::EndDragDropTarget();
 				}
@@ -279,8 +281,11 @@ namespace Simulatrix {
 			if (ImGui::BeginDragDropTarget()) {
 				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
 					const char* path = (const char*)payload->Data;
+					auto pathO = Path(path, PathType::File);
 
-					component.ShaderRef = ResourceManager::GetOrLoadShader(Path(path, PathType::File));
+					if (pathO.FileEnding == "glsl") {
+						component.ShaderRef = ResourceManager::GetOrLoadShader(pathO);
+					}
 
 					ImGui::EndDragDropTarget();
 				}

@@ -84,6 +84,11 @@ namespace Simulatrix {
         }
         m_LoadedModels.emplace(p.PathString, pointer->ID, pointer);
     }
+    const std::string TEXTURE_FILE_ENDINGS[] = {
+        "jpg",
+        "png",
+        "bmp"
+    };
 
     void ResourceManager::LoadTexture(Path& p, UUID uuid) {
         auto texture = Texture2D::Create(p);
@@ -92,6 +97,15 @@ namespace Simulatrix {
         pointer->SetID(uuid);
         m_LoadedFiles.push_back(p);
         m_LoadedTextures.emplace(p.PathString, pointer->GetID(), pointer);
+    }
+
+    bool ResourceManager::FileIsTexture(Path& p) {
+        for (auto ending : TEXTURE_FILE_ENDINGS) {
+            if (ending == p.FileEnding) {
+                return true;
+            }
+        }
+        return false;
     }
 
     const Ref<SceneModel> ResourceManager::GetModel(Path& path) {
@@ -146,11 +160,6 @@ namespace Simulatrix {
     const Ref<Texture2D> ResourceManager::GetTexture(UUID& id) {
         return m_LoadedTextures[id];
     }
-    const std::string TEXTURE_FILE_ENDINGS[] = {
-        "jpg",
-        "png",
-        "bmp"
-    };
     
     void ResourceManager::Load(Path& path, UUID uuid) {
         if(path.FileEnding == "glsl") {

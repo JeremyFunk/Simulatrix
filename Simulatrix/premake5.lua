@@ -44,7 +44,7 @@ project "Simulatrix"
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.yaml_cpp}",
 		"%{IncludeDir.ImGuizmo}",
-		"%{IncludeDir.ReactPhysics3D}",
+		"%{IncludeDir.ReactPhysics3D}"
 	}
 
 	links
