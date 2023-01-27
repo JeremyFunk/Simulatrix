@@ -1,7 +1,7 @@
 #include "simixpch.h"
 #include "Simulatrix/Platform/OpenGL/OpenGLTexture2D.h"
 #include "Simulatrix/Core/Core.h"
-#include <stb_image.h>
+#include <stbi_image.h>
 
 namespace Simulatrix {
 

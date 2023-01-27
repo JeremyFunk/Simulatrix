@@ -1,6 +1,9 @@
 #include "simixpch.h"
 #include "OBJParser.h"
 #include "Simulatrix/Core/Core.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 namespace Simulatrix {
     void loadModel(Path const& path, ResourceModel& result);
     void processNode(aiNode* node, const aiScene* scene, const Path& path, ResourceModel& result);
@@ -41,7 +44,7 @@ namespace Simulatrix {
         // check for errors
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
         {
-            SIMIX_CORE_ASSERT(false, "Assimp error: {0}", importer.GetErrorString())
+            SIMIX_CORE_ASSERT(false, "Assimp error: {}", importer.GetErrorString())
                 return;
         }
 

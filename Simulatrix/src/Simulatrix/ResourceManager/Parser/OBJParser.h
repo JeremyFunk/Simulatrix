@@ -1,8 +1,5 @@
 #pragma once
 #include "ModelParser.h"
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 #include "Simulatrix/Core/IOWrapper.h"
 #include "Simulatrix/Core/Core.h"
 namespace Simulatrix {
