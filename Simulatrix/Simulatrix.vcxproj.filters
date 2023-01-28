@@ -300,6 +300,9 @@
     <ClInclude Include="src\Simulatrix\Renderer\RenderCommand.h">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Renderer\RenderCommandQueue.h">
+      <Filter>src\Simulatrix\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\Renderer.h">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
@@ -307,9 +310,6 @@
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\Shader.h">
-      <Filter>src\Simulatrix\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Simulatrix\Renderer\ShaderImplementation.h">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Simulatrix\Renderer\Texture.h">
@@ -2034,6 +2034,9 @@
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\RenderCommand.cpp">
+      <Filter>src\Simulatrix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulatrix\Renderer\RenderCommandQueue.cpp">
       <Filter>src\Simulatrix\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulatrix\Renderer\Renderer.cpp">

@@ -5,7 +5,6 @@
 #include "Simulatrix/Renderer/Shader.h"
 #include "Entity.h"
 #include <Simulatrix/Core/Camera.h>
-#include "Simulatrix/Renderer/ShaderImplementation.h"
 #include "Simulatrix/ResourceManager/ResourceManager.h"
 #include "reactphysics3d/reactphysics3d.h"
 namespace Simulatrix {

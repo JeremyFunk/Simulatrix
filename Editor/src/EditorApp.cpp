@@ -139,6 +139,15 @@ public:
             });
 
         m_Action = nullptr;
+
+        auto gridShader = ResourceManager::GetOrLoadShader(Path(ResourceManager::GetIO()->GetCurrentDir().PathString + "\\resources\\raw\\shaders\\grid\\grid.glsl", PathType::File));
+        auto e = m_Scene->CreateEntity();
+        e.AddComponent<ComponentID>();
+        e.AddComponent<ComponentShader>(gridShader);
+        auto& gridTransform = e.AddComponent<ComponentTransform>();
+        gridTransform.Scale = glm::vec3(10.f);
+        e.AddComponent<ComponentModel>(ResourceManager::GetPrimitive("Plane"));
+        e.AddComponent<ComponentInternal>();
     }
 
     void OnDetach() {}
@@ -296,7 +305,7 @@ public:
 
         m_MainMenu->Render();
 
-        m_ShaderEditor->Render();
+        //m_ShaderEditor->Render();
         m_SceneHierarchy->Render();
         m_ContentBrowser->Render();
         m_Toolbar->Render();

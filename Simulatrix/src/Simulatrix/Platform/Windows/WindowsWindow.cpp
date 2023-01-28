@@ -41,6 +41,7 @@ namespace Simulatrix {
 
         
         glfwSetWindowUserPointer(m_Window, &m_Data);
+        glfwWindowHint(GLFW_SAMPLES, 4);
         SetVSync(true);
 
         glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {

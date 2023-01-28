@@ -33,6 +33,15 @@ namespace Simulatrix {
 
         }
     };*/
+    struct ComponentInternal {
+        bool Serialize = false;
+        ComponentInternal() = default;
+    };
+
+    struct ExtraComponentRenderData {
+
+    };
+
     struct ComponentModel {
         Ref<SceneModel> Model;
         ComponentModel() = default;

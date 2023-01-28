@@ -186,10 +186,10 @@
     <ClInclude Include="src\Simulatrix\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Simulatrix\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Simulatrix\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\RenderCommandQueue.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Renderer.h" />
     <ClInclude Include="src\Simulatrix\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Shader.h" />
-    <ClInclude Include="src\Simulatrix\Renderer\ShaderImplementation.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Texture.h" />
     <ClInclude Include="src\Simulatrix\Renderer\VertexArray.h" />
     <ClInclude Include="src\Simulatrix\ResourceManager\Loader\MeshLoader.h" />
@@ -766,6 +766,7 @@
     <ClCompile Include="src\Simulatrix\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\RenderCommandQueue.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Shader.cpp" />
@@ -1051,5 +1052,6 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
 </Project>
