@@ -220,7 +220,7 @@ namespace Simulatrix {
 		if (ImGui::BeginPopup("AddComponent"))
 		{
 			DisplayAddComponentEntry<ComponentTextureMaterial>("Texture Material");
-			DisplayAddComponentEntry<ComponentShader>("Shader");
+			DisplayAddComponentEntry<ComponentRenderable>("Renderable");
 			ImGui::EndPopup();
 		}
 
@@ -259,42 +259,42 @@ namespace Simulatrix {
 		});
 
 		auto scene = m_Scene.get();
-		DrawComponent<ComponentShader>("Shader", entity, [scene](ComponentShader& component) {
-			/*std::string selectedShaderName = "None";
-			if (component.ShaderRef != nullptr) {
-				selectedShaderName = component.ShaderRef->GetName();
-			}
+		//DrawComponent<ComponentShader>("Shader", entity, [scene](ComponentShader& component) {
+		//	/*std::string selectedShaderName = "None";
+		//	if (component.ShaderRef != nullptr) {
+		//		selectedShaderName = component.ShaderRef->GetName();
+		//	}
 
-			if (ImGui::BeginCombo("Shader Name", selectedShaderName.c_str())) {
-				for (auto shader : scene->GetShaders()) {
-					if (ImGui::Button(shader->GetName().c_str())) {
-						component.ShaderRef = shader;
-					}
-				}
+		//	if (ImGui::BeginCombo("Shader Name", selectedShaderName.c_str())) {
+		//		for (auto shader : scene->GetShaders()) {
+		//			if (ImGui::Button(shader->GetName().c_str())) {
+		//				component.ShaderRef = shader;
+		//			}
+		//		}
 
-				ImGui::EndCombo();
-			}*/
-			std::string selectedShaderName = "None";
-			if (component.ShaderRef != nullptr) {
-				selectedShaderName = component.ShaderRef->GetName();
-			}
+		//		ImGui::EndCombo();
+		//	}*/
+		//	std::string selectedShaderName = "None";
+		//	if (component.ShaderRef != nullptr) {
+		//		selectedShaderName = component.ShaderRef->GetName();
+		//	}
 
-			ImGui::Button(selectedShaderName.c_str());
+		//	ImGui::Button(selectedShaderName.c_str());
 
-			if (ImGui::BeginDragDropTarget()) {
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
-					const char* path = (const char*)payload->Data;
-					auto pathO = Path(path, PathType::File);
+		//	if (ImGui::BeginDragDropTarget()) {
+		//		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
+		//			const char* path = (const char*)payload->Data;
+		//			auto pathO = Path(path, PathType::File);
 
-					if (pathO.FileEnding == "glsl") {
-						component.ShaderRef = ResourceManager::GetOrLoadShader(pathO);
-					}
+		//			if (pathO.FileEnding == "glsl") {
+		//				component.ShaderRef = ResourceManager::GetOrLoadShader(pathO);
+		//			}
 
-					ImGui::EndDragDropTarget();
-				}
-			}
+		//			ImGui::EndDragDropTarget();
+		//		}
+		//	}
 
-		});
+		//});
 
 		//DrawComponent<CameraComponent>("Camera", entity, [](auto& component)
 		//	{

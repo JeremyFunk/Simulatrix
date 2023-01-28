@@ -141,22 +141,15 @@ namespace Simulatrix {
 			out << YAML::EndMap;
 		}
 
-		if (entity.HasComponent<ComponentModel>()) {
-			auto& component = entity.GetComponent<ComponentModel>();
-			out << YAML::Key << "ComponentModel";
+		if (entity.HasComponent<ComponentRenderable>()) {
+			auto& component = entity.GetComponent<ComponentRenderable>();
+			out << YAML::Key << "ComponentRenderable";
 			out << YAML::BeginMap;
 			out << YAML::Key << "ModelID" << YAML::Value << component.Model->ID;
+			out << YAML::Key << "PipelineID" << YAML::Value << component.RenderPipeline->GetID();
 			if (component.Model->IsPrimitive) {
 				out << YAML::Key << "IsPrimitive" << YAML::Value << true;
 			}
-			out << YAML::EndMap;
-		}
-
-		if (entity.HasComponent<ComponentShader>()) {
-			auto& component = entity.GetComponent<ComponentShader>();
-			out << YAML::Key << "ComponentShader";
-			out << YAML::BeginMap;
-			out << YAML::Key << "ShaderID" << YAML::Value << component.ShaderRef->GetID();
 			out << YAML::EndMap;
 		}
 
@@ -318,11 +311,11 @@ namespace Simulatrix {
 					tc.Color = colorMaterialComponent["Color"].as<glm::vec3>();
 				}
 
-				auto shaderComponent = entity["ComponentShader"];
-				if (shaderComponent) {
-					auto& tc = deserializedEntity.AddComponent<ComponentShader>();
-					tc.ShaderRef = ResourceManager::GetShader(shaderComponent["ShaderID"].as<UUID>());
-				}
+				//auto shaderComponent = entity["ComponentShader"];
+				//if (shaderComponent) {
+				//	auto& tc = deserializedEntity.AddComponent<ComponentShader>();
+				//	tc.ShaderRef = ResourceManager::GetShader(shaderComponent["ShaderID"].as<UUID>());
+				//}
 
 				auto textureComponent = entity["ComponentTextureMaterial"];
 				if (textureComponent) {
@@ -330,18 +323,18 @@ namespace Simulatrix {
 					tc.Diffuse = ResourceManager::GetTexture(textureComponent["TextureID"].as<UUID>());
 				}
 
-				auto modelComponent = entity["ComponentModel"];
-				if (modelComponent) {
-					auto& tc = deserializedEntity.AddComponent<ComponentModel>();
-					auto isPrimitive = modelComponent["IsPrimitive"];
+				//auto modelComponent = entity["ComponentModel"];
+				//if (modelComponent) {
+				//	auto& tc = deserializedEntity.AddComponent<ComponentModel>();
+				//	auto isPrimitive = modelComponent["IsPrimitive"];
 
-					if (isPrimitive) {
-						tc.Model = ResourceManager::GetPrimitive(modelComponent["ModelID"].as<UUID>());
-					}
-					else {
-						tc.Model = ResourceManager::GetModel(modelComponent["ModelID"].as<UUID>());
-					}
-				}
+				//	if (isPrimitive) {
+				//		tc.Model = ResourceManager::GetPrimitive(modelComponent["ModelID"].as<UUID>());
+				//	}
+				//	else {
+				//		tc.Model = ResourceManager::GetModel(modelComponent["ModelID"].as<UUID>());
+				//	}
+				//}
 			}
 		}
 

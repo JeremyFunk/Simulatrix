@@ -140,14 +140,30 @@ public:
 
         m_Action = nullptr;
 
+        // GRID
         auto gridShader = ResourceManager::GetOrLoadShader(Path(ResourceManager::GetIO()->GetCurrentDir().PathString + "\\resources\\raw\\shaders\\grid\\grid.glsl", PathType::File));
+        PipelineSpecification gridPipelineSpec;
+        gridPipelineSpec.Shader = gridShader;
+        gridPipelineSpec.BackfaceCulling = false;
+        gridPipelineSpec.DebugName = "Grid Pipeline";
+        auto gridPipeline = Pipeline::Create(gridPipelineSpec);
+        m_Scene->AddPipeline(gridPipeline);
+        
         auto e = m_Scene->CreateEntity();
         e.AddComponent<ComponentID>();
-        e.AddComponent<ComponentShader>(gridShader);
+        e.AddComponent<ComponentRenderable>(ResourceManager::GetPrimitive("Plane"), gridPipeline);
         auto& gridTransform = e.AddComponent<ComponentTransform>();
         gridTransform.Scale = glm::vec3(10.f);
-        e.AddComponent<ComponentModel>(ResourceManager::GetPrimitive("Plane"));
         e.AddComponent<ComponentInternal>();
+
+        // DEFAULT PIPELINE
+        auto defaultShader = ResourceManager::GetOrLoadShader(Path(ResourceManager::GetIO()->GetCurrentDir().PathString + "\\resources\\raw\\shaders\\singleColor\\singleColor.glsl", PathType::File));
+        PipelineSpecification defaultPipelineSpec;
+        defaultPipelineSpec.Shader = defaultShader;
+        defaultPipelineSpec.DebugName = "Default Pipeline";
+        auto defaultPipeline = Pipeline::Create(defaultPipelineSpec);
+        m_Scene->AddPipeline(defaultPipeline);
+        m_Scene->SetDefaultPipeline(defaultPipeline);
     }
 
     void OnDetach() {}
@@ -200,8 +216,7 @@ public:
         if (m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f) {
             auto& window = Application::Get().GetWindow();
             glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)m_ViewportSize.x / (float)m_ViewportSize.y, 0.1f, 100.0f);
-
-            Renderer::SetProjectionMatrix(projection);
+            Application::Get().SetViewportSize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
         }
     }
 
@@ -233,7 +248,7 @@ public:
 
                     auto e2 = m_Scene->CreateEntity();
                     e2.AddComponent<ComponentID>();
-                    e2.AddComponent<ComponentModel>(id);
+                    e2.AddComponent<ComponentRenderable>(id, m_Scene->GetDefaultPipeline());
                     e2.AddComponent<ComponentTag>("Backpack");
                     e2.AddComponent<ComponentTransform>();
                 }
@@ -265,7 +280,7 @@ public:
 
             float snapValues[3] = { snapValue, snapValue, snapValue };
 
-            ImGuizmo::Manipulate(glm::value_ptr(m_Scene->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()),
+            ImGuizmo::Manipulate(glm::value_ptr(Application::Get().GetSceneRenderer()->GetViewMatrix()), glm::value_ptr(Application::Get().GetSceneRenderer()->GetProjectionMatrix()),
                 m_Toolbar->GetTranslationMode(), ImGuizmo::LOCAL, glm::value_ptr(transform),
                 nullptr, snap ? snapValues : nullptr);
             if (ImGuizmo::IsUsing())
@@ -298,7 +313,7 @@ public:
         }
 
         if (m_Toolbar->GetShowGrid())
-            ImGuizmo::DrawGrid(glm::value_ptr(m_Scene->GetCamera()->GetViewMatrix()), glm::value_ptr(Renderer::GetProjectionMatrix()), glm::value_ptr(glm::mat4(1.0)), 100.f);
+            ImGuizmo::DrawGrid(glm::value_ptr(Application::Get().GetSceneRenderer()->GetViewMatrix()), glm::value_ptr(Application::Get().GetSceneRenderer()->GetProjectionMatrix()), glm::value_ptr(glm::mat4(1.0)), 100.f);
 
         ImGui::End();
 ;

@@ -14,7 +14,7 @@ namespace Simulatrix {
     }
 
     void Renderer::Render(Ref<Scene> scene) {
-        auto v = scene->GetCamera()->GetViewMatrix();
+        /*auto v = scene->GetCamera()->GetViewMatrix();
         auto models = scene->GetAllEntitiesWith<ComponentModel, ComponentTransform, ComponentShader>();
         for (auto& m : models) {
             auto [modelC, transformC, shaderC] = scene->GetComponents<ComponentModel, ComponentTransform, ComponentShader>(m);
@@ -39,6 +39,6 @@ namespace Simulatrix {
                 mesh.VAO->Bind();
                 RenderCommand::DrawIndexed(mesh.VAO);
             }
-        }
+        }*/
     }
 }

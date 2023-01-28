@@ -9,6 +9,7 @@
 #include <Simulatrix/Renderer/Shader.h>
 #include <Simulatrix/Renderer/Buffer.h>
 #include <Simulatrix/Renderer/VertexArray.h>
+#include <Simulatrix/Renderer/SceneRenderer.h>
 #include <Simulatrix/Core/Camera.h>
 #include <Simulatrix/Scene/Scene.h>
 #include <Simulatrix/Renderer/Framebuffer.h>
@@ -31,8 +32,12 @@ namespace Simulatrix {
         Ref<Scene>& GetActiveScene() {
             return m_ActiveScene;
         }
+        Ref<SceneRenderer>& GetSceneRenderer() {
+            return m_SceneRenderer;
+        }
+        void SetViewportSize(uint32_t width, uint32_t height);
     private:
-        bool OnWindowClosed(WindowCloseEvent& e);
+        bool OnWindowClosed(WindowCloseEvent& e); 
 
         Scope<Window> m_Window;
         bool m_Running = true;
@@ -42,6 +47,7 @@ namespace Simulatrix {
         float m_LastFrameTime = 0.0f;
         ImGuiLayer* m_ImGuiLayer;
         Ref<Scene> m_ActiveScene;
+        Ref<SceneRenderer> m_SceneRenderer;
     };
     // To be defined in client.
     Application* CreateApplication();

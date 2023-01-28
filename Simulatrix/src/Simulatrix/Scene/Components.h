@@ -7,7 +7,9 @@
 #include "Simulatrix/Core/Core.h"
 #include <Simulatrix/Renderer/Texture.h>
 #include <Simulatrix/Renderer/Shader.h>
+#include <Simulatrix/Renderer/Pipeline.h>
 #include <Simulatrix/Scene/SceneData.h>
+
 namespace Simulatrix {
     struct ComponentID {
         UUID ID;
@@ -42,13 +44,16 @@ namespace Simulatrix {
 
     };
 
-    struct ComponentModel {
+    struct ComponentRenderable {
         Ref<SceneModel> Model;
-        ComponentModel() = default;
-        ComponentModel(Ref<SceneModel> model) : Model(model)
+        Ref<Pipeline> RenderPipeline;
+        // TODO add material here aswell
+        ComponentRenderable() = default;
+        ComponentRenderable(Ref<SceneModel> model, Ref<Pipeline> pipeline) : Model(model), RenderPipeline(pipeline)
         {
         }
     };
+    
     struct ComponentTransform {
         glm::vec3 Translation = { 0.0f, 0.0f, 0.0f };
         glm::vec3 Rotation = { 0.0f, 0.0f, 0.0f };
@@ -68,6 +73,7 @@ namespace Simulatrix {
                 * glm::scale(glm::mat4(1.0f), Scale);
         }
     };
+    
     struct ComponentColorMaterial {
         glm::vec3 Color;
         ComponentColorMaterial() = default;
@@ -81,14 +87,6 @@ namespace Simulatrix {
         ComponentTextureMaterial() = default;
         ComponentTextureMaterial(Ref<Texture2D> diffuse) : Diffuse(diffuse)
         {
-        }
-    };
-    struct ComponentShader {
-        Ref<Shader> ShaderRef;
-        ComponentShader() = default;
-        ComponentShader(Ref<Shader> shader) : ShaderRef(shader)
-        {
-
         }
     };
 }

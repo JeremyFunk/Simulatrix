@@ -78,15 +78,42 @@ namespace Simulatrix {
 
         Entity InstantiatePrimitive(std::string name) {
             auto e = CreateEntity();
-            e.AddComponent<ComponentModel>(ResourceManager::GetPrimitive(name));
+            e.AddComponent<ComponentRenderable>(ResourceManager::GetPrimitive(name), m_DefaultPipeline);
             e.AddComponent<ComponentTag>(name);
             e.AddComponent<ComponentID>();
             e.AddComponent<ComponentTransform>();
             return e;
         }
+
+        const std::vector<Ref<Pipeline>> GetPipelines() {
+            return m_Pipelines;
+        }
+        
+        void AddPipeline(Ref<Pipeline> pipeline) {
+            m_Pipelines.push_back(pipeline);
+        }
+
+        Ref<Pipeline> GetPipeline(UUID id) {
+            for (auto pipeline : m_Pipelines) {
+                if (pipeline->GetID() == id) {
+                    return pipeline;
+                }
+            }
+            return nullptr;
+        }
+
+        void SetDefaultPipeline(Ref<Pipeline> pipeline) {
+            m_DefaultPipeline = pipeline;
+        }
+
+        Ref<Pipeline> GetDefaultPipeline() {
+            return m_DefaultPipeline;
+        }
     private:
         Ref<Camera> m_Camera;
         std::vector<Ref<Shader>> m_Shaders;
+        Ref<Pipeline> m_DefaultPipeline;
+        std::vector<Ref<Pipeline>> m_Pipelines;
 
         Ref<reactphysics3d::PhysicsCommon> m_PhysicsCommon;
         reactphysics3d::PhysicsWorld* m_PhysicsWorld;
@@ -94,6 +121,7 @@ namespace Simulatrix {
         friend class Entity;
         friend class SceneSerializer;
         friend class SceneHierarchy;
+        friend class SceneRenderer;
     };
     
 }

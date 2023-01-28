@@ -31,7 +31,9 @@ namespace Simulatrix {
         m_ImGuiLayer->OnAttach();
 
         m_ActiveScene.reset(new Scene());
+        m_SceneRenderer = CreateRef<SceneRenderer>(m_ActiveScene);
     }
+
     Application::~Application() {
         ResourceManager::CleanUp();
     }
@@ -53,7 +55,7 @@ namespace Simulatrix {
         while (m_Running) {
             Input::PollInputs();
             ResourceManager::Update();
-            Renderer::BeginScene(m_ActiveScene);
+            m_SceneRenderer->BeginScene();
 
             float time = (float)glfwGetTime();
             Timestep timestep = time - m_LastFrameTime;
@@ -67,6 +69,7 @@ namespace Simulatrix {
             for (Layer* layer : m_LayerStack)
                 layer->OnRender();
             Renderer::Render(m_ActiveScene);
+            m_SceneRenderer->WaitForRender();
             for (Layer* layer : m_LayerStack)
                 layer->OnPostRender();
 
@@ -81,7 +84,7 @@ namespace Simulatrix {
 
             m_ImGuiLayer->End();
 
-            Renderer::EndScene(m_ActiveScene);
+            m_SceneRenderer->EndScene();
             m_Window->OnUpdate();
         }
     }
@@ -97,5 +100,9 @@ namespace Simulatrix {
 
     void Application::PushOverlay(Layer* overlay) {
         m_LayerStack.PushOverlay(overlay);
+    }
+
+    void Application::SetViewportSize(uint32_t width, uint32_t height) {
+        m_SceneRenderer->SetViewportSize(width, height);
     }
 }

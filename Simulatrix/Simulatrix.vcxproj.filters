@@ -1953,6 +1953,9 @@
     <ClInclude Include="vendor\stb_image\stbi_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Simulatrix\Renderer\SceneRenderer.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\Pipeline.h" />
+    <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLPipeline.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
@@ -2342,5 +2345,8 @@
     <ClCompile Include="vendor\stb_image\stbi_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\Simulatrix\Renderer\SceneRenderer.cpp" />
+    <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLPipeline.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\Pipeline.cpp" />
   </ItemGroup>
 </Project>
