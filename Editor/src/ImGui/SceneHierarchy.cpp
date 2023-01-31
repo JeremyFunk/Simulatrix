@@ -219,7 +219,7 @@ namespace Simulatrix {
 
 		if (ImGui::BeginPopup("AddComponent"))
 		{
-			DisplayAddComponentEntry<ComponentTextureMaterial>("Texture Material");
+			DisplayAddComponentEntry<ComponentMaterial>("Material");
 			DisplayAddComponentEntry<ComponentRenderable>("Renderable");
 			ImGui::EndPopup();
 		}
@@ -234,7 +234,64 @@ namespace Simulatrix {
 			DrawVec3Control("Scale", component.Scale, 1.0f);
 		});
 		auto iconLib = m_IconLibrary.get();
-		DrawComponent<ComponentTextureMaterial>("Diffuse Material", entity, [iconLib](ComponentTextureMaterial& component) {
+		DrawComponent<ComponentMaterial>("Material", entity, [iconLib](ComponentMaterial& component) {
+			if (component.Material == nullptr) {
+				if (ImGui::BeginCombo("Material", "")) {
+					for (auto material : MaterialFactory::GetMaterialNames()) {
+						if (ImGui::Button(material.c_str())) {
+							component.Material = Ref<MaterialInstance>(MaterialFactory::CreateMaterialInstance(material));
+						}
+					}
+					ImGui::EndCombo();
+				}
+			}
+			else {
+				for (auto& attr : *component.Material->GetTextureUniforms()) {
+					if (attr.second == nullptr) {
+						ImGui::ImageButton((void*)(intptr_t)iconLib->GetIconByName("close")->GetRendererID(), ImVec2(64, 64));
+					}
+					else {
+						ImGui::ImageButton((void*)(intptr_t)attr.second->GetRendererID(), ImVec2(64, 64));
+					}
+					ImGui::SameLine();
+					ImGui::Text(attr.first.c_str());
+
+
+					if (ImGui::BeginDragDropTarget()) {
+						if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
+							const char* path = (const char*)payload->Data;
+							auto pathO = Path(path, PathType::File);
+							if (ResourceManager::FileIsTexture(pathO)) {
+								attr.second = ResourceManager::GetOrLoadTexture(pathO);
+							}
+
+							ImGui::EndDragDropTarget();
+						}
+					}
+				}
+				for (auto& attr : *component.Material->GetBoolUniforms()) {
+					ImGui::Checkbox(attr.first.c_str(), &attr.second);
+				}
+				for (auto& attr : *component.Material->GetFloatUniforms()) {
+					ImGui::DragFloat(attr.first.c_str(), &attr.second);
+				}
+				for (auto& attr : *component.Material->GetIntUniforms()) {
+					ImGui::DragInt(attr.first.c_str(), &attr.second);
+				}
+				for (auto& attr : *component.Material->GetVec2Uniforms()) {
+					ImGui::DragFloat2(attr.first.c_str(), (float*)&attr.second, 0.01, 0.0, 1.0);
+				}
+				for (auto& attr : *component.Material->GetVec3Uniforms()) {
+					ImGui::DragFloat3(attr.first.c_str(), (float*)&attr.second, 0.01, 0.0, 1.0);
+				}
+				for (auto& attr : *component.Material->GetVec4Uniforms()) {
+					ImGui::DragFloat4(attr.first.c_str(), (float*)&attr.second, 0.01, 0.0, 1.0);
+				}
+				
+			}
+		});
+
+		/*DrawComponent<ComponentTextureMaterial>("Diffuse Material", entity, [iconLib](ComponentTextureMaterial& component) {
 			if (component.Diffuse == nullptr) {
 				ImGui::ImageButton((void*)(intptr_t)iconLib->GetIconByName("close")->GetRendererID(), ImVec2(64, 64));
 			}
@@ -256,7 +313,7 @@ namespace Simulatrix {
 
 			ImGui::SameLine();
 			ImGui::Text("Diffuse Texture");
-		});
+		});*/
 
 		auto scene = m_Scene.get();
 		//DrawComponent<ComponentShader>("Shader", entity, [scene](ComponentShader& component) {

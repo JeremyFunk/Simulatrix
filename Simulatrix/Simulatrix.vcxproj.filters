@@ -1956,6 +1956,8 @@
     <ClInclude Include="src\Simulatrix\Renderer\SceneRenderer.h" />
     <ClInclude Include="src\Simulatrix\Renderer\Pipeline.h" />
     <ClInclude Include="src\Simulatrix\Platform\OpenGL\OpenGLPipeline.h" />
+    <ClInclude Include="src\Simulatrix\Scene\MaterialFactory.h" />
+    <ClInclude Include="src\Simulatrix\Renderer\MaterialInstance.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Simulatrix\Core\Application.cpp">
@@ -2348,5 +2350,7 @@
     <ClCompile Include="src\Simulatrix\Renderer\SceneRenderer.cpp" />
     <ClCompile Include="src\Simulatrix\Platform\OpenGL\OpenGLPipeline.cpp" />
     <ClCompile Include="src\Simulatrix\Renderer\Pipeline.cpp" />
+    <ClCompile Include="src\Simulatrix\Renderer\MaterialInstance.cpp" />
+    <ClCompile Include="src\Simulatrix\Scene\MaterialFactory.cpp" />
   </ItemGroup>
 </Project>

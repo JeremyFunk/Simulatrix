@@ -147,6 +147,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Simulatrix\Renderer\MaterialInstance.h" />
+    <ClInclude Include="src\Simulatrix\Scene\MaterialFactory.h" />
     <ClInclude Include="src\Simulatrix.h" />
     <ClInclude Include="src\Simulatrix\Core\Application.h" />
     <ClInclude Include="src\Simulatrix\Core\Camera.h" />
@@ -742,6 +744,7 @@
     <ClInclude Include="vendor\stb_image\stbi_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Simulatrix\Renderer\MaterialInstance.cpp" />
     <ClCompile Include="src\Simulatrix\Core\Application.cpp" />
     <ClCompile Include="src\Simulatrix\Core\FileWatcher.cpp" />
     <ClCompile Include="src\Simulatrix\Core\Layer.cpp" />
@@ -781,6 +784,7 @@
     <ClCompile Include="src\Simulatrix\ResourceManager\Parser\DefaultTextureParser.cpp" />
     <ClCompile Include="src\Simulatrix\ResourceManager\Parser\OBJParser.cpp" />
     <ClCompile Include="src\Simulatrix\ResourceManager\ResourceManager.cpp" />
+    <ClCompile Include="src\Simulatrix\Scene\MaterialFactory.cpp" />
     <ClCompile Include="src\Simulatrix\Scene\Scene.cpp" />
     <ClCompile Include="src\Simulatrix\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\Simulatrix\Util\MathUtil.cpp" />

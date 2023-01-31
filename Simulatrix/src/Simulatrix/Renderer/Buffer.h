@@ -4,7 +4,7 @@
 
 namespace Simulatrix {
     enum class ShaderDataType {
-        None = 0, Float, Vec2, Vec3, Vec4, Mat3, Mat4, Int, IVec2, IVec3, Bool
+        None = 0, Float, Vec2, Vec3, Vec4, Mat3, Mat4, Int, IVec2, IVec3, IVec4, Bool, UInt
     };
 
     static uint32_t ShaderDataTypeSize(ShaderDataType type) {
@@ -16,8 +16,10 @@ namespace Simulatrix {
             case ShaderDataType::Mat3:  return 4 * 3 * 3;
             case ShaderDataType::Mat4:  return 4 * 4 * 4;
             case ShaderDataType::Int:   return 4;
+            case ShaderDataType::UInt:   return 4;
             case ShaderDataType::IVec2: return 4 * 2;
             case ShaderDataType::IVec3: return 4 * 3;
+            case ShaderDataType::IVec4: return 4 * 4;
             case ShaderDataType::Bool:  return 1;
         }
         SIMIX_CORE_ASSERT(false, "Unknown ShaderDataType!");
@@ -47,8 +49,10 @@ namespace Simulatrix {
                 case ShaderDataType::Mat3:  return 3 * 3;
                 case ShaderDataType::Mat4:  return 4 * 4;
                 case ShaderDataType::Int:   return 1;
+                case ShaderDataType::UInt:   return 1;
                 case ShaderDataType::IVec2: return 2;
                 case ShaderDataType::IVec3: return 3;
+                case ShaderDataType::IVec4: return 4;
                 case ShaderDataType::Bool:  return 1;
             }
             SIMIX_CORE_ASSERT(false, "Unknown ShaderDataType!");

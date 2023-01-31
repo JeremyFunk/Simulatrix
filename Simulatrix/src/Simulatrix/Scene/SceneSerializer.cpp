@@ -133,13 +133,13 @@ namespace Simulatrix {
         out << YAML::BeginMap;
         out << YAML::Key << "Entity" << YAML::Value << entity.GetUUID();
 
-		if (entity.HasComponent<ComponentColorMaterial>()) {
-			auto& component = entity.GetComponent<ComponentColorMaterial>();
-			out << YAML::Key << "ComponentColorMaterial";
-			out << YAML::BeginMap;
-			out << YAML::Key << "Color" << YAML::Value << component.Color;
-			out << YAML::EndMap;
-		}
+		//if (entity.HasComponent<ComponentColorMaterial>()) {
+		//	auto& component = entity.GetComponent<ComponentColorMaterial>();
+		//	out << YAML::Key << "ComponentColorMaterial";
+		//	out << YAML::BeginMap;
+		//	out << YAML::Key << "Color" << YAML::Value << component.Color;
+		//	out << YAML::EndMap;
+		//}
 
 		if (entity.HasComponent<ComponentRenderable>()) {
 			auto& component = entity.GetComponent<ComponentRenderable>();
@@ -161,13 +161,13 @@ namespace Simulatrix {
 			out << YAML::EndMap;
 		}
 
-		if (entity.HasComponent<ComponentTextureMaterial>()) {
+		/*if (entity.HasComponent<ComponentTextureMaterial>()) {
 			auto& component = entity.GetComponent<ComponentTextureMaterial>();
 			out << YAML::Key << "ComponentTextureMaterial";
 			out << YAML::BeginMap;
 			out << YAML::Key << "TextureID" << YAML::Value << component.Diffuse->GetID();
 			out << YAML::EndMap;
-		}
+		}*/
 
 		if (entity.HasComponent<ComponentTransform>()) {
 			out << YAML::Key << "ComponentTransform";
@@ -305,23 +305,23 @@ namespace Simulatrix {
 					tc.Scale = transformComponent["Scale"].as<glm::vec3>();
 				}
 
-				auto colorMaterialComponent = entity["ComponentColorMaterial"];
-				if (colorMaterialComponent) {
-					auto& tc = deserializedEntity.AddComponent<ComponentColorMaterial>();
-					tc.Color = colorMaterialComponent["Color"].as<glm::vec3>();
-				}
-
-				//auto shaderComponent = entity["ComponentShader"];
-				//if (shaderComponent) {
-				//	auto& tc = deserializedEntity.AddComponent<ComponentShader>();
-				//	tc.ShaderRef = ResourceManager::GetShader(shaderComponent["ShaderID"].as<UUID>());
+				//auto colorMaterialComponent = entity["ComponentColorMaterial"];
+				//if (colorMaterialComponent) {
+				//	auto& tc = deserializedEntity.AddComponent<ComponentColorMaterial>();
+				//	tc.Color = colorMaterialComponent["Color"].as<glm::vec3>();
 				//}
 
-				auto textureComponent = entity["ComponentTextureMaterial"];
-				if (textureComponent) {
-					auto& tc = deserializedEntity.AddComponent<ComponentTextureMaterial>();
-					tc.Diffuse = ResourceManager::GetTexture(textureComponent["TextureID"].as<UUID>());
-				}
+				////auto shaderComponent = entity["ComponentShader"];
+				////if (shaderComponent) {
+				////	auto& tc = deserializedEntity.AddComponent<ComponentShader>();
+				////	tc.ShaderRef = ResourceManager::GetShader(shaderComponent["ShaderID"].as<UUID>());
+				////}
+
+				//auto textureComponent = entity["ComponentTextureMaterial"];
+				//if (textureComponent) {
+				//	auto& tc = deserializedEntity.AddComponent<ComponentTextureMaterial>();
+				//	tc.Diffuse = ResourceManager::GetTexture(textureComponent["TextureID"].as<UUID>());
+				//}
 
 				//auto modelComponent = entity["ComponentModel"];
 				//if (modelComponent) {

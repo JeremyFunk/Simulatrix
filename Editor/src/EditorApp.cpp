@@ -19,6 +19,7 @@
 #include "CommandStack/CommandStack.h"
 #include "CommandStack/CommandTransform.h"
 #include "Actions/ActionTransform.h"
+#include "Simulatrix/Scene/MaterialFactory.h"
 
 using namespace Simulatrix;
 
@@ -164,6 +165,10 @@ public:
         auto defaultPipeline = Pipeline::Create(defaultPipelineSpec);
         m_Scene->AddPipeline(defaultPipeline);
         m_Scene->SetDefaultPipeline(defaultPipeline);
+
+        MaterialFactory::AddMaterial("Color Material", { {glm::vec4(1.0), "u_color"} });
+        
+        //auto singleColorMaterial
     }
 
     void OnDetach() {}

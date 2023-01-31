@@ -9,6 +9,7 @@
 #include <Simulatrix/Renderer/Shader.h>
 #include <Simulatrix/Renderer/Pipeline.h>
 #include <Simulatrix/Scene/SceneData.h>
+#include <Simulatrix/Scene/MaterialFactory.h>
 
 namespace Simulatrix {
     struct ComponentID {
@@ -74,19 +75,19 @@ namespace Simulatrix {
         }
     };
     
-    struct ComponentColorMaterial {
-        glm::vec3 Color;
-        ComponentColorMaterial() = default;
-        ComponentColorMaterial(glm::vec3 Color) : Color(Color)
+    struct ComponentMaterial {
+        Ref<MaterialInstance> Material;
+        ComponentMaterial() = default;
+        ComponentMaterial(Ref<MaterialInstance> material) : Material(material)
         {
 
         }
     };
-    struct ComponentTextureMaterial {
+    /*struct ComponentTextureMaterial {
         Ref<Texture2D> Diffuse;
         ComponentTextureMaterial() = default;
         ComponentTextureMaterial(Ref<Texture2D> diffuse) : Diffuse(diffuse)
         {
         }
-    };
+    };*/
 }

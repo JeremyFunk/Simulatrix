@@ -167,45 +167,135 @@ namespace Simulatrix {
             AddUniform(uniform);
         }
     }
-    void OpenGLShader::SetUniform(uint32_t rendererID, float value)
-    {
+
+
+
+    void OpenGLShader::SetUniform(uint32_t rendererID, float value) {
         glUniform1f(rendererID, value);
     }
-    void OpenGLShader::SetUniform(uint32_t rendererID, uint32_t value)
-    {
+    void OpenGLShader::SetUniform(uint32_t rendererID, uint32_t value) {
+        glUniform1ui(rendererID, value);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, int value) {
         glUniform1i(rendererID, value);
     }
-    void OpenGLShader::SetUniform(const char* name, float value)
-    {
+    void OpenGLShader::SetUniform(uint32_t rendererID, bool value) {
+        glUniform1i(rendererID, value);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::mat3& value) {
+        glUniformMatrix3fv(rendererID, 1, GL_FALSE, &value[0][0]);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::mat4& value) {
+        glUniformMatrix4fv(rendererID, 1, GL_FALSE, &value[0][0]);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::vec2& value) {
+        glUniform2f(rendererID, value.x, value.y);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::vec3& value) {
+        glUniform3f(rendererID, value.x, value.y, value.z);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::vec4& value) {
+        glUniform4f(rendererID, value.x, value.y, value.z, value.w);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::ivec2& value) {
+        glUniform2i(rendererID, value.x, value.y);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::ivec3& value) {
+        glUniform3i(rendererID, value.x, value.y, value.z);
+    }
+    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::ivec4& value) {
+        glUniform4i(rendererID, value.x, value.y, value.z, value.w);
+    }
+
+
+
+
+
+    void OpenGLShader::SetUniform(const char* name, float value) {
         for (const auto& uniform : m_Uniforms) {
             if (uniform.Name == name) {
                 glUniform1f(uniform.RendererID, value);
-                break;
             }
         }
     }
-    void OpenGLShader::SetUniform(const char* name, uint32_t value)
-    {
+    void OpenGLShader::SetUniform(const char* name, uint32_t value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniform1ui(uniform.RendererID, value);
+            }
+        }
+    }
+    void OpenGLShader::SetUniform(const char* name, int value) {
         for (const auto& uniform : m_Uniforms) {
             if (uniform.Name == name) {
                 glUniform1i(uniform.RendererID, value);
-                break;
             }
         }
     }
-    void OpenGLShader::SetUniform(uint32_t rendererID, const glm::mat4& value)
-    {
-        glUniformMatrix4fv(rendererID, 1, GL_FALSE, &value[0][0]);
+    void OpenGLShader::SetUniform(const char* name, bool value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniform1i(uniform.RendererID, value);
+            }
+        }
     }
-    void OpenGLShader::SetUniform(const char* name, const glm::mat4& value)
-    {
+    void OpenGLShader::SetUniform(const char* name, const glm::mat3& value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniformMatrix3fv(uniform.RendererID, 1, GL_FALSE, &value[0][0]);
+            }
+        }
+    }
+    void OpenGLShader::SetUniform(const char* name, const glm::mat4& value) {
         for (const auto& uniform : m_Uniforms) {
             if (uniform.Name == name) {
                 glUniformMatrix4fv(uniform.RendererID, 1, GL_FALSE, &value[0][0]);
-                break;
             }
         }
     }
+    void OpenGLShader::SetUniform(const char* name, const glm::vec2& value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniform2f(uniform.RendererID, value.x, value.y);
+            }
+        }
+    }
+    void OpenGLShader::SetUniform(const char* name, const glm::vec3& value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniform3f(uniform.RendererID, value.x, value.y, value.z);
+            }
+        }
+    }
+    void OpenGLShader::SetUniform(const char* name, const glm::vec4& value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniform4f(uniform.RendererID, value.x, value.y, value.z, value.w);
+            }
+        }
+    }
+    void OpenGLShader::SetUniform(const char* name, const glm::ivec2& value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniform2i(uniform.RendererID, value.x, value.y);
+            }
+        }
+    }
+    void OpenGLShader::SetUniform(const char* name, const glm::ivec3& value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniform3i(uniform.RendererID, value.x, value.y, value.z);
+            }
+        }
+    }
+    void OpenGLShader::SetUniform(const char* name, const glm::ivec4& value) {
+        for (const auto& uniform : m_Uniforms) {
+            if (uniform.Name == name) {
+                glUniform4i(uniform.RendererID, value.x, value.y, value.z, value.w);
+            }
+        }
+    }
+
     const ShaderUniforms& OpenGLShader::GetUniforms() const
     {
         return m_Uniforms;

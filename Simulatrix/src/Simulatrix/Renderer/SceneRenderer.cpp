@@ -43,12 +43,10 @@ namespace Simulatrix {
 
 
             // TODO automate with material component binds
-            if (m_Scene->HasComponents<ComponentTextureMaterial>(m)) {
-                auto& textureC = m_Scene->GetComponent< ComponentTextureMaterial>(m);
-                if (textureC.Diffuse != nullptr) {
-                    render.RenderPipeline->GetShader()->SetUniform("u_textureDiffuse", (float)textureC.Diffuse->GetRendererID());
-                    textureC.Diffuse->Bind();
-                }
+            if (m_Scene->HasComponents<ComponentMaterial>(m)) {
+                auto& materialC = m_Scene->GetComponent<ComponentMaterial>(m);
+                if(materialC.Material != nullptr)
+                    materialC.Material->Bind(render.RenderPipeline->GetShader());
             }
 
             
